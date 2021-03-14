@@ -1,4 +1,4 @@
-# Programming Technology Lab
+# TPUM 2021 - Technologie Programowania Urządzeń Mobilnych
 
 ## Team
 
