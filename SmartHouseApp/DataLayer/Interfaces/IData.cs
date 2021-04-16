@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DataLayer
+namespace DataLayer.Interfaces
 {
-    internal interface IData
+    public interface IData
     {
         public int Id { get; protected set; }
     }
