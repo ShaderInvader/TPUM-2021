@@ -5,7 +5,7 @@ using DataLayer.Interfaces;
 
 namespace DataLayer.Devices
 {
-    class LightBulb : IDevice
+    public class LightBulb : IDevice
     {
         public int Id { get; set; }
         public string Name { get; set; }
