@@ -1,0 +1,26 @@
+﻿<Window x:Class="PresentationLayer.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PresentationLayer.Views"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid x:Name="MainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="200" />
+        </Grid.ColumnDefinitions>
+        <Border Background="AliceBlue"/>
+        <Button Content="Devices" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Center" Height="30" Width="60" Command=""/>
+        <Button Content="Schedule" HorizontalAlignment="Left" Margin="100,0,0,0" VerticalAlignment="Center" Height="30" Width="60"/>
+        <Button Content="Alerts" HorizontalAlignment="Left" Margin="180,0,0,0" VerticalAlignment="Center" Height="30" Width="60"/>
+        <Label Content="Properties" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
+
+        <Frame Name ="windowContent" Source="DevicesPage.xaml" Grid.Row="1"/>
+    </Grid>
+</Window>

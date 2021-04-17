@@ -5,14 +5,14 @@ using System.Text;
 using System.Windows;
 using System.Windows.Input;
 
-namespace PresentationLayer
+namespace PresentationLayer.ViewModels
 {
     public partial class MainWindow : Window
     {
         private ViewModelExample VMExample { get; set; } = new ViewModelExample() { Name = "Jan Paweł II Papież", Age = 2137 };
     }
 
-    class ViewModelExample : INotifyPropertyChanged
+    class ViewModelExample : BaseViewModel
     {
         private string name;
         private int age;
@@ -43,7 +43,7 @@ namespace PresentationLayer
             set
             {
                 name = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Name"));
+                OnPropertyChanged("Name");
             }
         }
 
@@ -53,11 +53,9 @@ namespace PresentationLayer
             set
             {
                 age = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Age"));
+                OnPropertyChanged("Age");
             }
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
     }
 
     class ExampleCommand : ICommand
