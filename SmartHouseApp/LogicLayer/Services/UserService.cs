@@ -19,6 +19,8 @@ namespace LogicLayer.Services
 
         public UserDTO GetUser(int id)
         {
+            if (id < 0)
+                throw new ArgumentOutOfRangeException();
             return Mapper.Map(_userRepo.Get(id));
         }
 

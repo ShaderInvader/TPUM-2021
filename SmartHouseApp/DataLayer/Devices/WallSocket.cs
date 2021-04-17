@@ -5,7 +5,7 @@ using DataLayer.Interfaces;
 
 namespace DataLayer.Devices
 {
-    class WallSocket : IDevice
+    public class WallSocket : IDevice
     {
         public int Id { get; set; }
         public string Name { get; set; }

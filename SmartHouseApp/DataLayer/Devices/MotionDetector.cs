@@ -5,7 +5,7 @@ using DataLayer.Interfaces;
 
 namespace DataLayer.Devices
 {
-    class MotionDetector : IDevice
+    public class MotionDetector : IDevice
     {
         public int Id { get; set; }
         public string Name { get; set; }
