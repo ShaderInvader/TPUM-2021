@@ -6,6 +6,6 @@ namespace DataLayer.Interfaces
 {
     public interface INamed : IData
     {
-        public string Name { get; protected set; }
+        public string Name { get; set; }
     }
 }

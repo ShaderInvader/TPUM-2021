@@ -8,9 +8,9 @@ namespace DataLayer.Interfaces
     {
         public IEnumerable<T> Get();
         public T Get(int id);
-        public T Add(T item);
+        public void Add(T item);
         public int Remove(int id);
-        public int Remove(T item);
-        public int Update(int id, T item);
+        public bool Remove(T item);
+        public bool Update(int id, T item);
     }
 }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DataLayer.Interfaces
 {
-    public interface IDeviceRepository : INamedRepository
+    public interface IDeviceRepository : INamedRepository<IDevice>
     {
         public bool SetState(int id, bool enabled);
         public bool SetStateFirst(string name, bool enabled);

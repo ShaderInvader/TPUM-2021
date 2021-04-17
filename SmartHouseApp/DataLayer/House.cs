@@ -5,9 +5,9 @@ using DataLayer.Interfaces;
 
 namespace DataLayer
 {
-    class House : IData
+    public class House : INamed
     {
-        int IData.Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public List<Room> Rooms { get; set; }
     }

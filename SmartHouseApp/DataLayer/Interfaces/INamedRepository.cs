@@ -4,13 +4,14 @@ using System.Text;
 
 namespace DataLayer.Interfaces
 {
-    public interface INamedRepository : IDataRepository<INamed>
+    public interface INamedRepository<T> : IDataRepository<T> where T : INamed
     {
-        public INamed Get(string name);
+        public T Get(string name);
+        public IEnumerable<T> GetAll(string name);
         public int GetFirstId(string name);
         public int[] GetIds(string name);
         public int Remove(string name);
-        public bool UpdateFirst(string name, INamed item);
-        public int UpdateAll(string name, INamed item);
+        public bool UpdateFirst(string name, T item);
+        public int UpdateAll(string name, T item);
     }
 }
