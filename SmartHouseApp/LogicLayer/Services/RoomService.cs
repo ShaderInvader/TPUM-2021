@@ -19,6 +19,8 @@ namespace LogicLayer.Services
 
         public RoomDTO GetRoom(int id)
         {
+            if (id < 0)
+                throw new ArgumentOutOfRangeException();
             return Mapper.Map(_roomRepo.Get(id));
         }
 
