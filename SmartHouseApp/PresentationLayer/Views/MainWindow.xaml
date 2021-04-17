@@ -16,11 +16,11 @@
             <ColumnDefinition Width="200" />
         </Grid.ColumnDefinitions>
         <Border Background="AliceBlue"/>
-        <Button Content="Devices" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Center" Height="30" Width="60" Command=""/>
-        <Button Content="Schedule" HorizontalAlignment="Left" Margin="100,0,0,0" VerticalAlignment="Center" Height="30" Width="60"/>
-        <Button Content="Alerts" HorizontalAlignment="Left" Margin="180,0,0,0" VerticalAlignment="Center" Height="30" Width="60"/>
+        <Button Content="Devices" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Center" Height="30" Width="60" Command="{Binding Devices}"/>
+        <Button Content="Schedule" HorizontalAlignment="Left" Margin="100,0,0,0" VerticalAlignment="Center" Height="30" Width="60" Command="{Binding Schedule}"/>
+        <Button Content="Alerts" HorizontalAlignment="Left" Margin="180,0,0,0" VerticalAlignment="Center" Height="30" Width="60" Command="{Binding Alerts}"/>
         <Label Content="Properties" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
 
-        <Frame Name ="windowContent" Source="DevicesPage.xaml" Grid.Row="1"/>
+        <Frame Name ="windowContent" Source="{Binding CurrentPage}" Grid.Row="1"/>
     </Grid>
 </Window>
