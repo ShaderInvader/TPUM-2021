@@ -52,13 +52,29 @@ namespace LogicLayer.Services
 
         public bool AddDevice(DeviceDTO newDevice)
         {
-            _deviceRepo.Add(Mapper.Map(newDevice));
+            try 
+            {
+                _deviceRepo.Add(Mapper.Map(newDevice));
+            }
+            catch(Exceptions.InvalidDeviceTypeException)
+            {
+                return false;
+            }
             return true;
         }
 
         public bool RemoveDevice(DeviceDTO deviceToRemove)
         {
-            return true;
+            bool retVal = false;
+            try
+            {
+                retVal = _deviceRepo.Remove(Mapper.Map(deviceToRemove));
+            }
+            catch (Exceptions.InvalidDeviceTypeException)
+            {
+                return false;
+            }
+            return retVal;
         }
     }
 }

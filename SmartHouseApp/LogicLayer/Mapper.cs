@@ -52,12 +52,36 @@ namespace LogicLayer
             };
         }
 
-        //public static IDevice Map(DeviceDTO device)
-        //{
-        //    if(device.Type.Equals("Light Bulb"))
-        //    {
-        //        return new LightBulb()
-        //    }
-        //}
+        public static IDevice Map(DeviceDTO device)
+        {
+            if (device.Type.Equals("LightBulb"))
+            {
+                return new LightBulb()
+                {
+                    Id = device.Id,
+                    Name = device.Name,
+                    Enabled = device.Enabled
+                };
+            }
+            else if(device.Type.Equals("MotionDetector"))
+            {
+                return new MotionDetector()
+                {
+                    Id = device.Id,
+                    Name = device.Name,
+                    Enabled = device.Enabled
+                };
+            }
+            else if(device.Type.Equals("WallSocket"))
+            {
+                return new WallSocket()
+                {
+                    Id = device.Id,
+                    Name = device.Name,
+                    Enabled = device.Enabled
+                };
+            }
+            throw new Exceptions.InvalidDeviceTypeException(device.Type);
+        }
     }
 }
