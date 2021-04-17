@@ -7,8 +7,8 @@ namespace DataLayer.Devices
 {
     class WallSocket : IDevice
     {
-        int IData.Id { get; set; }
-        string IDevice.Name { get; set; }
-        bool IDevice.Enabled { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public bool Enabled { get; set; }
     }
 }

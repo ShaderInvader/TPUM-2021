@@ -6,6 +6,6 @@ namespace DataLayer.Interfaces
 {
     public interface IData
     {
-        public int Id { get; protected set; }
+        public int Id { get; set; }
     }
 }

@@ -5,8 +5,8 @@ using DataLayer.Interfaces;
 
 namespace DataLayer.Interfaces
 {
-    public interface IDevice : IData
+    public interface IDevice : INamed
     {
-        public bool Enabled { get; protected set; }
+        public bool Enabled { get; set; }
     }
 }
