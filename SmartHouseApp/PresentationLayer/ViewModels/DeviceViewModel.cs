@@ -1,4 +1,4 @@
-﻿using PresentationLayer.Models;
+﻿using LogicLayer.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,21 +9,16 @@ namespace PresentationLayer.ViewModels
 {
     class DeviceViewModel : BaseViewModel
     {
-        private ObservableCollection<DeviceModel> devices;
+        private ObservableCollection<DeviceDTO> devices;
+
+        private DeviceDTO selectedDevice;
 
         public DeviceViewModel()
         {
-            devices = new ObservableCollection<DeviceModel>() 
-            { 
-                new DeviceModel() {ID = 1, Type = "Lodówka", Enabled = false},
-                new DeviceModel() {ID = 2, Type = "Telewizor", Enabled = true},
-                new DeviceModel() {ID = 3, Type = "Żarówka", Enabled = false},
-                new DeviceModel() {ID = 4, Type = "Żarówka", Enabled = true},
-                new DeviceModel() {ID = 5, Type = "Pralka", Enabled = true}
-            };
+            devices = new ObservableCollection<DeviceDTO>(MOCKs.DevicesMock.devicesMock);
         }
 
-        public ObservableCollection<DeviceModel> Devices
+        public ObservableCollection<DeviceDTO> Devices
         {
             get => devices;
             set
@@ -32,5 +27,16 @@ namespace PresentationLayer.ViewModels
                 OnPropertyChanged("Devices");
             }
         }
+
+        public DeviceDTO SelectedDevice
+        {
+            get => selectedDevice;
+            set
+            {
+                selectedDevice = value;
+                OnPropertyChanged("SelectedDevice");
+            }
+        }
     }
+
 }

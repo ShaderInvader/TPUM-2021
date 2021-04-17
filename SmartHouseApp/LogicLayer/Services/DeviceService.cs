@@ -49,5 +49,16 @@ namespace LogicLayer.Services
         {
             return _deviceRepo.SetState(id, state);
         }
+
+        public bool AddDevice(DeviceDTO newDevice)
+        {
+            _deviceRepo.Add(Mapper.Map(newDevice));
+            return true;
+        }
+
+        public bool RemoveDevice(DeviceDTO deviceToRemove)
+        {
+            return true;
+        }
     }
 }

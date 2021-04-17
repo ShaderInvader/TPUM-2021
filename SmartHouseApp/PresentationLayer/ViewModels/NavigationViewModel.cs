@@ -38,7 +38,7 @@ namespace PresentationLayer.ViewModels
         public ICommand Schedule { get; private set; }
         public void LoadSchedule()
         {
-            CurrentPage = "";
+            CurrentPage = "SchedulePage.xaml";
         }
 
         public ICommand Alerts { get; private set; }
@@ -84,7 +84,7 @@ namespace PresentationLayer.ViewModels
 
         public bool CanExecute(object parameter)
         {
-            return false;
+            return true;
         }
 
         public void Execute(object parameter)

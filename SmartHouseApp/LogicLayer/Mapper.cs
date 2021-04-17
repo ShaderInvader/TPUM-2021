@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using DataLayer;
 using DataLayer.Interfaces;
+using DataLayer.Devices;
 using LogicLayer.DTOs;
 
 namespace LogicLayer
@@ -50,5 +51,13 @@ namespace LogicLayer
                 Name = house.Name
             };
         }
+
+        //public static IDevice Map(DeviceDTO device)
+        //{
+        //    if(device.Type.Equals("Light Bulb"))
+        //    {
+        //        return new LightBulb()
+        //    }
+        //}
     }
 }

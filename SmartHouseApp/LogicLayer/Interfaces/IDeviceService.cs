@@ -11,5 +11,7 @@ namespace LogicLayer.Interfaces
         IEnumerable<DeviceDTO> GetDevices();
         IEnumerable<DeviceDTO> GetDevicesByName(string name);
         bool SetDeviceState(int id, bool state);
+        bool AddDevice(DeviceDTO newDevice);
+        bool RemoveDevice(DeviceDTO deviceToRemove);
     }
 }
