@@ -25,7 +25,12 @@ namespace PresentationLayer.ViewModels
             NewDeviceCommand = new NewDeviceCommand(this);
             SaveDeviceCommand = new AddDeviceCommand(this);
             EditDeviceCommand = new EditDeviceCommand(this);
-            DeleteDeviceCommand = new MessageBoxCommand(new DeleteDeviceCommand(this), null);
+            DeleteDeviceCommand = new MessageBoxCommand(new DeleteDeviceCommand(this), null, "Do you really want to delete this device?");
+        }
+
+        ~DeviceViewModel()
+        {
+            _deviceService.DeviceChange -= UpdateDevices;
         }
 
         #region Properties

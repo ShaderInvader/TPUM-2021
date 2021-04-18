@@ -31,6 +31,11 @@ namespace LogicLayer.Services
             foreach (var room in rooms)
             {
                 roomsDTOs.Add(Mapper.Map(room));
+                roomsDTOs[^1].Devices = new List<DeviceDTO>();
+                foreach(var device in room.Devices)
+                {
+                    roomsDTOs[^1].Devices.Add(Mapper.Map(device));
+                }
             }
 
             return roomsDTOs;

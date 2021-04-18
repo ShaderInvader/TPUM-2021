@@ -10,11 +10,15 @@ namespace PresentationLayer.Commands
     {
         private readonly ICommand _yesCommand;
         private readonly ICommand _noCommand;
+        private readonly string _message;
+        private readonly string _windowTitle;
 
-        public MessageBoxCommand(ICommand YesCommand, ICommand NoCommand)
+        public MessageBoxCommand(ICommand YesCommand, ICommand NoCommand, string message, string windowTitle = "Warning")
         {
             _yesCommand = YesCommand;
             _noCommand = NoCommand;
+            _message = message;
+            _windowTitle = windowTitle;
         }
 
         public event EventHandler CanExecuteChanged;
@@ -26,7 +30,7 @@ namespace PresentationLayer.Commands
 
         public void Execute(object parameter)
         {
-            var Result = MessageBox.Show("Are you sure?", "", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            var Result = MessageBox.Show(_message, _windowTitle, MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if( Result == MessageBoxResult.Yes)
             {
                 _yesCommand?.Execute(null);

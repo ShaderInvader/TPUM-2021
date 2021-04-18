@@ -10,7 +10,7 @@ namespace PresentationLayer.ViewModels
         public NavigationViewModel()
         {
             Devices = new LoadPageCommand(this, "DevicesPage.xaml");
-            Schedule = new LoadPageCommand(this, "SchedulePage.xaml", false);
+            Rooms = new LoadPageCommand(this, "RoomsPage.xaml");
             Alerts = new LoadPageCommand(this, "", false);
             Devices.Execute(null);
         }
@@ -31,7 +31,7 @@ namespace PresentationLayer.ViewModels
         #region ICommands
         public ICommand Devices { get; private set; }
 
-        public ICommand Schedule { get; private set; }
+        public ICommand Rooms { get; private set; }
 
         public ICommand Alerts { get; private set; }
         #endregion

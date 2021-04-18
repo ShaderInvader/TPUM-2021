@@ -5,7 +5,7 @@ using LogicLayer.DTOs;
 
 namespace LogicLayer.Interfaces
 {
-    interface IRoomService
+    public interface IRoomService
     {
         RoomDTO GetRoom(int id);
         IEnumerable<RoomDTO> GetRooms();
