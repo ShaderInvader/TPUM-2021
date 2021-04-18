@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using DataLayer.Interfaces;
 using LogicLayer.DTOs;
+using LogicLayer.Exceptions;
 using LogicLayer.Interfaces;
 
 namespace LogicLayer.Services
@@ -20,6 +21,9 @@ namespace LogicLayer.Services
 
         public DeviceDTO GetDevice(int id)
         {
+            if (id < 0)
+                throw new ArgumentOutOfRangeException();
+
             return Mapper.Map(_deviceRepo.Get(id));
         }
 
@@ -49,25 +53,44 @@ namespace LogicLayer.Services
 
         public bool SetDeviceState(int id, bool state)
         {
+            if (id < 0)
+                throw new ArgumentOutOfRangeException();
             bool methodRetVal = _deviceRepo.SetState(id, state);
             if (methodRetVal)
             {
-                DeviceChange.Invoke();
+                DeviceChange?.Invoke();
             }
             return methodRetVal;
         }
 
         public bool AddDevice(DeviceDTO newDevice)
         {
-            try 
+            DeviceField invaildFields = DeviceField.None;
+
+            if (newDevice.Id < 0)
             {
-                _deviceRepo.Add(Mapper.Map(newDevice));
+                invaildFields |= DeviceField.Id;
             }
-            catch(Exceptions.InvalidDeviceTypeException)
+            
+            if (!(newDevice.Type == "LightBulb" ||
+                 newDevice.Type == "MotionDetector" ||
+                 newDevice.Type == "WallSocket"))
             {
-                return false;
+                invaildFields |= DeviceField.Type;
             }
-            DeviceChange.Invoke();
+
+            if (newDevice.Name == "")
+            {
+                invaildFields |= DeviceField.Name;
+            }
+
+            if (invaildFields != DeviceField.None)
+            {
+                throw new InvalidDeviceDataException(invaildFields);
+            }
+
+            _deviceRepo.Add(Mapper.Map(newDevice));
+            DeviceChange?.Invoke();
             return true;
         }
 
@@ -78,11 +101,11 @@ namespace LogicLayer.Services
             {
                 retVal = _deviceRepo.Remove(deviceToRemove.Id) > 0;
             }
-            catch (Exceptions.InvalidDeviceTypeException)
+            catch (Exceptions.InvalidDeviceDataException)
             {
                 return false;
             }
-            DeviceChange.Invoke();
+            DeviceChange?.Invoke();
             return retVal;
         }
     }

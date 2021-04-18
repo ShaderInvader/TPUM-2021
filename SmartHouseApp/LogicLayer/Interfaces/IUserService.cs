@@ -5,12 +5,13 @@ using LogicLayer.DTOs;
 
 namespace LogicLayer.Interfaces
 {
-    interface IUserService
+    public interface IUserService
     {
         UserDTO GetUser(int id);
         IEnumerable<UserDTO> GetUsers();
         IEnumerable<UserDTO> GetUsersByName(string name);
         bool AddUser(UserDTO newUser);
         bool RemoveUser(UserDTO userToRemove);
+        bool LoginUser(string username, string password);
     }
 }

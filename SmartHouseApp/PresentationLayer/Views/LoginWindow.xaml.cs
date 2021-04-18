@@ -17,14 +17,11 @@ namespace PresentationLayer.Views
     /// </summary>
     public partial class LoginWindow : Window
     {
+        private ViewModels.LoginViewModel LoginViewModel { get; set; } = new ViewModels.LoginViewModel();
         public LoginWindow()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
+            this.DataContext = LoginViewModel;
         }
     }
 }
