@@ -10,6 +10,12 @@
       Title="Devices List">
     <Page.Resources>
         <u:MyBooleanToVisibilityConverter x:Key="boolToVisible"/>
+        <Style TargetType="Button" x:Key="DeleteButtonStyle">
+            <Setter Property="Background" Value="DarkSalmon"/>
+        </Style>
+        <Style TargetType="Button" x:Key="AddButtonStyle">
+            <Setter Property="Background" Value="LightGreen"/>
+        </Style>
     </Page.Resources>
 
     <Grid x:Name="devicesPageGrid">
@@ -30,29 +36,33 @@
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="50"/>
+                <RowDefinition Height="150"/>
             </Grid.RowDefinitions>
-            <Border BorderBrush="Black" BorderThickness="0, 0, 0, 1"/>
+            <Border BorderBrush="Black" BorderThickness="1, 0, 0, 1"/>
+            <Border Grid.Row="1" BorderBrush="Black" BorderThickness="1, 0, 0, 0"/>
 
             <Label Content="Id:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0"/>
-            <TextBlock Text="{Binding SelectedDevice.Id}" HorizontalAlignment="Left" Margin="70,15,10,0"  TextWrapping="Wrap" VerticalAlignment="Top" Visibility= "{Binding OldDevice, Converter={StaticResource boolToVisible}}"/>
-            <TextBox HorizontalAlignment="Left" Margin="70,14,0,0" Text="{Binding SelectedDevice.Id}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Visibility= "{Binding NewDevice, Converter={StaticResource boolToVisible}}"/>
+            <TextBlock Text="{Binding SelectedDevice.Id}" HorizontalAlignment="Left" Margin="70,15,10,0"  TextWrapping="Wrap" VerticalAlignment="Top" Visibility= "{Binding EditDeviceInv, Converter={StaticResource boolToVisible}}"/>
+            <TextBox HorizontalAlignment="Left" Margin="70,14,0,0" Text="{Binding SelectedDevice.Id}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Visibility= "{Binding EditDevice, Converter={StaticResource boolToVisible}}"/>
 
             <Label Content="Type:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,50,0,0"/>
-            <TextBlock Text="{Binding SelectedDevice.Type}" HorizontalAlignment="Left" Margin="70,55,10,0"  TextWrapping="Wrap" VerticalAlignment="Top" Visibility= "{Binding OldDevice, Converter={StaticResource boolToVisible}}"/>
-            <TextBox HorizontalAlignment="Left" Margin="70,54,0,0" Text="{Binding SelectedDevice.Type}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Visibility= "{Binding NewDevice, Converter={StaticResource boolToVisible}}"/>
+            <TextBlock Text="{Binding SelectedDevice.Type}" HorizontalAlignment="Left" Margin="70,55,10,0"  TextWrapping="Wrap" VerticalAlignment="Top" Visibility= "{Binding EditDeviceInv, Converter={StaticResource boolToVisible}}"/>
+            <TextBox HorizontalAlignment="Left" Margin="70,54,0,0" Text="{Binding SelectedDevice.Type}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Visibility= "{Binding EditDevice, Converter={StaticResource boolToVisible}}"/>
 
             <Label Content="Enabled" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,90,0,0"/>
-            <CheckBox HorizontalAlignment="Left" Margin="70,95,0,0" VerticalAlignment="Top" IsChecked="{Binding SelectedDevice.Enabled}" IsEnabled="{Binding NewDevice}"/>
+            <CheckBox HorizontalAlignment="Left" Margin="70,95,0,0" VerticalAlignment="Top" IsChecked="{Binding SelectedDevice.Enabled}" IsEnabled="{Binding EditDevice}"/>
 
             <Label Content="Name:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,130,10,0"/>
-            <TextBlock Text="{Binding SelectedDevice.Name}" HorizontalAlignment="Left" Margin="70,135,10,0"  TextWrapping="Wrap" VerticalAlignment="Top" Visibility= "{Binding OldDevice, Converter={StaticResource boolToVisible}}"/>
-            <TextBox HorizontalAlignment="Left" Margin="70,134,0,0" Text="{Binding SelectedDevice.Name}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Visibility= "{Binding NewDevice, Converter={StaticResource boolToVisible}}"/>
+            <TextBlock Text="{Binding SelectedDevice.Name}" HorizontalAlignment="Left" Margin="70,135,10,0"  TextWrapping="Wrap" VerticalAlignment="Top" Visibility= "{Binding EditDeviceInv, Converter={StaticResource boolToVisible}}"/>
+            <TextBox HorizontalAlignment="Left" Margin="70,134,0,0" Text="{Binding SelectedDevice.Name}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Visibility= "{Binding EditDevice, Converter={StaticResource boolToVisible}}"/>
 
-            <Button Content="Save" Command="{Binding SaveDeviceCommand}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,10" Width="100" Visibility= "{Binding NewDevice, Converter={StaticResource boolToVisible}}"/>
+            <Button Content="Save" Command="{Binding SaveDeviceCommand}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,10" Width="100" Visibility= "{Binding EditDevice, Converter={StaticResource boolToVisible}}"/>
+            <StackPanel Grid.Row="1" >
 
-            <Button Content="New Device" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Center" Margin="20,0,0,0" Command="{Binding NewDeviceCommand}"/>
-            <Button Content="Delete Device" HorizontalAlignment="Right" Grid.Row="1" VerticalAlignment="Center" Margin="0,0,20,0"/>
+                <Button Content="Edit Device" Margin="10, 5, 10, 10" Height="30"/>
+                <Button Content="Delete Device"  Command="{Binding DeleteDeviceCommand}" Margin="10, 15, 10, 5" Height="30" Style="{StaticResource DeleteButtonStyle}"/>
+                <Button Content="New Device" Command="{Binding NewDeviceCommand}" Margin="10, 15, 10, 0" Height="30" Style="{StaticResource AddButtonStyle}"/>
+            </StackPanel>
         </Grid>
     </Grid>
 </Page>

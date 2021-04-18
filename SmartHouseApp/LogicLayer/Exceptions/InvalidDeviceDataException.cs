@@ -7,6 +7,7 @@ namespace LogicLayer.Exceptions
     [Flags]
     public enum DeviceField
     {
+        None,
         Id,
         Name,
         Enabled,

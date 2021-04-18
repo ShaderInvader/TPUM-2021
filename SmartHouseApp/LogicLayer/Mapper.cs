@@ -84,7 +84,20 @@ namespace LogicLayer
                     Enabled = device.Enabled
                 };
             }
-            throw new Exceptions.InvalidDeviceDataException(new DeviceField[] {DeviceField.Type});
+            throw new Exceptions.InvalidDeviceDataException(DeviceField.Type);
+        }
+
+        public static User Map(UserDTO user)
+        {
+            return new User() 
+            { 
+                Id = user.Id, 
+                Email = user.Email, 
+                FirstName = user.FirstName, 
+                LastName = user.LastName, 
+                Name = user.Name, 
+                Password = user.Password 
+            };
         }
     }
 }

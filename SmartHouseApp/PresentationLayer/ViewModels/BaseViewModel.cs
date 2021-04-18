@@ -6,7 +6,7 @@ using System.Text;
 
 namespace PresentationLayer.ViewModels
 {
-    class BaseViewModel : INotifyPropertyChanged
+    public class BaseViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

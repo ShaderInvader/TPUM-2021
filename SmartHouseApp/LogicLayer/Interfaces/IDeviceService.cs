@@ -13,5 +13,7 @@ namespace LogicLayer.Interfaces
         bool SetDeviceState(int id, bool state);
         bool AddDevice(DeviceDTO newDevice);
         bool RemoveDevice(DeviceDTO deviceToRemove);
+
+        event Action DeviceChange;
     }
 }

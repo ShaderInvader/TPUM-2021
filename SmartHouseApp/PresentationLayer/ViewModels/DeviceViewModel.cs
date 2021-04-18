@@ -2,39 +2,37 @@
 using LogicLayer.DTOs;
 using LogicLayer.Interfaces;
 using LogicLayer.Services;
+using PresentationLayer.Commands;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
-using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace PresentationLayer.ViewModels
 {
-    class DeviceViewModel : BaseViewModel
+    public class DeviceViewModel : BaseViewModel
     {
         private ObservableCollection<DeviceDTO> _devices;
         private readonly IDeviceService _deviceService;
         private DeviceDTO _selectedDevice;
-        private bool _newDevice;
-
+        private bool _editDevice;
         public DeviceViewModel()
         {
             _deviceService = new DeviceService(RepositoryMock.GetDeviceRepository());
+            _deviceService.DeviceChange += UpdateDevices;
             _devices = new ObservableCollection<DeviceDTO>(_deviceService.GetDevices());
             _selectedDevice = _devices[0];
-            _newDevice = false;
+            _editDevice = false;
             NewDeviceCommand = new NewDeviceCommand(this);
-            SaveDeviceCommand = new SaveDeviceCommand(this);
+            SaveDeviceCommand = new AddDeviceCommand(this);
+            EditDeviceCommand = new EditDeviceCommand(this);
+            DeleteDeviceCommand = new MessageBoxCommand(new DeleteDeviceCommand(this), null);
         }
+
+        #region Properties
 
         public ObservableCollection<DeviceDTO> Devices
         {
-            get
-            {
-                _devices = new ObservableCollection<DeviceDTO>(_deviceService.GetDevices());
-                return _devices;
-            }
+            get => _devices;
             set
             {
                 _devices = value;
@@ -60,71 +58,37 @@ namespace PresentationLayer.ViewModels
             }
         }
 
-        public bool NewDevice
+        public bool EditDevice
         {
-            get => _newDevice;
+            get => _editDevice;
             set
             {
-                _newDevice = value;
-                OnPropertyChanged("NewDevice");
+                _editDevice = value;
+                OnPropertyChanged("EditDevice");
                 OnPropertyChanged("Devices");
-                OnPropertyChanged("OldDevice");
+                OnPropertyChanged("EditDeviceInv");
             }
         }
 
-        public bool OldDevice
+        public bool EditDeviceInv
         {
-            get => !NewDevice;
+            get => !EditDevice;
         }
+
+        #endregion
+
 
         #region ICommands
         public ICommand NewDeviceCommand { get; set; }
         public ICommand SaveDeviceCommand { get; set; }
+        public ICommand EditDeviceCommand { get; set; }
+        public ICommand DeleteDeviceCommand { get; set; }
         #endregion
-    }
 
-    class NewDeviceCommand : ICommand
-    {
-        private readonly DeviceViewModel deviceViewModel;
-        public NewDeviceCommand(DeviceViewModel deviceViewModel)
+        public void UpdateDevices()
         {
-            this.deviceViewModel = deviceViewModel;
-        }
-
-        public event EventHandler CanExecuteChanged;
-
-        public bool CanExecute(object parameter)
-        {
-            return deviceViewModel.Devices.Count > 0;
-        }
-
-        public void Execute(object parameter)
-        {
-            deviceViewModel.NewDevice = true;
-            deviceViewModel.SelectedDevice = new DeviceDTO();
-        }
-    }
-
-    class SaveDeviceCommand : ICommand
-    {
-        private readonly DeviceViewModel deviceViewModel;
-        public SaveDeviceCommand(DeviceViewModel deviceViewModel)
-        {
-            this.deviceViewModel = deviceViewModel;
-        }
-
-        public event EventHandler CanExecuteChanged;
-
-        public bool CanExecute(object parameter)
-        {
-            return deviceViewModel.Devices.Count > 0;
-        }
-
-        public void Execute(object parameter)
-        {
-            deviceViewModel.DeviceService.AddDevice(deviceViewModel.SelectedDevice);
-            deviceViewModel.SelectedDevice = deviceViewModel.Devices[0];
-            deviceViewModel.NewDevice = false;
+            _devices = new ObservableCollection<DeviceDTO>(_deviceService.GetDevices());
+            OnPropertyChanged("Devices");
         }
     }
 }

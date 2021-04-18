@@ -12,6 +12,8 @@ namespace LogicLayer.Services
     {
         private readonly IDeviceRepository _deviceRepo;
 
+        public event Action DeviceChange;
+
         public DeviceService(IDeviceRepository deviceRepository)
         {
             _deviceRepo = deviceRepository;
@@ -53,16 +55,43 @@ namespace LogicLayer.Services
         {
             if (id < 0)
                 throw new ArgumentOutOfRangeException();
-            return _deviceRepo.SetState(id, state);
+            bool methodRetVal = _deviceRepo.SetState(id, state);
+            if (methodRetVal)
+            {
+                DeviceChange?.Invoke();
+            }
+            return methodRetVal;
         }
 
         public bool AddDevice(DeviceDTO newDevice)
         {
-            DeviceField invaildFields = ;
-            if (newDevice.Id < 0)
-                invaildFields |= DeviceField.Id;
-            _deviceRepo.Add(Mapper.Map(newDevice));
+            DeviceField invaildFields = DeviceField.None;
 
+            if (newDevice.Id < 0)
+            {
+                invaildFields |= DeviceField.Id;
+            }
+            
+            if (!(newDevice.Type == "LightBulb" ||
+                 newDevice.Type == "MotionDetector" ||
+                 newDevice.Type == "WallSocket"))
+            {
+                invaildFields |= DeviceField.Type;
+            }
+
+            if (newDevice.Name == "")
+            {
+                invaildFields |= DeviceField.Name;
+            }
+
+            if (invaildFields != DeviceField.None)
+            {
+                throw new InvalidDeviceDataException(invaildFields);
+            }
+
+            _deviceRepo.Add(Mapper.Map(newDevice));
+            DeviceChange?.Invoke();
+            return true;
         }
 
         public bool RemoveDevice(DeviceDTO deviceToRemove)
@@ -76,6 +105,7 @@ namespace LogicLayer.Services
             {
                 return false;
             }
+            DeviceChange?.Invoke();
             return retVal;
         }
     }
