@@ -1,4 +1,6 @@
-﻿using LogicLayer.DTOs;
+﻿using DataLayer;
+using LogicLayer.DTOs;
+using LogicLayer.Interfaces;
 using LogicLayer.Services;
 using System;
 using System.Collections.Generic;
@@ -11,52 +13,61 @@ namespace PresentationLayer.ViewModels
 {
     class DeviceViewModel : BaseViewModel
     {
-        private ObservableCollection<DeviceDTO> devices;
-        private DeviceDTO selectedDevice;
-        //private readonly DeviceService deviceService;
-        private bool newDevice;
+        private ObservableCollection<DeviceDTO> _devices;
+        private readonly IDeviceService _deviceService;
+        private DeviceDTO _selectedDevice;
+        private bool _newDevice;
 
         public DeviceViewModel()
         {
-            devices = new ObservableCollection<DeviceDTO>(MOCKs.DevicesMock.devicesMock);
-            selectedDevice = devices[0];
-            newDevice = false;
+            _deviceService = new DeviceService(RepositoryMock.GetDeviceRepository());
+            _devices = new ObservableCollection<DeviceDTO>(_deviceService.GetDevices());
+            _selectedDevice = _devices[0];
+            _newDevice = false;
             NewDeviceCommand = new NewDeviceCommand(this);
             SaveDeviceCommand = new SaveDeviceCommand(this);
         }
 
         public ObservableCollection<DeviceDTO> Devices
         {
-            get => devices;
+            get
+            {
+                _devices = new ObservableCollection<DeviceDTO>(_deviceService.GetDevices());
+                return _devices;
+            }
             set
             {
-                devices = value;
+                _devices = value;
                 OnPropertyChanged("Devices");
             }
         }
 
         public DeviceDTO SelectedDevice
         {
-            get => selectedDevice;
+            get => _selectedDevice;
             set
             {
-                selectedDevice = value;
+                _selectedDevice = value;
                 OnPropertyChanged("SelectedDevice");
             }
         }
 
-        //public DeviceService DeviceService
-        //{
-        //    get => deviceService;
-        //}
+        public DeviceService DeviceService
+        {
+            get
+            {
+                return (DeviceService)_deviceService;
+            }
+        }
 
         public bool NewDevice
         {
-            get => newDevice;
+            get => _newDevice;
             set
             {
-                newDevice = value;
+                _newDevice = value;
                 OnPropertyChanged("NewDevice");
+                OnPropertyChanged("Devices");
                 OnPropertyChanged("OldDevice");
             }
         }
@@ -111,8 +122,9 @@ namespace PresentationLayer.ViewModels
 
         public void Execute(object parameter)
         {
+            deviceViewModel.DeviceService.AddDevice(deviceViewModel.SelectedDevice);
+            deviceViewModel.SelectedDevice = deviceViewModel.Devices[0];
             deviceViewModel.NewDevice = false;
-            deviceViewModel.SelectedDevice = deviceViewModel.Devices[deviceViewModel.Devices.Count - 1];
         }
     }
 }

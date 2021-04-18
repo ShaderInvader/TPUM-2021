@@ -24,12 +24,14 @@ namespace LogicLayer
 
         public static DeviceDTO Map(IDevice device)
         {
+            string type = device.GetType().ToString();
+            var names = type.Split('.');
             return new DeviceDTO()
             {
                 Id = device.Id,
                 Name = device.Name,
                 Enabled = device.Enabled,
-                Type = device.GetType().ToString()
+                Type = names[^1]
             };
         }
 

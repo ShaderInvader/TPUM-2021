@@ -9,10 +9,10 @@ namespace PresentationLayer.ViewModels
     {
         public NavigationViewModel()
         {
-            Devices = new DevicesCommand(this);
-            Schedule = new ScheduleCommand(this);
-            Alerts = new AlertsCommand(this);
-            LoadDevices();
+            Devices = new LoadPageCommand(this, "DevicesPage.xaml");
+            Schedule = new LoadPageCommand(this, "SchedulePage.xaml", false);
+            Alerts = new LoadPageCommand(this, "", false);
+            Devices.Execute(null);
         }
 
         #region ViewModel
@@ -30,88 +30,37 @@ namespace PresentationLayer.ViewModels
 
         #region ICommands
         public ICommand Devices { get; private set; }
-        public void LoadDevices()
-        {
-            CurrentPage = "DevicesPage.xaml";
-        }
 
         public ICommand Schedule { get; private set; }
-        public void LoadSchedule()
-        {
-            CurrentPage = "SchedulePage.xaml";
-        }
 
         public ICommand Alerts { get; private set; }
-        public void LoadAlerts()
-        {
-            CurrentPage = "";
-        }
         #endregion
     }
 
-    class DevicesCommand : ICommand
+    class LoadPageCommand : ICommand
     {
         private readonly NavigationViewModel navigationViewModel;
+        private readonly string uri;
+        private readonly bool shouldExecute;
 
-        public DevicesCommand(NavigationViewModel navigationViewModel)
+        public LoadPageCommand(NavigationViewModel navigationViewModel, string uri, bool shouldExecute = true)
         {
             this.navigationViewModel = navigationViewModel;
+            this.uri = uri;
+            this.shouldExecute = shouldExecute;
         }
 
         public event EventHandler CanExecuteChanged;
 
         public bool CanExecute(object parameter)
         {
-            return true;
+            return shouldExecute;
         }
 
         public void Execute(object parameter)
         {
-            navigationViewModel.LoadDevices();
+            navigationViewModel.CurrentPage = uri;
         }
     }
 
-    class ScheduleCommand : ICommand
-    {
-        private readonly NavigationViewModel navigationViewModel;
-
-        public ScheduleCommand(NavigationViewModel navigationViewModel)
-        {
-            this.navigationViewModel = navigationViewModel;
-        }
-
-        public event EventHandler CanExecuteChanged;
-
-        public bool CanExecute(object parameter)
-        {
-            return true;
-        }
-
-        public void Execute(object parameter)
-        {
-            navigationViewModel.LoadSchedule();
-        }
-    }
-
-    class AlertsCommand : ICommand
-    {
-        private readonly NavigationViewModel navigationViewModel;
-
-        public AlertsCommand(NavigationViewModel navigationViewModel)
-        {
-            this.navigationViewModel = navigationViewModel;
-        }
-
-        public event EventHandler CanExecuteChanged;
-
-        public bool CanExecute(object parameter)
-        {
-            return false;
-        }
-
-        public void Execute(object parameter)
-        {
-            navigationViewModel.LoadAlerts();
-        }
-    }
 }
