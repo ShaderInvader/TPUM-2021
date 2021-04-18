@@ -13,6 +13,8 @@ namespace DataLayer
         private static readonly DataContext _context = new DataContext();
         private static IDeviceRepository _deviceRepository = null;
 
+        private static INamedRepository<User> _usersRepository = null;
+
         public static IDeviceRepository GetDeviceRepository()
         {
             if(_deviceRepository == null)
@@ -27,6 +29,16 @@ namespace DataLayer
                 _deviceRepository.Add(new WallSocket() { Id = 7, Name = "Gosund Smart Socket SP1-C", Enabled = false });
             }
             return _deviceRepository;
+        }
+
+        public static INamedRepository<User> GetUsersRepository()
+        {
+            if (_usersRepository == null)
+            {
+                _usersRepository = new UserRepository(_context);
+                _usersRepository.Add(new User() {Name="Johnny123", FirstName="John", LastName="Audio", Email="Johnny123@example.com", Id=1, Password="password"});
+            }
+            return _usersRepository;
         }
     }
 }

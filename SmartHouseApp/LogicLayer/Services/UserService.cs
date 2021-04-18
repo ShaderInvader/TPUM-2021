@@ -47,5 +47,16 @@ namespace LogicLayer.Services
 
             return userDTOs;
         }
+
+        public bool AddUser(UserDTO newUser)
+        {
+           _userRepo.Add(Mapper.Map(newUser));
+            return true;
+        }
+
+        public bool RemoveUser(UserDTO userToRemove)
+        {
+            return _userRepo.Remove(userToRemove.Id) > 0;
+        }
     }
 }

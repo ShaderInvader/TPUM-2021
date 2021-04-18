@@ -11,6 +11,8 @@ namespace LogicLayer.Services
     {
         private readonly IDeviceRepository _deviceRepo;
 
+        public event Action DeviceChange;
+
         public DeviceService(IDeviceRepository deviceRepository)
         {
             _deviceRepo = deviceRepository;
@@ -47,7 +49,12 @@ namespace LogicLayer.Services
 
         public bool SetDeviceState(int id, bool state)
         {
-            return _deviceRepo.SetState(id, state);
+            bool methodRetVal = _deviceRepo.SetState(id, state);
+            if (methodRetVal)
+            {
+                DeviceChange.Invoke();
+            }
+            return methodRetVal;
         }
 
         public bool AddDevice(DeviceDTO newDevice)
@@ -60,6 +67,7 @@ namespace LogicLayer.Services
             {
                 return false;
             }
+            DeviceChange.Invoke();
             return true;
         }
 
@@ -68,12 +76,13 @@ namespace LogicLayer.Services
             bool retVal = false;
             try
             {
-                retVal = _deviceRepo.Remove(Mapper.Map(deviceToRemove));
+                retVal = _deviceRepo.Remove(deviceToRemove.Id) > 0;
             }
             catch (Exceptions.InvalidDeviceTypeException)
             {
                 return false;
             }
+            DeviceChange.Invoke();
             return retVal;
         }
     }

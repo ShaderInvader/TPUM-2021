@@ -85,5 +85,18 @@ namespace LogicLayer
             }
             throw new Exceptions.InvalidDeviceTypeException(device.Type);
         }
+
+        public static User Map(UserDTO user)
+        {
+            return new User() 
+            { 
+                Id = user.Id, 
+                Email = user.Email, 
+                FirstName = user.FirstName, 
+                LastName = user.LastName, 
+                Name = user.Name, 
+                Password = user.Password 
+            };
+        }
     }
 }
