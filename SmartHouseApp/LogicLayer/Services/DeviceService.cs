@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using DataLayer.Interfaces;
 using LogicLayer.DTOs;
+using LogicLayer.Exceptions;
 using LogicLayer.Interfaces;
 
 namespace LogicLayer.Services
@@ -18,6 +19,9 @@ namespace LogicLayer.Services
 
         public DeviceDTO GetDevice(int id)
         {
+            if (id < 0)
+                throw new ArgumentOutOfRangeException();
+
             return Mapper.Map(_deviceRepo.Get(id));
         }
 
@@ -47,20 +51,18 @@ namespace LogicLayer.Services
 
         public bool SetDeviceState(int id, bool state)
         {
+            if (id < 0)
+                throw new ArgumentOutOfRangeException();
             return _deviceRepo.SetState(id, state);
         }
 
         public bool AddDevice(DeviceDTO newDevice)
         {
-            try 
-            {
-                _deviceRepo.Add(Mapper.Map(newDevice));
-            }
-            catch(Exceptions.InvalidDeviceTypeException)
-            {
-                return false;
-            }
-            return true;
+            DeviceField invaildFields = ;
+            if (newDevice.Id < 0)
+                invaildFields |= DeviceField.Id;
+            _deviceRepo.Add(Mapper.Map(newDevice));
+
         }
 
         public bool RemoveDevice(DeviceDTO deviceToRemove)
@@ -68,9 +70,9 @@ namespace LogicLayer.Services
             bool retVal = false;
             try
             {
-                retVal = _deviceRepo.Remove(Mapper.Map(deviceToRemove));
+                retVal = _deviceRepo.Remove(deviceToRemove.Id) > 0;
             }
-            catch (Exceptions.InvalidDeviceTypeException)
+            catch (Exceptions.InvalidDeviceDataException)
             {
                 return false;
             }

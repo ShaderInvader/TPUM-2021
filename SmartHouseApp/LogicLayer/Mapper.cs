@@ -5,6 +5,7 @@ using DataLayer;
 using DataLayer.Interfaces;
 using DataLayer.Devices;
 using LogicLayer.DTOs;
+using LogicLayer.Exceptions;
 
 namespace LogicLayer
 {
@@ -83,7 +84,7 @@ namespace LogicLayer
                     Enabled = device.Enabled
                 };
             }
-            throw new Exceptions.InvalidDeviceTypeException(device.Type);
+            throw new Exceptions.InvalidDeviceDataException(new DeviceField[] {DeviceField.Type});
         }
     }
 }
