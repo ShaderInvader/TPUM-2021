@@ -12,5 +12,6 @@ namespace LogicLayer.Interfaces
         IEnumerable<UserDTO> GetUsersByName(string name);
         bool AddUser(UserDTO newUser);
         bool RemoveUser(UserDTO userToRemove);
+        bool LoginUser(string username, string password);
     }
 }

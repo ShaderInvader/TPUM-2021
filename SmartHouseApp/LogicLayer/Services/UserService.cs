@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using DataLayer;
 using DataLayer.Interfaces;
 using LogicLayer.DTOs;
+using LogicLayer.Exceptions;
 using LogicLayer.Interfaces;
 
 namespace LogicLayer.Services
@@ -57,6 +59,27 @@ namespace LogicLayer.Services
         public bool RemoveUser(UserDTO userToRemove)
         {
             return _userRepo.Remove(userToRemove.Id) > 0;
+        }
+
+        public bool LoginUser(string username, string password)
+        {
+            var users = GetUsersByName(username).ToList();
+            // TODO: add proper password validation
+            if (users.Count() == 1)
+            {
+                if (password == "admin")
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                throw new UserNotFoundException(username);
+            }
         }
     }
 }

@@ -22,9 +22,14 @@ namespace PresentationLayer.Commands
 
         public void Execute(object parameter)
         {
-            
+            // TODO: remove hardcoded password
+            _loginViewModel._userService.LoginUser(_loginViewModel.Login, "admin");
         }
 
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler CanExecuteChanged
+        {
+            add => CommandManager.RequerySuggested += value;
+            remove => CommandManager.RequerySuggested -= value;
+        }
     }
 }
