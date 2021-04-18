@@ -5,7 +5,7 @@ using LogicLayer.DTOs;
 
 namespace LogicLayer.Interfaces
 {
-    interface IHouseService
+    public interface IHouseService
     {
         HouseDTO GetHouse(int id);
         IEnumerable<HouseDTO> GetHouses();

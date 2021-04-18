@@ -5,7 +5,7 @@ using LogicLayer.DTOs;
 
 namespace LogicLayer.Interfaces
 {
-    interface IUserService
+    public interface IUserService
     {
         UserDTO GetUser(int id);
         IEnumerable<UserDTO> GetUsers();
