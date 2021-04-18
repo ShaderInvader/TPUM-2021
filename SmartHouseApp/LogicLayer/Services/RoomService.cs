@@ -32,9 +32,12 @@ namespace LogicLayer.Services
             {
                 roomsDTOs.Add(Mapper.Map(room));
                 roomsDTOs[^1].Devices = new List<DeviceDTO>();
-                foreach(var device in room.Devices)
+                if (room.Devices != null)
                 {
-                    roomsDTOs[^1].Devices.Add(Mapper.Map(device));
+                    foreach(var device in room.Devices)
+                    {
+                        roomsDTOs[^1].Devices.Add(Mapper.Map(device));
+                    }
                 }
             }
 
