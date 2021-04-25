@@ -1,15 +1,12 @@
-﻿using PresentationLayer.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 using System.Windows.Input;
 
-namespace PresentationLayer.Commands
+namespace PresentationLayer.ViewModels.Commands
 {
-    public class AddDeviceCommand : ICommand
+    public class DeleteDeviceCommand : ICommand
     {
         private readonly DeviceViewModel deviceViewModel;
-        public AddDeviceCommand(DeviceViewModel deviceViewModel)
+        public DeleteDeviceCommand(DeviceViewModel deviceViewModel)
         {
             this.deviceViewModel = deviceViewModel;
         }
@@ -23,8 +20,7 @@ namespace PresentationLayer.Commands
 
         public void Execute(object parameter)
         {
-            deviceViewModel.DeviceService.AddDevice(deviceViewModel.SelectedDevice);
-            deviceViewModel.EditDevice = false;
+            deviceViewModel.DeviceService.RemoveDevice(deviceViewModel.SelectedDevice);
         }
     }
 }

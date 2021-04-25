@@ -1,9 +1,8 @@
-﻿using DataLayer;
-using LogicLayer.DTOs;
+﻿using LogicLayer.DTOs;
 using LogicLayer.Interfaces;
 using LogicLayer.Services;
-using PresentationLayer.Commands;
-using System;
+using LogicLayer;
+using PresentationLayer.ViewModels.Commands;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -17,7 +16,7 @@ namespace PresentationLayer.ViewModels
         private bool _editDevice;
         public DeviceViewModel()
         {
-            _deviceService = new DeviceService(RepositoryMock.GetDeviceRepository());
+            _deviceService = new DeviceService(RepositoryPlaceholder.GetDeviceRepository());
             _deviceService.DeviceChange += UpdateDevices;
             _devices = new ObservableCollection<DeviceDTO>(_deviceService.GetDevices());
             _selectedDevice = _devices[0];

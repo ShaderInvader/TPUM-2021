@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows;
 using System.Windows.Input;
 
-namespace PresentationLayer.Commands
+namespace PresentationLayer.ViewModels.Commands
 {
     public class MessageBoxCommand : ICommand
     {
@@ -31,7 +29,7 @@ namespace PresentationLayer.Commands
         public void Execute(object parameter)
         {
             var Result = MessageBox.Show(_message, _windowTitle, MessageBoxButton.YesNo, MessageBoxImage.Warning);
-            if( Result == MessageBoxResult.Yes)
+            if (Result == MessageBoxResult.Yes)
             {
                 _yesCommand?.Execute(null);
             }

@@ -1,10 +1,8 @@
-﻿using PresentationLayer.Util.Interfaces;
+﻿using PresentationLayer.ViewModels.Util.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace PresentationLayer.Util
+namespace PresentationLayer.ViewModels.Util
 {
     public static class TaskUtil
     {

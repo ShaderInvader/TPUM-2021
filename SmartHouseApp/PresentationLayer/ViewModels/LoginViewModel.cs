@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Security;
-using System.Text;
-using System.Windows.Input;
-using DataLayer;
+﻿using System.Windows.Input;
 using LogicLayer.Interfaces;
 using LogicLayer.Services;
-using PresentationLayer.Commands;
+using LogicLayer;
+using PresentationLayer.ViewModels.Commands;
 
 namespace PresentationLayer.ViewModels
 {
@@ -27,7 +23,7 @@ namespace PresentationLayer.ViewModels
 
         public LoginViewModel()
         {
-            _userService = new UserService(RepositoryMock.GetUsersRepository());
+            _userService = new UserService(RepositoryPlaceholder.GetUsersRepository());
             _login = "";
             LoginCommand = new LoginCommand(this);
         }

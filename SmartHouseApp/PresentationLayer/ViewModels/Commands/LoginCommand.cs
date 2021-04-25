@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Input;
-using PresentationLayer.ViewModels;
 
-namespace PresentationLayer.Commands
+namespace PresentationLayer.ViewModels.Commands
 {
     class LoginCommand : ICommand
     {

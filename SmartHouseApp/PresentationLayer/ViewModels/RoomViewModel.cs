@@ -1,10 +1,8 @@
-﻿using DataLayer;
-using LogicLayer.DTOs;
+﻿using LogicLayer.DTOs;
 using LogicLayer.Interfaces;
 using LogicLayer.Services;
-using System;
+using LogicLayer;
 using System.Collections.Generic;
-using System.Text;
 
 namespace PresentationLayer.ViewModels
 {
@@ -16,7 +14,7 @@ namespace PresentationLayer.ViewModels
 
         public RoomViewModel()
         {
-            _roomService = new RoomService(RepositoryMock.GetRoomsRepository());
+            _roomService = new RoomService(RepositoryPlaceholder.GetRoomsRepository());
             _rooms = new List<RoomEntryViewModel>();
             ParseRooms();
         }

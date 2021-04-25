@@ -1,14 +1,13 @@
 ﻿using DataLayer.Devices;
 using DataLayer.Interfaces;
 using DataLayer.Repositories;
-using System;
+using DataLayer;
 using System.Collections.Generic;
-using System.Text;
 
 
-namespace DataLayer
+namespace LogicLayer
 {
-    public static class RepositoryMock
+    public static class RepositoryPlaceholder
     {
         private static readonly DataContext _context = new DataContext();
         private static IDeviceRepository _deviceRepository = null;

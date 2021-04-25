@@ -1,14 +1,13 @@
-﻿using LogicLayer.DTOs;
-using PresentationLayer.ViewModels;
-using System;
+﻿using System;
 using System.Windows.Input;
 
-namespace PresentationLayer.Commands
+namespace PresentationLayer.ViewModels.Commands
 {
-    public class NewDeviceCommand : ICommand
+    public class EditDeviceCommand : ICommand
     {
         private readonly DeviceViewModel deviceViewModel;
-        public NewDeviceCommand(DeviceViewModel deviceViewModel)
+
+        public EditDeviceCommand(DeviceViewModel deviceViewModel)
         {
             this.deviceViewModel = deviceViewModel;
         }
@@ -23,7 +22,6 @@ namespace PresentationLayer.Commands
         public void Execute(object parameter)
         {
             deviceViewModel.EditDevice = true;
-            deviceViewModel.SelectedDevice = new DeviceDTO();
         }
     }
 }

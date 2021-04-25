@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace PresentationLayer.Util.Interfaces
+namespace PresentationLayer.ViewModels.Util.Interfaces
 {
     public interface IErrorHandler
     {
