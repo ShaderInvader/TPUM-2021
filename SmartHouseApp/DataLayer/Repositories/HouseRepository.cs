@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using DataLayer.Interfaces;
 
-namespace DataLayer.Repositories
+namespace DataLayer
 {
     public class HouseRepository : INamedRepository<House>
     {

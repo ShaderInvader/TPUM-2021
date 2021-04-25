@@ -1,7 +1,4 @@
-﻿using LogicLayer.DTOs;
-using LogicLayer.Interfaces;
-using LogicLayer.Services;
-using LogicLayer;
+﻿using LogicLayer;
 using System.Collections.Generic;
 
 namespace PresentationLayer.ViewModels

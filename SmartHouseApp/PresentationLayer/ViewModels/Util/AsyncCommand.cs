@@ -1,8 +1,7 @@
-﻿using PresentationLayer.ViewModels.Util.Interfaces;
-using System;
+﻿using System;
 using System.Threading.Tasks;
 
-namespace PresentationLayer.ViewModels.Util
+namespace PresentationLayer.ViewModels
 {
     class AsyncCommand : IAsyncCommand
     {

@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using DataLayer.Devices;
-using DataLayer.Interfaces;
-using LogicLayer.Services;
+using DataLayer;
+using LogicLayer;
 using Moq;
 using NUnit.Framework;
 

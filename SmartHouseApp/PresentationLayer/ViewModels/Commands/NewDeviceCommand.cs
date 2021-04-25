@@ -1,8 +1,8 @@
-﻿using LogicLayer.DTOs;
+﻿using LogicLayer;
 using System;
 using System.Windows.Input;
 
-namespace PresentationLayer.ViewModels.Commands
+namespace PresentationLayer.ViewModels
 {
     public class NewDeviceCommand : ICommand
     {

@@ -3,12 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using DataLayer;
-using DataLayer.Interfaces;
-using LogicLayer.DTOs;
-using LogicLayer.Exceptions;
-using LogicLayer.Interfaces;
 
-namespace LogicLayer.Services
+namespace LogicLayer
 {
     public class UserService : IUserService
     {

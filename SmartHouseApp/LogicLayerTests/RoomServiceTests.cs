@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using DataLayer;
-using DataLayer.Interfaces;
 using LogicLayer;
-using LogicLayer.Services;
 using Moq;
 using NUnit.Framework;
 

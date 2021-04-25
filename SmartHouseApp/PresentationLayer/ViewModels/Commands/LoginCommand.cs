@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace PresentationLayer.ViewModels.Commands
+namespace PresentationLayer.ViewModels
 {
     class LoginCommand : ICommand
     {

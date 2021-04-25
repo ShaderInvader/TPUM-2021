@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LogicLayer.Exceptions
+namespace LogicLayer
 {
     [Flags]
     public enum DeviceField

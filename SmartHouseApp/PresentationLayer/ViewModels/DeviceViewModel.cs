@@ -1,8 +1,4 @@
-﻿using LogicLayer.DTOs;
-using LogicLayer.Interfaces;
-using LogicLayer.Services;
-using LogicLayer;
-using PresentationLayer.ViewModels.Commands;
+﻿using LogicLayer;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 

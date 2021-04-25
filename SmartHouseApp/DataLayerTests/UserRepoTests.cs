@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using DataLayer;
-using DataLayer.Repositories;
 using NUnit.Framework;
 
 namespace DataLayerTests

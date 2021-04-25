@@ -2,10 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 using DataLayer;
-using DataLayer.Interfaces;
-using DataLayer.Devices;
-using LogicLayer.DTOs;
-using LogicLayer.Exceptions;
 
 namespace LogicLayer
 {
@@ -84,7 +80,7 @@ namespace LogicLayer
                     Enabled = device.Enabled
                 };
             }
-            throw new Exceptions.InvalidDeviceDataException(DeviceField.Type);
+            throw new InvalidDeviceDataException(DeviceField.Type);
         }
 
         public static User Map(UserDTO user)
