@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using DataLayer;
+using ModelCommon;
 
 namespace LogicLayer
 {

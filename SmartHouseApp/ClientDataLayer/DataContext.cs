@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DataLayer
+namespace ClientDataLayer
 {
-    public interface IData
+    class DataContext
     {
-        public int Id { get; set; }
     }
 }

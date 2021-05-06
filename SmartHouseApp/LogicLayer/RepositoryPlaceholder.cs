@@ -1,5 +1,6 @@
 ﻿using DataLayer;
 using System.Collections.Generic;
+using ModelCommon;
 
 namespace LogicLayer
 {

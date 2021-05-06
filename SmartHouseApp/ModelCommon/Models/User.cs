@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ModelCommon.Interfaces;
 
-namespace DataLayer
+namespace ModelCommon
 {
     public class User : INamed
     {

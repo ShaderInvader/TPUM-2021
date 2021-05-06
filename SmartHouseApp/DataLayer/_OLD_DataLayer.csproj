@@ -8,4 +8,8 @@
     <Product>Smart House App</Product>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ModelCommon\ModelCommon.csproj" />
+  </ItemGroup>
+
 </Project>

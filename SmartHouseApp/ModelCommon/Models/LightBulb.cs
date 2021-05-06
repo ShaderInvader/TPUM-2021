@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ModelCommon.Interfaces;
 
-namespace DataLayer
+namespace ModelCommon
 {
-    public class WallSocket : IDevice
+    public class LightBulb : IDevice
     {
         public int Id { get; set; }
         public string Name { get; set; }

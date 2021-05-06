@@ -11,7 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\LogicLayer\LogicLayer.csproj" />
+    <ProjectReference Include="..\ClientLogicLayer\ClientLogicLayer.csproj" />
+    <ProjectReference Include="..\LogicLayer\_OLD_LogicLayer.csproj" />
   </ItemGroup>
 
 </Project>

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DataLayer
+namespace ModelCommon.Interfaces
 {
     public interface IDevice : INamed
     {

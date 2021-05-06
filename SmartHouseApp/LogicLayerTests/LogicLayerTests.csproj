@@ -14,8 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DataLayer\DataLayer.csproj" />
-    <ProjectReference Include="..\LogicLayer\LogicLayer.csproj" />
+    <ProjectReference Include="..\DataLayer\_OLD_DataLayer.csproj" />
+    <ProjectReference Include="..\LogicLayer\_OLD_LogicLayer.csproj" />
   </ItemGroup>
 
 </Project>
