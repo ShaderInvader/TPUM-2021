@@ -9,7 +9,6 @@ namespace LogicLayer
         private static IDeviceRepository _deviceRepository = null;
 
         private static INamedRepository<User> _usersRepository = null;
-        private static INamedRepository<Room> _roomsRepository = null;
 
         public static IDeviceRepository GetDeviceRepository()
         {
@@ -35,29 +34,6 @@ namespace LogicLayer
                 _usersRepository.Add(new User() {Name="Johnny123", FirstName="John", LastName="Audio", Email="Johnny123@example.com", Id=1, Password="password"});
             }
             return _usersRepository;
-        }
-
-        public static INamedRepository<Room> GetRoomsRepository()
-        {
-            if(_roomsRepository == null)
-            {
-                _roomsRepository = new RoomRepository(_context);
-                _roomsRepository.Add(new Room() { Id = 0, Name = "Living Room", Description = "", Devices = new List<IDevice>() });
-                _roomsRepository.Add(new Room() { Id = 1, Name = "Kitchen", Description = "", Devices = new List<IDevice>() });
-                var devices = new List<IDevice>(GetDeviceRepository().Get());
-                for (int i = 0; i < devices.Count; ++i)
-                {
-                    if(i % 2 == 0)
-                    {
-                        _roomsRepository.Get(0).Devices.Add(GetDeviceRepository().Get(i));
-                    }
-                    else
-                    {
-                        _roomsRepository.Get(1).Devices.Add(GetDeviceRepository().Get(i));
-                    }
-                }
-            }
-            return _roomsRepository;
         }
     }
 }

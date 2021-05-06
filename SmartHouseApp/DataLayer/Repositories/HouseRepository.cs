@@ -44,7 +44,7 @@ namespace DataLayer
             if (found != null)
             {
                 found.Name = item.Name;
-                found.Rooms = new List<Room>(item.Rooms);
+                found.Devices = new List<IDevice>(item.Devices);
                 return true;
             }
 
@@ -95,7 +95,7 @@ namespace DataLayer
             if (found != null)
             {
                 found.Name = item.Name;
-                found.Rooms = new List<Room>(item.Rooms);
+                found.Devices = new List<IDevice>(item.Devices);
                 return true;
             }
 
@@ -108,7 +108,7 @@ namespace DataLayer
             foreach (var t in found)
             {
                 t.Name = item.Name;
-                t.Rooms = new List<Room>(item.Rooms);
+                t.Devices = new List<IDevice>(item.Devices);
             }
             return found.Count;
         }

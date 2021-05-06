@@ -8,6 +8,7 @@ namespace DataLayer
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public List<Room> Rooms { get; set; }
+        public List<IDevice> Devices { get; set; }
+        public Tuple<double, double> Location { get; set; }
     }
 }

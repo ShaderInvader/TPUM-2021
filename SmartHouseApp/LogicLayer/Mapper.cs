@@ -32,16 +32,6 @@ namespace LogicLayer
             };
         }
 
-        public static RoomDTO Map(Room room)
-        {
-            return new RoomDTO()
-            {
-                Id = room.Id,
-                Name = room.Name,
-                Description = room.Description
-            };
-        }
-
         public static HouseDTO Map(House house)
         {
             return new HouseDTO()
