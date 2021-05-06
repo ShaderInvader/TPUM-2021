@@ -9,6 +9,7 @@ namespace ServerDataLayer
     public class UserRepository : INamedRepository<User>
     {
         private readonly DataContext _dataContext;
+        private readonly object _userLock = new object();
 
         public UserRepository()
         {
@@ -88,13 +89,16 @@ namespace ServerDataLayer
             bool returnValue = false;
             if (found != null)
             {
-                found.Email = item.Email;
-                found.Name = item.Name;
-                found.FirstName = item.FirstName;
-                found.LastName = item.LastName;
-                found.Location = item.Location;
-                found.Email = item.Email;
-                found.Password = item.Password;
+                lock(_userLock)
+                {
+                    found.Email = item.Email;
+                    found.Name = item.Name;
+                    found.FirstName = item.FirstName;
+                    found.LastName = item.LastName;
+                    found.Location = item.Location;
+                    found.Email = item.Email;
+                    found.Password = item.Password;
+                }
 
                 returnValue = true;
             }
@@ -106,11 +110,15 @@ namespace ServerDataLayer
             List<User> found = _dataContext.Users.FindAll(user => user.Name == name);
             foreach (var u in found)
             {
-                u.Email = item.Email;
-                u.Name = item.Name;
-                u.FirstName = item.FirstName;
-                u.LastName = item.LastName;
-                u.Location = item.Location;
+                lock (_userLock)
+                {
+                    u.Email = item.Email;
+                    u.Password = item.Password;
+                    u.Name = item.Name;
+                    u.FirstName = item.FirstName;
+                    u.LastName = item.LastName;
+                    u.Location = item.Location;
+                }
             }
             return found.Count;
         }
@@ -121,11 +129,15 @@ namespace ServerDataLayer
             bool returnValue = false;
             if (found != null)
             {
-                found.Email = item.Email;
-                found.Name = item.Name;
-                found.FirstName = item.FirstName;
-                found.LastName = item.LastName;
-                found.Location = item.Location;
+                lock (_userLock)
+                {
+                    found.Email = item.Email;
+                    found.Password = item.Password;
+                    found.Name = item.Name;
+                    found.FirstName = item.FirstName;
+                    found.LastName = item.LastName;
+                    found.Location = item.Location;
+                }
 
                 returnValue = true;
             }

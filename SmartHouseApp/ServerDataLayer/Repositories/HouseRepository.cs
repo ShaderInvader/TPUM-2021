@@ -8,7 +8,8 @@ namespace ServerDataLayer
 {
     public class HouseRepository : INamedRepository<House>
     {
-        private DataContext _dataContext;
+        private readonly DataContext _dataContext;
+        private readonly object _houseLock = new object();
 
         public HouseRepository()
         {
@@ -87,8 +88,12 @@ namespace ServerDataLayer
             bool returnValue = false;
             if (found != null)
             {
-                found.Name = item.Name;
-                found.Devices = new List<IDevice>(item.Devices);
+                lock(_houseLock)
+                {
+                    found.Name = item.Name;
+                    found.Devices = new List<IDevice>(item.Devices);
+                    found.Location = item.Location;
+                }
                 returnValue = true;
             }
 
@@ -100,8 +105,12 @@ namespace ServerDataLayer
             List<House> found = (List<House>)GetAll(name);
             foreach (var h in found)
             {
-                h.Name = item.Name;
-                h.Devices = new List<IDevice>(item.Devices);
+                lock (_houseLock)
+                {
+                    h.Name = item.Name;
+                    h.Devices = new List<IDevice>(item.Devices);
+                    h.Location = item.Location;
+                }
             }
             return found.Count;
         }
@@ -112,8 +121,12 @@ namespace ServerDataLayer
             bool returnValue = false;
             if (found != null)
             {
-                found.Name = item.Name;
-                found.Devices = new List<IDevice>(item.Devices);
+                lock (_houseLock)
+                {
+                    found.Name = item.Name;
+                    found.Devices = new List<IDevice>(item.Devices);
+                    found.Location = item.Location;
+                }
                 returnValue = true;
             }
 

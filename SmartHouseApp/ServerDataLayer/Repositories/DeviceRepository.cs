@@ -8,6 +8,7 @@ namespace ServerDataLayer
     public class DeviceRepository : IDeviceRepository
     {
         private readonly DataContext _dataContext;
+        private readonly object _deviceLock = new object();
 
         public DeviceRepository()
         {
@@ -87,8 +88,11 @@ namespace ServerDataLayer
             bool returnValue = false;
             if (found != null)
             {
-                found.Name = item.Name;
-                found.Enabled = item.Enabled;
+                lock(_deviceLock)
+                {
+                    found.Name = item.Name;
+                    found.Enabled = item.Enabled;
+                }
                 returnValue = true;
             }
             return returnValue;
@@ -100,8 +104,10 @@ namespace ServerDataLayer
             bool returnValue = false;
             if (found != null)
             {
-                found.Enabled = item.Enabled;
-                found.Name = item.Name;
+                lock(_deviceLock)
+                {
+                    found.Enabled = item.Enabled;
+                }
                 returnValue = true;
             }
             return returnValue;
@@ -112,8 +118,10 @@ namespace ServerDataLayer
             List<IDevice> found = _dataContext.Devices.FindAll(device => device.Name == name);
             foreach (var d in found)
             {
-                d.Enabled = item.Enabled;
-                d.Name = item.Name;
+                lock(_deviceLock)
+                {
+                    d.Enabled = item.Enabled;
+                }
             }
             return found.Count;
         }
@@ -124,7 +132,10 @@ namespace ServerDataLayer
             bool returnValue = false;
             if (device != null)
             {
-                device.Enabled = enabled;
+                lock(_deviceLock)
+                {
+                    device.Enabled = enabled;
+                }
                 returnValue = true;
             }
 
@@ -137,7 +148,10 @@ namespace ServerDataLayer
             bool returnValue = false;
             if (device != null)
             {
-                device.Enabled = enabled;
+                lock (_deviceLock)
+                {
+                    device.Enabled = enabled;
+                }
                 returnValue = true;
             }
 
@@ -149,7 +163,10 @@ namespace ServerDataLayer
             List<IDevice> devices = (List<IDevice>)GetAll(name);
             foreach (var device in devices)
             {
-                device.Enabled = enabled;
+                lock (_deviceLock)
+                {
+                    device.Enabled = enabled;
+                }
             }
             return devices.Count;
         }
@@ -160,7 +177,10 @@ namespace ServerDataLayer
             bool returnValue = false;
             if (device != null)
             {
-                device.Enabled = !device.Enabled;
+                lock (_deviceLock)
+                {
+                    device.Enabled = !device.Enabled;
+                }
                 returnValue = true;
             }
 
@@ -173,7 +193,10 @@ namespace ServerDataLayer
             bool returnValue = false;
             if (device != null)
             {
-                device.Enabled = !device.Enabled;
+                lock (_deviceLock)
+                {
+                    device.Enabled = !device.Enabled;
+                }
                 returnValue = true;
             }
 
@@ -185,7 +208,10 @@ namespace ServerDataLayer
             List<IDevice> devices = (List<IDevice>)GetAll(name);
             foreach (var device in devices)
             {
-                device.Enabled = !device.Enabled;
+                lock (_deviceLock)
+                {
+                    device.Enabled = !device.Enabled;
+                }
             }
             return devices.Count;
         } 
