@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ClientPresentationLayer.ViewModels.Util.Interfaces
+namespace ClientPresentationLayer.ViewModels
 {
     public interface IErrorHandler
     {

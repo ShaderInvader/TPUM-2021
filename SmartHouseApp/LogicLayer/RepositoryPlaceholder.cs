@@ -1,9 +1,5 @@
-﻿using DataLayer.Devices;
-using DataLayer.Interfaces;
-using DataLayer.Repositories;
-using DataLayer;
+﻿using DataLayer;
 using System.Collections.Generic;
-
 
 namespace LogicLayer
 {

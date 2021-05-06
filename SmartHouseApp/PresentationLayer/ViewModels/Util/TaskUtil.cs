@@ -1,8 +1,7 @@
-﻿using ClientPresentationLayer.ViewModels.Util.Interfaces;
 using System;
 using System.Threading.Tasks;
 
-namespace ClientPresentationLayer.ViewModels.Util
+namespace ClientPresentationLayer.ViewModels
 {
     public static class TaskUtil
     {

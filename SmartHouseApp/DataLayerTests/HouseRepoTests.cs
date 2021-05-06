@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using DataLayer;
-using DataLayer.Devices;
-using DataLayer.Repositories;
 using NuGet.Frameworks;
 using NUnit.Framework;
 

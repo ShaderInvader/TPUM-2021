@@ -4,8 +4,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using DataLayer;
-using DataLayer.Interfaces;
-using LogicLayer.Interfaces;
 
 namespace LogicLayer
 {

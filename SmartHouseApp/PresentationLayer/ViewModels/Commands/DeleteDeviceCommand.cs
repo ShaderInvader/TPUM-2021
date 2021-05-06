@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace ClientPresentationLayer.ViewModels.Commands
+namespace ClientPresentationLayer.ViewModels
 {
     public class DeleteDeviceCommand : ICommand
     {

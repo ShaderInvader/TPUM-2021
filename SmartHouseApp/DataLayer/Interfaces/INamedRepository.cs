@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DataLayer.Interfaces
+namespace DataLayer
 {
     public interface INamedRepository<T> : IDataRepository<T> where T : INamed
     {

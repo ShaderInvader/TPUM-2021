@@ -1,7 +1,5 @@
 using System.Linq;
 using DataLayer;
-using DataLayer.Repositories;
-using DataLayer.Devices;
 using NUnit.Framework;
 
 namespace DataLayerTests

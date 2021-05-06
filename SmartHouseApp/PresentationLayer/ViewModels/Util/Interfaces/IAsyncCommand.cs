@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace ClientPresentationLayer.ViewModels.Util.Interfaces
+namespace ClientPresentationLayer.ViewModels
 {
     public interface IAsyncCommand : ICommand
     {

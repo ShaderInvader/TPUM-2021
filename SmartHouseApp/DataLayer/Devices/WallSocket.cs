@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using DataLayer.Interfaces;
 
-namespace DataLayer.Devices
+namespace DataLayer
 {
     public class WallSocket : IDevice
     {

@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using LogicLayer.DTOs;
 
-namespace LogicLayer.Interfaces
+namespace LogicLayer
 {
     public interface IHouseService
     {

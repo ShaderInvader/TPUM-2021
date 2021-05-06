@@ -1,12 +1,9 @@
-﻿using System;
+﻿using DataLayer;
+using System;
 using System.Collections.Generic;
 using System.Text;
-using DataLayer.Interfaces;
-using LogicLayer.DTOs;
-using LogicLayer.Exceptions;
-using LogicLayer.Interfaces;
 
-namespace LogicLayer.Services
+namespace LogicLayer
 {
     public class DeviceService : IDeviceService
     {
@@ -101,7 +98,7 @@ namespace LogicLayer.Services
             {
                 retVal = _deviceRepo.Remove(deviceToRemove.Id) > 0;
             }
-            catch (Exceptions.InvalidDeviceDataException)
+            catch (InvalidDeviceDataException)
             {
                 return false;
             }

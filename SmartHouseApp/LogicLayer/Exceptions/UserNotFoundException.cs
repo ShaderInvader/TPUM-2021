@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LogicLayer.Exceptions
+namespace LogicLayer
 {
     public class UserNotFoundException : Exception
     {

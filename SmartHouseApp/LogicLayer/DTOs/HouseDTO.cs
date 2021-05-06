@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LogicLayer.DTOs
+namespace LogicLayer
 {
     public class HouseDTO
     {

@@ -2,11 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using DataLayer;
-using DataLayer.Interfaces;
-using LogicLayer.DTOs;
-using LogicLayer.Interfaces;
 
-namespace LogicLayer.Services
+namespace LogicLayer
 {
     public class HouseService : IHouseService
     {

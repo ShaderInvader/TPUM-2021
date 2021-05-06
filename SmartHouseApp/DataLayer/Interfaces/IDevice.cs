@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using DataLayer.Interfaces;
 
-namespace DataLayer.Interfaces
+namespace DataLayer
 {
     public interface IDevice : INamed
     {
