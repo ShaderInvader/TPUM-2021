@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace PresentationLayer.ViewModels
+namespace ClientPresentationLayer.ViewModels
 {
     class NavigationViewModel : BaseViewModel
     {

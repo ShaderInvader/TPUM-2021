@@ -2,9 +2,9 @@
 using LogicLayer.Interfaces;
 using LogicLayer.Services;
 using LogicLayer;
-using PresentationLayer.ViewModels.Commands;
+using ClientPresentationLayer.ViewModels.Commands;
 
-namespace PresentationLayer.ViewModels
+namespace ClientPresentationLayer.ViewModels
 {
     class LoginViewModel : BaseViewModel
     {

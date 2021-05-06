@@ -2,11 +2,11 @@
 using LogicLayer.Interfaces;
 using LogicLayer.Services;
 using LogicLayer;
-using PresentationLayer.ViewModels.Commands;
+using ClientPresentationLayer.ViewModels.Commands;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
-namespace PresentationLayer.ViewModels
+namespace ClientPresentationLayer.ViewModels
 {
     public class DeviceViewModel : BaseViewModel
     {

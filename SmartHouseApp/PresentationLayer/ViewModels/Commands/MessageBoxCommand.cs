@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Input;
 
-namespace PresentationLayer.ViewModels.Commands
+namespace ClientPresentationLayer.ViewModels.Commands
 {
     public class MessageBoxCommand : ICommand
     {

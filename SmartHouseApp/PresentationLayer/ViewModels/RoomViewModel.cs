@@ -4,7 +4,7 @@ using LogicLayer.Services;
 using LogicLayer;
 using System.Collections.Generic;
 
-namespace PresentationLayer.ViewModels
+namespace ClientPresentationLayer.ViewModels
 {
     class RoomViewModel : BaseViewModel
     {

@@ -11,7 +11,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PresentationLayer.Views
+namespace ClientPresentationLayer.Views
 {
     /// <summary>
     /// Interaction logic for SchedulePage.xaml

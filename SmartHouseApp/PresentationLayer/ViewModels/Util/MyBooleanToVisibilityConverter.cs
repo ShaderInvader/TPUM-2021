@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Data;
 
-namespace PresentationLayer.ViewModels.Util
+namespace ClientPresentationLayer.ViewModels.Util
 {
     public class MyBooleanToVisibilityConverter : IValueConverter
     {

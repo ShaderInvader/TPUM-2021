@@ -1,4 +1,4 @@
-﻿using PresentationLayer.ViewModels;
+﻿using ClientPresentationLayer.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PresentationLayer.Views
+namespace ClientPresentationLayer.Views
 {
     /// <summary>
     /// Interaction logic for RoomsPage.xaml
