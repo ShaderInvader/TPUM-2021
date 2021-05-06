@@ -8,4 +8,8 @@
     <ProjectReference Include="..\ServerDataLayer\ServerDataLayer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\" />
+  </ItemGroup>
+
 </Project>
