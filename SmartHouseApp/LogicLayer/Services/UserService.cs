@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using DataLayer;
 using ModelCommon;
+using ModelCommon.Interfaces;
 
 namespace LogicLayer
 {

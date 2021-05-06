@@ -8,8 +8,4 @@
     <ProjectReference Include="..\ModelCommon\ModelCommon.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Repositories\" />
-  </ItemGroup>
-
 </Project>

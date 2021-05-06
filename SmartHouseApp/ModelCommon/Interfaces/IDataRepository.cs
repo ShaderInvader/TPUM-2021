@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ModelCommon.Interfaces;
 
-namespace DataLayer
+namespace ModelCommon.Interfaces
 {
     public interface IDataRepository<T> where T : IData
     {

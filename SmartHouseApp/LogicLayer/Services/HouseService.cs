@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using DataLayer;
 using ModelCommon;
+using ModelCommon.Interfaces;
 
 namespace LogicLayer
 {

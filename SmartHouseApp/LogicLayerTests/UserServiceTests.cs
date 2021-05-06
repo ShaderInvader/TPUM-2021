@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using DataLayer;
 using LogicLayer;
+using ModelCommon;
+using ModelCommon.Interfaces;
 using Moq;
 using NUnit.Framework;
 
