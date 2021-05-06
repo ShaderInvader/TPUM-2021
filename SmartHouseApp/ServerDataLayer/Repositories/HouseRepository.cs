@@ -4,7 +4,7 @@ using System.Text;
 using ModelCommon.Interfaces;
 using ModelCommon;
 
-namespace ServerDataLayer.Repositories
+namespace ServerDataLayer
 {
     public class HouseRepository : INamedRepository<House>
     {
