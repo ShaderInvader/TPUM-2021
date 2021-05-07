@@ -17,11 +17,11 @@ namespace LogicLayer
             if(_deviceRepository == null)
             {
                 _deviceRepository = new DeviceRepository(_context);
-                _deviceRepository.Add(new LightBulb() { Id = 0, Name = "Philips Hue Bluetooth White and Color Ambiance Bulb", Enabled = true });
-                _deviceRepository.Add(new LightBulb() { Id = 1, Name = "Yeelight Smart LED Bulb", Enabled = true });
-                _deviceRepository.Add(new MotionDetector() { Id = 2, Name = "Mi Smart Motion Sensor", Enabled = false });
-                _deviceRepository.Add(new MotionDetector() { Id = 3, Name = "Mi Smart Motion Sensor", Enabled = false });
-                _deviceRepository.Add(new MotionDetector() { Id = 4, Name = "Dahua's Smart Motion Detection", Enabled = true });
+                _deviceRepository.Add(new ExampleDevice() { Id = 0, Name = "Philips Hue Bluetooth White and Color Ambiance Bulb", Enabled = true });
+                _deviceRepository.Add(new ExampleDevice() { Id = 1, Name = "Yeelight Smart LED Bulb", Enabled = true });
+                _deviceRepository.Add(new ExampleDevice() { Id = 2, Name = "Mi Smart Motion Sensor", Enabled = false });
+                _deviceRepository.Add(new ExampleDevice() { Id = 3, Name = "Mi Smart Motion Sensor", Enabled = false });
+                _deviceRepository.Add(new ExampleDevice() { Id = 4, Name = "Dahua's Smart Motion Detection", Enabled = true });
                 _deviceRepository.Add(new ExampleDevice() { Id = 5, Name = "Gosund Smart Socket SP1-C", Enabled = true });
                 _deviceRepository.Add(new ExampleDevice() { Id = 6, Name = "Gosund Smart Socket SP1-C", Enabled = false });
             }

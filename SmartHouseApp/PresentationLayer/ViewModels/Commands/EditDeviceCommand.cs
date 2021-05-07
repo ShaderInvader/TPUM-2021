@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace ClientPresentationLayer.ViewModels
+namespace ClientPresentationLayer.ViewModels.Commands
 {
     public class EditDeviceCommand : ICommand
     {

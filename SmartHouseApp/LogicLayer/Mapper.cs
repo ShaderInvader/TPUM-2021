@@ -45,34 +45,12 @@ namespace LogicLayer
 
         public static IDevice Map(DeviceDTO device)
         {
-            if (device.Type.Equals("LightBulb"))
+            return new ExampleDevice()
             {
-                return new LightBulb()
-                {
-                    Id = device.Id,
-                    Name = device.Name,
-                    Enabled = device.Enabled
-                };
-            }
-            else if(device.Type.Equals("MotionDetector"))
-            {
-                return new MotionDetector()
-                {
-                    Id = device.Id,
-                    Name = device.Name,
-                    Enabled = device.Enabled
-                };
-            }
-            else if(device.Type.Equals("WallSocket"))
-            {
-                return new ExampleDevice()
-                {
-                    Id = device.Id,
-                    Name = device.Name,
-                    Enabled = device.Enabled
-                };
-            }
-            throw new InvalidDeviceDataException(DeviceField.Type);
+                Id = device.Id,
+                Name = device.Name,
+                Enabled = device.Enabled
+            };
         }
 
         public static User Map(UserDTO user)

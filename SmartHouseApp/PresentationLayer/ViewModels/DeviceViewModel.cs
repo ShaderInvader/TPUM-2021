@@ -2,6 +2,7 @@
 using LogicLayer;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using ClientPresentationLayer.ViewModels.Commands;
 
 namespace ClientPresentationLayer.ViewModels
 {
@@ -11,6 +12,7 @@ namespace ClientPresentationLayer.ViewModels
         private readonly IDeviceService _deviceService;
         private DeviceDTO _selectedDevice;
         private bool _editDevice;
+
         public DeviceViewModel()
         {
             _deviceService = new DeviceService(RepositoryPlaceholder.GetDeviceRepository());
