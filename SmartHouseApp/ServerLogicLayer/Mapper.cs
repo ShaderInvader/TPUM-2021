@@ -8,13 +8,12 @@ namespace ServerLogicLayer
 {
     public class Mapper
     {
-        public static DeviceDTO Map(IDevice device)
+        public static ExampleDeviceDTO Map(IDevice device)
         {
-            return new DeviceDTO
+            return new ExampleDeviceDTO
             {
                 Name = device.Name,
                 Id = device.Id,
-                Type = device.Type,
                 Enabled = device.Enabled
             };
         }
@@ -33,13 +32,12 @@ namespace ServerLogicLayer
             };
         }
 
-        public static HouseDTO Map(House house)
+        public static RoomDTO Map(Room house)
         {
-            return new HouseDTO
+            return new RoomDTO
             {
                 Id = house.Id,
                 Name = house.Name,
-                Location = new Tuple<double, double>(house.Location.Item1, house.Location.Item2),
                 Devices = new List<IDevice>(house.Devices)
             };
         }
@@ -58,47 +56,24 @@ namespace ServerLogicLayer
             };
         }
 
-        public static House Map(HouseDTO houseDto)
+        public static Room Map(RoomDTO houseDto)
         {
-            return new House
+            return new Room
             {
                 Id = houseDto.Id,
                 Devices = houseDto.Devices,
-                Location = new Tuple<double, double>(houseDto.Location.Item1, houseDto.Location.Item2),
                 Name = houseDto.Name
             };
         }
 
-        public static IDevice Map(DeviceDTO deviceDTO)
+        public static IDevice Map(ExampleDeviceDTO deviceDTO)
         {
-            IDevice device;
-            if(string.Compare(deviceDTO.Type, "LightBulb") == 0)
+            IDevice device = new ExampleDevice
             {
-                device = new LightBulb
-                {
-                    Name = deviceDTO.Name,
-                    Id = deviceDTO.Id,
-                    Enabled = deviceDTO.Enabled
-                };
-            }
-            else if (string.Compare(deviceDTO.Type, "MotionDetector") == 0)
-            {
-                device = new MotionDetector
-                {
-                    Name = deviceDTO.Name,
-                    Id = deviceDTO.Id,
-                    Enabled = deviceDTO.Enabled
-                };
-            }
-            else
-            {
-                device = new WallSocket
-                {
-                    Name = deviceDTO.Name,
-                    Id = deviceDTO.Id,
-                    Enabled = deviceDTO.Enabled
-                };
-            }
+                Name = deviceDTO.Name,
+                Id = deviceDTO.Id,
+                Enabled = deviceDTO.Enabled
+            };
             return device;
         }
     }

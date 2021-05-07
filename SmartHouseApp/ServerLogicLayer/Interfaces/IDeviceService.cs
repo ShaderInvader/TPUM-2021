@@ -7,15 +7,15 @@ namespace ServerLogicLayer
 {
     public interface IDeviceService
     {
-        Task<DeviceDTO> GetDevice(int id);
-        Task<DeviceDTO> GetDevice(string name);
-        Task<IEnumerable<DeviceDTO>> GetDevices();
-        Task<IEnumerable<DeviceDTO>> GetDevicesByName(string name);
+        Task<ExampleDeviceDTO> GetDevice(int id);
+        Task<ExampleDeviceDTO> GetDevice(string name);
+        Task<IEnumerable<ExampleDeviceDTO>> GetDevices();
+        Task<IEnumerable<ExampleDeviceDTO>> GetDevicesByName(string name);
         Task<bool> SetDeviceState(int id, bool state);
-        Task<bool> AddDevice(DeviceDTO newDevice);
-        Task<bool> RemoveDevice(DeviceDTO devicetoRemove);
+        Task<bool> AddDevice(ExampleDeviceDTO newDevice);
+        Task<bool> RemoveDevice(ExampleDeviceDTO devicetoRemove);
         Task<bool> RemoveDevicesByName(string name);
         Task<int[]> GetDevicesIds(string name);
-        Task<bool> UpdateDevice(int id, DeviceDTO deviceNewValues);
+        Task<bool> UpdateDevice(int id, ExampleDeviceDTO deviceNewValues);
     }
 }

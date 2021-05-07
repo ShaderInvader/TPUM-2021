@@ -4,11 +4,10 @@ using System.Text;
 
 namespace ServerLogicLayer
 {
-    public class DeviceDTO
+    public class ExampleDeviceDTO
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public bool Enabled { get; set; }
-        public string Type { get; set; }
     }
 }

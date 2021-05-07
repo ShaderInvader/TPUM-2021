@@ -34,7 +34,7 @@ namespace LogicLayer
             };
         }
 
-        public static HouseDTO Map(House house)
+        public static HouseDTO Map(Room house)
         {
             return new HouseDTO()
             {
@@ -65,7 +65,7 @@ namespace LogicLayer
             }
             else if(device.Type.Equals("WallSocket"))
             {
-                return new WallSocket()
+                return new ExampleDevice()
                 {
                     Id = device.Id,
                     Name = device.Name,

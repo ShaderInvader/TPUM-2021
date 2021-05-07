@@ -8,10 +8,8 @@ namespace ModelCommon.Interfaces
     {
         public T Get(string name);
         public IEnumerable<T> GetAll(string name);
-        public int GetFirstId(string name);
         public int[] GetIds(string name);
         public int Remove(string name);
-        public bool UpdateFirst(string name, T item);
         public int UpdateAll(string name, T item);
     }
 }

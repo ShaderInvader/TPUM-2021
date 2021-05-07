@@ -42,19 +42,6 @@ namespace ServerDataLayer
             return _dataContext.Devices.FindAll(device => device.Name == name);
         }
 
-        public int GetFirstId(string name)
-        {
-            IDevice found = _dataContext.Devices.Find(device => device.Name == name);
-            if (found != null)
-            {
-                return found.Id;
-            }
-            else
-            {
-                return -1;
-            }
-        }
-
         public int[] GetIds(string name)
         {
             List<IDevice> found = _dataContext.Devices.FindAll(device => device.Name == name);
@@ -98,21 +85,6 @@ namespace ServerDataLayer
             return returnValue;
         }
 
-        public bool UpdateFirst(string name, IDevice item)
-        {
-            IDevice found = _dataContext.Devices.Find(device => device.Name == name);
-            bool returnValue = false;
-            if (found != null)
-            {
-                lock(_deviceLock)
-                {
-                    found.Enabled = item.Enabled;
-                }
-                returnValue = true;
-            }
-            return returnValue;
-        }
-
         public int UpdateAll(string name, IDevice item)
         {
             List<IDevice> found = _dataContext.Devices.FindAll(device => device.Name == name);
@@ -142,22 +114,6 @@ namespace ServerDataLayer
             return returnValue;
         }
 
-        public bool SetStateFirst(string name, bool enabled)
-        {
-            IDevice device = Get(name);
-            bool returnValue = false;
-            if (device != null)
-            {
-                lock (_deviceLock)
-                {
-                    device.Enabled = enabled;
-                }
-                returnValue = true;
-            }
-
-            return returnValue;
-        }
-
         public int SetStates(string name, bool enabled)
         {
             List<IDevice> devices = (List<IDevice>)GetAll(name);
@@ -174,22 +130,6 @@ namespace ServerDataLayer
         public bool Toggle(int id)
         {
             IDevice device = Get(id);
-            bool returnValue = false;
-            if (device != null)
-            {
-                lock (_deviceLock)
-                {
-                    device.Enabled = !device.Enabled;
-                }
-                returnValue = true;
-            }
-
-            return returnValue;
-        }
-
-        public bool ToggleFirst(string name)
-        {
-            IDevice device = Get(name);
             bool returnValue = false;
             if (device != null)
             {

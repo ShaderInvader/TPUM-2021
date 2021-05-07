@@ -22,8 +22,8 @@ namespace LogicLayer
                 _deviceRepository.Add(new MotionDetector() { Id = 2, Name = "Mi Smart Motion Sensor", Enabled = false });
                 _deviceRepository.Add(new MotionDetector() { Id = 3, Name = "Mi Smart Motion Sensor", Enabled = false });
                 _deviceRepository.Add(new MotionDetector() { Id = 4, Name = "Dahua's Smart Motion Detection", Enabled = true });
-                _deviceRepository.Add(new WallSocket() { Id = 5, Name = "Gosund Smart Socket SP1-C", Enabled = true });
-                _deviceRepository.Add(new WallSocket() { Id = 6, Name = "Gosund Smart Socket SP1-C", Enabled = false });
+                _deviceRepository.Add(new ExampleDevice() { Id = 5, Name = "Gosund Smart Socket SP1-C", Enabled = true });
+                _deviceRepository.Add(new ExampleDevice() { Id = 6, Name = "Gosund Smart Socket SP1-C", Enabled = false });
             }
             return _deviceRepository;
         }

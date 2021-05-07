@@ -9,9 +9,9 @@ namespace LogicLayer
 {
     public class HouseService : IHouseService
     {
-        private readonly INamedRepository<House> _houseRepo;
+        private readonly INamedRepository<Room> _houseRepo;
 
-        public HouseService(INamedRepository<House> houseRepository)
+        public HouseService(INamedRepository<Room> houseRepository)
         {
             _houseRepo = houseRepository;
         }
@@ -23,7 +23,7 @@ namespace LogicLayer
 
         public IEnumerable<HouseDTO> GetHouses()
         {
-            IEnumerable<House> houses = _houseRepo.Get();
+            IEnumerable<Room> houses = _houseRepo.Get();
             List<HouseDTO> housesDTOs = new List<HouseDTO>();
             foreach (var house in houses)
             {
@@ -35,7 +35,7 @@ namespace LogicLayer
 
         public IEnumerable<HouseDTO> GetHousesByName(string name)
         {
-            IEnumerable<House> houses = _houseRepo.GetAll(name);
+            IEnumerable<Room> houses = _houseRepo.GetAll(name);
             List<HouseDTO> housesDTOs = new List<HouseDTO>();
             foreach (var house in houses)
             {

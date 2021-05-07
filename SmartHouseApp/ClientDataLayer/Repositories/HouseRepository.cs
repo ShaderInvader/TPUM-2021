@@ -6,7 +6,7 @@ using ModelCommon.Interfaces;
 
 namespace ClientDataLayer
 {
-    public class HouseRepository : INamedRepository<House>
+    public class HouseRepository : INamedRepository<Room>
     {
         private readonly DataContext _dataContext;
 
@@ -15,17 +15,17 @@ namespace ClientDataLayer
             _dataContext = dataContext;
         }
 
-        public IEnumerable<House> Get()
+        public IEnumerable<Room> Get()
         {
             return _dataContext.Houses;
         }
 
-        public House Get(int id)
+        public Room Get(int id)
         {
             return _dataContext.Houses.Find(house => house.Id == id);
         }
 
-        public void Add(House item)
+        public void Add(Room item)
         {
             _dataContext.Houses.Add(item);
         }
@@ -35,14 +35,14 @@ namespace ClientDataLayer
             return _dataContext.Houses.RemoveAll(house => house.Id == id);
         }
 
-        public bool Remove(House item)
+        public bool Remove(Room item)
         {
             return _dataContext.Houses.Remove(item);
         }
 
-        public bool Update(int id, House item)
+        public bool Update(int id, Room item)
         {
-            House found = _dataContext.Houses.Find(house => house.Id == id);
+            Room found = _dataContext.Houses.Find(house => house.Id == id);
             if (found != null)
             {
                 found.Name = item.Name;
@@ -53,19 +53,19 @@ namespace ClientDataLayer
             return false;
         }
 
-        public House Get(string name)
+        public Room Get(string name)
         {
             return _dataContext.Houses.Find(house => house.Name == name);
         }
 
-        public IEnumerable<House> GetAll(string name)
+        public IEnumerable<Room> GetAll(string name)
         {
             return _dataContext.Houses.FindAll(house => house.Name == name);
         }
 
         public int GetFirstId(string name)
         {
-            House found = Get(name);
+            Room found = Get(name);
             if (found != null)
             {
                 return found.Id;
@@ -76,7 +76,7 @@ namespace ClientDataLayer
 
         public int[] GetIds(string name)
         {
-            List<House> found = (List<House>)GetAll(name);
+            List<Room> found = (List<Room>)GetAll(name);
             int[] ids = new int[found.Count];
             for (int i = 0; i < found.Count; i++)
             {
@@ -91,9 +91,9 @@ namespace ClientDataLayer
             return _dataContext.Houses.RemoveAll(house => house.Name == name);
         }
 
-        public bool UpdateFirst(string name, House item)
+        public bool UpdateFirst(string name, Room item)
         {
-            House found = Get(name);
+            Room found = Get(name);
             if (found != null)
             {
                 found.Name = item.Name;
@@ -104,9 +104,9 @@ namespace ClientDataLayer
             return false;
         }
 
-        public int UpdateAll(string name, House item)
+        public int UpdateAll(string name, Room item)
         {
-            List<House> found = (List<House>)GetAll(name);
+            List<Room> found = (List<Room>)GetAll(name);
             foreach (var t in found)
             {
                 t.Name = item.Name;

@@ -16,23 +16,6 @@ namespace ServerDataLayer
             _dataContext = DataContext.Instance;
         }
 
-        public House GetHouse(int id)
-        {
-            return _dataContext.Users.Find(user => user.Id == id).UserHouse;
-        }
-        
-        public bool SetUserHouse(int id, House house)
-        {
-            bool returnValue = false;
-            User u = _dataContext.Users.Find(user => user.Id == id);
-            if(u != null)
-            {
-                u.UserHouse = house;
-                returnValue = true;
-            }
-            return returnValue;
-        }
-
         #region INamedRepository<User>
 
         public void Add(User item)
@@ -58,19 +41,6 @@ namespace ServerDataLayer
         public IEnumerable<User> GetAll(string name)
         {
             return _dataContext.Users.FindAll(user => user.Name == name);
-        }
-
-        public int GetFirstId(string name)
-        {
-            User found = _dataContext.Users.Find(user => user.Name == name);
-            if (found != null)
-            {
-                return found.Id;
-            }
-            else
-            {
-                return -1;
-            }
         }
 
         public int[] GetIds(string name)
@@ -139,27 +109,6 @@ namespace ServerDataLayer
             }
             return found.Count;
         }
-
-        public bool UpdateFirst(string name, User item)
-        {
-            User found = _dataContext.Users.Find(user => user.Name == name);
-            bool returnValue = false;
-            if (found != null)
-            {
-                lock (_userLock)
-                {
-                    found.Email = item.Email;
-                    found.Password = item.Password;
-                    found.Name = item.Name;
-                    found.FirstName = item.FirstName;
-                    found.LastName = item.LastName;
-                    found.Location = item.Location;
-                }
-
-                returnValue = true;
-            }
-            return returnValue;
-        } 
         
         #endregion
         

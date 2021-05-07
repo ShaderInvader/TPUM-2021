@@ -21,7 +21,7 @@ namespace ServerDataLayer
         }
         private static DataContext _instance = null;
 
-        public List<House> Houses { get; set; } = new List<House>();
+        public List<Room> Rooms { get; set; } = new List<Room>();
 
         public List<User> Users { get; set; } = new List<User>();
 
