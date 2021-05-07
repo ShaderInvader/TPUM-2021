@@ -16,6 +16,23 @@ namespace ServerDataLayer
             _dataContext = DataContext.Instance;
         }
 
+        public House GetHouse(int id)
+        {
+            return _dataContext.Users.Find(user => user.Id == id).UserHouse;
+        }
+        
+        public bool SetUserHouse(int id, House house)
+        {
+            bool returnValue = false;
+            User u = _dataContext.Users.Find(user => user.Id == id);
+            if(u != null)
+            {
+                u.UserHouse = house;
+                returnValue = true;
+            }
+            return returnValue;
+        }
+
         #region INamedRepository<User>
 
         public void Add(User item)

@@ -11,5 +11,6 @@ namespace ModelCommon
         public string Name { get; set; }
         public List<IDevice> Devices { get; set; }
         public Tuple<double, double> Location { get; set; }
+        public List<User> Users { get; set; }
     }
 }

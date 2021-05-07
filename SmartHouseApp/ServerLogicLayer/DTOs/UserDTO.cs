@@ -13,5 +13,6 @@ namespace ServerLogicLayer
         public string Email { get; set; }
         public string Password { get; set; }
         public Tuple<double, double> Location { get; set; }
+        public HouseDTO UserHouse { get; set; }
     }
 }

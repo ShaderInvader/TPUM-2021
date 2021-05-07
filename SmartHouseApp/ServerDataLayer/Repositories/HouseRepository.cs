@@ -16,6 +16,45 @@ namespace ServerDataLayer
             _dataContext = DataContext.Instance;
         }
 
+        public List<User> GetHouseUsers(int id)
+        {
+            return _dataContext.Houses.Find(house => house.Id == id).Users;
+        }
+
+        public bool AddUserToHouse(int id, User user)
+        {
+            bool returnValue = false;
+            House h = _dataContext.Houses.Find(house => house.Id == id);
+            if(h != null)
+            {
+                h.Users.Add(user);
+                returnValue = true;
+            }
+            return returnValue;
+        }
+
+        public bool RemoveUserFromHouse(int id, User user)
+        {
+            bool returnValue = false;
+            House h = _dataContext.Houses.Find(house => house.Id == id);
+            if(h != null)
+            {
+                returnValue = h.Users.Remove(user);
+            }
+            return returnValue;
+        }
+
+        public bool RemoveUserFromHouse(int houseId, int userId)
+        {
+            bool returnValue = false;
+            House h = _dataContext.Houses.Find(house => house.Id == houseId);
+            if(h != null)
+            {
+                returnValue = h.Users.RemoveAll(user => user.Id == userId) > 0;
+            }
+            return returnValue;
+        }
+
         #region INamedRepository<House>
 
         public void Add(House item)
