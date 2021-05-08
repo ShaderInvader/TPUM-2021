@@ -35,5 +35,11 @@ namespace ClientLogicLayer.Services
             }
 
         }
+
+        public async Task Disconnect()
+        {
+            await clientSocketConnection.DisconnectAsync();
+            clientSocketConnection = null;
+        }
     }
 }

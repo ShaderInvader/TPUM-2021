@@ -27,9 +27,15 @@ namespace ClientPresentationLayer.ViewModels.Commands
 
             try
             {
-                bool connection = await _navigationViewModel.EstablishConnection(new Uri(_navigationViewModel.ConnectionUri));
-                
-                Debug.WriteLine($"Connection result: {(connection ? "Connected" : "Failed")}");
+                if (_navigationViewModel.CheckConnection())
+                {
+                    await _navigationViewModel.Disconnect();
+                }
+                else
+                {
+                    bool connection = await _navigationViewModel.EstablishConnection(new Uri(_navigationViewModel.ConnectionUri));
+                    Debug.WriteLine($"Connection result: {(connection ? "Connected" : "Failed")}");
+                }
             }
             catch (UriFormatException e)
             {

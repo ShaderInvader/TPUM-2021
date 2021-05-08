@@ -16,6 +16,17 @@ namespace ClientPresentationLayer.ViewModels
         #endregion
 
         #region ViewModel
+        private string _connectButtonText = "Connect";
+        public string ConnectButtonText
+        {
+            get => _connectButtonText;
+            set
+            {
+                _connectButtonText = value;
+                OnPropertyChanged("ConnectButtonText");
+            }
+        }
+
         private string _connectionUri = "ws://localhost:8081/";
         public string ConnectionUri
         {
@@ -81,8 +92,23 @@ namespace ClientPresentationLayer.ViewModels
 
         public async Task<bool> EstablishConnection(Uri peerUri)
         {
-            await _connectionService.Connect(peerUri, ShowLog);
-            return _connectionService.Connected;
+            ConnectButtonText = "Connecting...";
+            bool result = await _connectionService.Connect(peerUri, ShowLog);
+            if (result)
+            {
+                ConnectButtonText = "Disconnect";
+            }
+            else
+            {
+                ConnectButtonText = "Connect";
+            }
+            return result;
+        }
+
+        public async Task Disconnect()
+        {
+            await _connectionService.Disconnect();
+            ConnectButtonText = "Connect";
         }
 
         public void ShowLog(string log)

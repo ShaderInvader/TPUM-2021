@@ -30,7 +30,7 @@ namespace ClientDataLayer
             }
         }
 
-        public class ClientWebSocketConnection : WebSocketConnection
+        private class ClientWebSocketConnection : WebSocketConnection
         {
             private ClientWebSocket _clientWebSocket = null;
             private Uri _peer = null;
@@ -41,17 +41,17 @@ namespace ClientDataLayer
                 this._log = log;
                 _peer = peer;
                 _clientWebSocket = clientWebSocket;
-                Task.Factory.StartNew(() => ClientMessageLoop());
+                Task.Factory.StartNew(ClientMessageLoop);
             }
 
             public override Task DisconnectAsync()
             {
-                throw new NotImplementedException();
+                return _clientWebSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "Shutdown procedure started", CancellationToken.None);
             }
 
             protected override Task SendTask(string message)
             {
-                throw new NotImplementedException();
+                return _clientWebSocket.SendAsync(message.GetArraySegment(), WebSocketMessageType.Text, true, CancellationToken.None); ;
             }
 
             private void ClientMessageLoop()
@@ -92,6 +92,12 @@ namespace ClientDataLayer
                     _clientWebSocket.CloseAsync(WebSocketCloseStatus.InternalServerError, "Connection has been broken because of an exception", CancellationToken.None).Wait();
                 }
             }
+        }
+
+        internal static ArraySegment<byte> GetArraySegment(this string message)
+        {
+            byte[] buffer = Encoding.UTF8.GetBytes(message);
+            return new ArraySegment<byte>(buffer);
         }
     }
 }
