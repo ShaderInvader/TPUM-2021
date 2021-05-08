@@ -47,7 +47,7 @@ namespace ServerLogicLayer
 
         public async Task<IEnumerable<ExampleDeviceDTO>> GetDevices()
         {
-            var devices = await _repoReference.Get();
+            var devices = _repoReference.Get();
             List<ExampleDeviceDTO> exampleDevices = new List<ExampleDeviceDTO>();
             foreach(var d in devices)
             {

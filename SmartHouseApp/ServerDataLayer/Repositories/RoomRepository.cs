@@ -86,9 +86,9 @@ namespace ServerDataLayer
             return _dataContext.Rooms.Find(house => house.Name == name);
         }
 
-        public async Task<IEnumerable<Room>> Get()
+        public IEnumerable<Room> Get()
         {
-            return await Task.FromResult(_dataContext.Rooms);
+            return _dataContext.Rooms;
         }
 
         public Room Get(int id)

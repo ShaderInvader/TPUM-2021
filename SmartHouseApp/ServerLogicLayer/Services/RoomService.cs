@@ -44,7 +44,7 @@ namespace ServerLogicLayer
         public async Task<IEnumerable<RoomDTO>> GetRooms()
         {
             List<RoomDTO> rooms = new List<RoomDTO>();
-            var ro = await _repoReference.Get();
+            var ro = _repoReference.Get();
             foreach(var r in ro)
             {
                 rooms.Add(Mapper.Map(r));

@@ -31,7 +31,7 @@ namespace ServerDataLayer
             return _dataContext.Users.Find(user => user.Name == name);
         }
 
-        public async Task<IEnumerable<User>> Get()
+        public IEnumerable<User> Get()
         {
             return _dataContext.Users;
         }

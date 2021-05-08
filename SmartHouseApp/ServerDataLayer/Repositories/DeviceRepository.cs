@@ -30,9 +30,9 @@ namespace ServerDataLayer
             return _dataContext.Devices.Find(device => device.Name == name);
         }
 
-        public async Task<IEnumerable<IDevice>> Get()
+        public IEnumerable<IDevice> Get()
         {
-            return await Task.FromResult(_dataContext.Devices);
+            return _dataContext.Devices;
         }
 
         public IDevice Get(int id)
