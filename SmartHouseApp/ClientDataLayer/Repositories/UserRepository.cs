@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using ModelCommon;
 using ModelCommon.Interfaces;
 
@@ -8,41 +9,41 @@ namespace ClientDataLayer
 {
     public class UserRepository : INamedRepository<User>
     {
-        private readonly DataContext _dataContext;
-
-        public UserRepository(DataContext dataContext)
+        private static UserRepository _instance;
+        public static UserRepository Instance
         {
-            _dataContext = dataContext;
+            get { return _instance ??= new UserRepository(); }
+            private set => _instance = value;
         }
 
-        public IEnumerable<User> Get()
+        public async Task<IEnumerable<User>> Get()
         {
-            return _dataContext.Users;
+            return DataContext.Instance.Users;
         }
 
         public User Get(int id)
         {
-            return _dataContext.Users.Find(user => user.Id == id);
+            return DataContext.Instance.Users.Find(user => user.Id == id);
         }
 
         public void Add(User item)
         {
-            _dataContext.Users.Add(item);
+            DataContext.Instance.Users.Add(item);
         }
 
         public int Remove(int id)
         {
-            return _dataContext.Users.RemoveAll(user => user.Id == id);
+            return DataContext.Instance.Users.RemoveAll(user => user.Id == id);
         }
 
         public bool Remove(User item)
         {
-            return _dataContext.Users.Remove(item);
+            return DataContext.Instance.Users.Remove(item);
         }
 
         public bool Update(int id, User item)
         {
-            User found = _dataContext.Users.Find(user => user.Id == id);
+            User found = DataContext.Instance.Users.Find(user => user.Id == id);
             if (found != null)
             {
                 found.Email = item.Email;
@@ -59,17 +60,17 @@ namespace ClientDataLayer
 
         public User Get(string name)
         {
-            return _dataContext.Users.Find(user => user.Name == name);
+            return DataContext.Instance.Users.Find(user => user.Name == name);
         }
 
         public IEnumerable<User> GetAll(string name)
         {
-            return _dataContext.Users.FindAll(user => user.Name == name);
+            return DataContext.Instance.Users.FindAll(user => user.Name == name);
         }
 
         public int GetFirstId(string name)
         {
-            User found = _dataContext.Users.Find(user => user.Name == name);
+            User found = DataContext.Instance.Users.Find(user => user.Name == name);
             if (found != null)
             {
                 return found.Id;
@@ -82,7 +83,7 @@ namespace ClientDataLayer
 
         public int[] GetIds(string name)
         {
-            List<User> found = _dataContext.Users.FindAll(user => user.Name == name);
+            List<User> found = DataContext.Instance.Users.FindAll(user => user.Name == name);
             int[] ids = new int[found.Count];
             for (int i = 0; i < found.Count; i++)
             {
@@ -94,12 +95,12 @@ namespace ClientDataLayer
 
         public int Remove(string name)
         {
-            return _dataContext.Users.RemoveAll(user => user.Name == name);
+            return DataContext.Instance.Users.RemoveAll(user => user.Name == name);
         }
 
         public bool UpdateFirst(string name, User item)
         {
-            User found = _dataContext.Users.Find(user => user.Name == name);
+            User found = DataContext.Instance.Users.Find(user => user.Name == name);
             if (found != null)
             {
                 found.Email = item.Email;
@@ -116,7 +117,7 @@ namespace ClientDataLayer
 
         public int UpdateAll(string name, User item)
         {
-            List<User> found = _dataContext.Users.FindAll(user => user.Name == name);
+            List<User> found = DataContext.Instance.Users.FindAll(user => user.Name == name);
             foreach (var t in found)
             {
                 t.Email = item.Email;

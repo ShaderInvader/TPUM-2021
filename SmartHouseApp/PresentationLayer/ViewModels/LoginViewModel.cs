@@ -1,6 +1,8 @@
 ﻿using System.Windows.Input;
+using ClientLogicLayer;
 using ClientPresentationLayer.ViewModels.Commands;
 using LogicLayer;
+using LogicLayer.Interfaces;
 
 namespace ClientPresentationLayer.ViewModels
 {
@@ -21,7 +23,7 @@ namespace ClientPresentationLayer.ViewModels
 
         public LoginViewModel()
         {
-            _userService = new UserService(RepositoryPlaceholder.GetUsersRepository());
+            _userService = ServiceFactory.CreateUserService;
             _login = "";
             LoginCommand = new LoginCommand(this);
         }

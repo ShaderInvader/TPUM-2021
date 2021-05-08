@@ -3,10 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31112.23
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_OLD_DataLayer", "DataLayer\_OLD_DataLayer.csproj", "{32533A87-FE07-4983-9D20-3489EACFFCDB}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_OLD_LogicLayer", "LogicLayer\_OLD_LogicLayer.csproj", "{57FE8C4C-72AF-4BD1-868F-22A048ED3B46}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientPresentationLayer", "PresentationLayer\ClientPresentationLayer.csproj", "{5A1435B7-277E-488B-B6C1-9A04549C9EBF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataLayerTests", "DataLayerTests\DataLayerTests.csproj", "{3E1E0546-E643-4456-B63A-A697C619C3CC}"
@@ -23,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientDataLayer", "ClientDa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientLogicLayer", "ClientLogicLayer\ClientLogicLayer.csproj", "{B07D7A09-83A9-4F30-BD79-8B269E1886B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelCommon", "ModelCommon\ModelCommon.csproj", "{0949823F-B404-40E3-B644-427DC0089809}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModelCommon", "ModelCommon\ModelCommon.csproj", "{0949823F-B404-40E3-B644-427DC0089809}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,14 +27,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{32533A87-FE07-4983-9D20-3489EACFFCDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{32533A87-FE07-4983-9D20-3489EACFFCDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{32533A87-FE07-4983-9D20-3489EACFFCDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{32533A87-FE07-4983-9D20-3489EACFFCDB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{57FE8C4C-72AF-4BD1-868F-22A048ED3B46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{57FE8C4C-72AF-4BD1-868F-22A048ED3B46}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{57FE8C4C-72AF-4BD1-868F-22A048ED3B46}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{57FE8C4C-72AF-4BD1-868F-22A048ED3B46}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5A1435B7-277E-488B-B6C1-9A04549C9EBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5A1435B7-277E-488B-B6C1-9A04549C9EBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A1435B7-277E-488B-B6C1-9A04549C9EBF}.Release|Any CPU.ActiveCfg = Release|Any CPU

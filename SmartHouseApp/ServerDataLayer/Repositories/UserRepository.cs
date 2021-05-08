@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using ModelCommon;
 using ModelCommon.Interfaces;
 
@@ -29,7 +30,7 @@ namespace ServerDataLayer
             return _dataContext.Users.Find(user => user.Name == name);
         }
 
-        public IEnumerable<User> Get()
+        public async Task<IEnumerable<User>> Get()
         {
             return _dataContext.Users;
         }

@@ -1,10 +1,11 @@
-﻿using DataLayer;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Threading.Tasks;
+using ClientLogicLayer.InternalDTOs;
+using LogicLayer.Interfaces;
 using ModelCommon.Interfaces;
 
-namespace LogicLayer
+namespace ClientLogicLayer.Services
 {
     public class DeviceService : IDeviceService
     {
@@ -25,9 +26,10 @@ namespace LogicLayer
             return Mapper.Map(_deviceRepo.Get(id));
         }
 
-        public IEnumerable<DeviceDTO> GetDevices()
+        public async Task<IEnumerable<DeviceDTO>> GetDevices()
         {
-            IEnumerable<IDevice> devices = _deviceRepo.Get();
+            IEnumerable<IDevice> devices = await _deviceRepo.Get();
+
             List<DeviceDTO> devicesDTOs = new List<DeviceDTO>();
             foreach (var device in devices)
             {
@@ -63,28 +65,21 @@ namespace LogicLayer
 
         public bool AddDevice(DeviceDTO newDevice)
         {
-            DeviceField invaildFields = DeviceField.None;
+            DeviceField invalidFields = DeviceField.None;
 
             if (newDevice.Id < 0)
             {
-                invaildFields |= DeviceField.Id;
-            }
-            
-            if (!(newDevice.Type == "LightBulb" ||
-                 newDevice.Type == "MotionDetector" ||
-                 newDevice.Type == "WallSocket"))
-            {
-                invaildFields |= DeviceField.Type;
+                invalidFields |= DeviceField.Id;
             }
 
             if (newDevice.Name == "")
             {
-                invaildFields |= DeviceField.Name;
+                invalidFields |= DeviceField.Name;
             }
 
-            if (invaildFields != DeviceField.None)
+            if (invalidFields != DeviceField.None)
             {
-                throw new InvalidDeviceDataException(invaildFields);
+                throw new InvalidDeviceDataException(invalidFields);
             }
 
             _deviceRepo.Add(Mapper.Map(newDevice));

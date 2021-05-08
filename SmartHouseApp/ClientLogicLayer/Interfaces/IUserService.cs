@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ClientLogicLayer.InternalDTOs;
 
-namespace LogicLayer
+namespace LogicLayer.Interfaces
 {
     public interface IUserService
     {

@@ -1,47 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using ModelCommon.Interfaces;
 
 namespace ClientDataLayer
 {
     public class DeviceRepository : IDeviceRepository
     {
-        private readonly DataContext _dataContext;
-
-        public DeviceRepository(DataContext dataContext)
+        private static DeviceRepository _instance;
+        public static DeviceRepository Instance
         {
-            _dataContext = dataContext;
+            get { return _instance ??= new DeviceRepository(); }
+            private set => _instance = value;
         }
 
-        public IEnumerable<IDevice> Get()
+        public async Task<IEnumerable<IDevice>> Get()
         {
-            return _dataContext.Devices;
+            await WebSocketClient.CurrentConnection.SendAsync("HEhehe");
+            return DataContext.Instance.Devices;
         }
 
         public IDevice Get(int id)
         {
-            return _dataContext.Devices.Find(device => device.Id == id);
+            return DataContext.Instance.Devices.Find(device => device.Id == id);
         }
 
         public void Add(IDevice item)
         {
-            _dataContext.Devices.Add(item);
+            DataContext.Instance.Devices.Add(item);
         }
 
         public int Remove(int id)
         {
-            return _dataContext.Devices.RemoveAll(device => device.Id == id);
+            return DataContext.Instance.Devices.RemoveAll(device => device.Id == id);
         }
 
         public bool Remove(IDevice item)
         {
-            return _dataContext.Devices.Remove(item);
+            return DataContext.Instance.Devices.Remove(item);
         }
 
         public bool Update(int id, IDevice item)
         {
-            IDevice found = _dataContext.Devices.Find(device => device.Id == id);
+            IDevice found = DataContext.Instance.Devices.Find(device => device.Id == id);
             if (found != null)
             {
                 found.Name = item.Name;
@@ -56,17 +58,17 @@ namespace ClientDataLayer
 
         public IDevice Get(string name)
         {
-            return _dataContext.Devices.Find(device => device.Name == name);
+            return DataContext.Instance.Devices.Find(device => device.Name == name);
         }
 
         public IEnumerable<IDevice> GetAll(string name)
         {
-            return _dataContext.Devices.FindAll(device => device.Name == name);
+            return DataContext.Instance.Devices.FindAll(device => device.Name == name);
         }
 
         public int GetFirstId(string name)
         {
-            IDevice found = _dataContext.Devices.Find(device => device.Name == name);
+            IDevice found = DataContext.Instance.Devices.Find(device => device.Name == name);
             if (found != null)
             {
                 return found.Id;
@@ -79,7 +81,7 @@ namespace ClientDataLayer
 
         public int[] GetIds(string name)
         {
-            List<IDevice> found = _dataContext.Devices.FindAll(device => device.Name == name);
+            List<IDevice> found = DataContext.Instance.Devices.FindAll(device => device.Name == name);
             int[] ids = new int[found.Count];
             for (int i = 0; i < found.Count; i++)
             {
@@ -91,12 +93,12 @@ namespace ClientDataLayer
 
         public int Remove(string name)
         {
-            return _dataContext.Devices.RemoveAll(device => device.Name == name);
+            return DataContext.Instance.Devices.RemoveAll(device => device.Name == name);
         }
 
         public bool UpdateFirst(string name, IDevice item)
         {
-            IDevice found = _dataContext.Devices.Find(device => device.Name == name);
+            IDevice found = DataContext.Instance.Devices.Find(device => device.Name == name);
             if (found != null)
             {
                 found.Enabled = item.Enabled;
@@ -111,7 +113,7 @@ namespace ClientDataLayer
 
         public int UpdateAll(string name, IDevice item)
         {
-            List<IDevice> found = _dataContext.Devices.FindAll(device => device.Name == name);
+            List<IDevice> found = DataContext.Instance.Devices.FindAll(device => device.Name == name);
             foreach (var t in found)
             {
                 t.Enabled = item.Enabled;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using ModelCommon.Interfaces;
 using ModelCommon;
 
@@ -84,9 +85,9 @@ namespace ServerDataLayer
             return _dataContext.Rooms.Find(house => house.Name == name);
         }
 
-        public IEnumerable<Room> Get()
+        public async Task<IEnumerable<Room>> Get()
         {
-            return _dataContext.Rooms;
+            return await Task.FromResult(_dataContext.Rooms);
         }
 
         public Room Get(int id)
