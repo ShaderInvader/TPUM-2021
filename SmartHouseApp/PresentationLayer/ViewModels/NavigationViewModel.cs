@@ -14,6 +14,7 @@ namespace ClientPresentationLayer.ViewModels
         #region Private
 
         private readonly IConnectionService _connectionService;
+        private readonly ILocationService _locationService;
 
         #endregion
 
@@ -78,6 +79,7 @@ namespace ClientPresentationLayer.ViewModels
         {
             // Create connection service object
             _connectionService = ServiceFactory.CreateConnectionService;
+            _locationService = ServiceFactory.CreateLocationService;
             // Add log messenger delegate
             _connectionService.ConnectionLogger += s => Log = s;
 
@@ -104,6 +106,7 @@ namespace ClientPresentationLayer.ViewModels
             if (result)
             {
                 ConnectionEstablishedEvent?.Invoke();
+                Task.Run(_locationService.StartTracking);
             }
             ConnectButtonText = result ? "Disconnect" : "Connect";
             return result;
@@ -113,6 +116,7 @@ namespace ClientPresentationLayer.ViewModels
         {
             await _connectionService.Disconnect();
             ConnectionLostEvent?.Invoke();
+            _locationService.StopTracking();
             ConnectButtonText = "Connect";
         }
     }
