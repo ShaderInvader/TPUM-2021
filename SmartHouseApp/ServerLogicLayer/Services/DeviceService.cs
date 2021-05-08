@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ServerLogicLayer.Services
+namespace ServerLogicLayer
 {
     public class DeviceService : IDeviceService
     {
@@ -46,7 +46,7 @@ namespace ServerLogicLayer.Services
 
         public async Task<IEnumerable<ExampleDeviceDTO>> GetDevices()
         {
-            var devices = _repoReference.Get();
+            var devices = await _repoReference.Get();
             List<ExampleDeviceDTO> exampleDevices = new List<ExampleDeviceDTO>();
             foreach(var d in devices)
             {

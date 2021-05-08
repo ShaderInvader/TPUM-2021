@@ -6,7 +6,7 @@ using ModelCommon.Interfaces;
 using ModelCommon;
 using ServerDataLayer;
 
-namespace ServerLogicLayer.Services
+namespace ServerLogicLayer
 {
     public class RoomService : IRoomService
     {
@@ -43,7 +43,7 @@ namespace ServerLogicLayer.Services
         public async Task<IEnumerable<RoomDTO>> GetRooms()
         {
             List<RoomDTO> rooms = new List<RoomDTO>();
-            var ro = _repoReference.Get();
+            var ro = await _repoReference.Get();
             foreach(var r in ro)
             {
                 rooms.Add(Mapper.Map(r));

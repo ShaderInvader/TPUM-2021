@@ -34,7 +34,7 @@ namespace ServerLogicLayer
 
         public async Task<IEnumerable<UserDTO>> GetUsers()
         {
-            var users = _repoReference.Get();
+            var users = await _repoReference.Get();
             List<UserDTO> usersDTO = new List<UserDTO>();
             foreach (var u in users)
             {

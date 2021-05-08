@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
@@ -27,7 +28,7 @@ namespace ClientDataLayer
                     // ===== Creating socket connection object =====
                     WebSocketConnection socketConnection = new ClientWebSocketConnection(clientWebSocket, peer, log);
                     // ===== Attaching data parser to on message event =====
-                    socketConnection.OnMessage = DataContext.Instance.ParseData;
+                    socketConnection.OnMessage = (x) => Debug.WriteLine(x);
                     
                     // Setting the current connection for singleton connection implementation
                     CurrentConnection = socketConnection;
