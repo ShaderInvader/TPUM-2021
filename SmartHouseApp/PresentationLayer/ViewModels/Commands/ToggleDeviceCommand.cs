@@ -1,13 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 using System.Windows.Input;
-
 
 namespace ClientPresentationLayer.ViewModels.Commands
 {
-    public class AddDeviceCommand : ICommand
+    public class ToggleDeviceCommand : ICommand
     {
         private readonly DeviceViewModel deviceViewModel;
-        public AddDeviceCommand(DeviceViewModel deviceViewModel)
+        public ToggleDeviceCommand(DeviceViewModel deviceViewModel)
         {
             this.deviceViewModel = deviceViewModel;
         }
@@ -20,12 +21,12 @@ namespace ClientPresentationLayer.ViewModels.Commands
 
         public bool CanExecute(object parameter)
         {
-            return deviceViewModel.Devices.Count > 0;
+            return deviceViewModel.Devices.Count > 0 && deviceViewModel.SelectedDevice != null;
         }
 
         public void Execute(object parameter)
         {
-            deviceViewModel.DeviceService.AddDevice(deviceViewModel.SelectedDevice);
+            deviceViewModel.DeviceService.ToggleDevice(deviceViewModel.SelectedDevice.Id);
             deviceViewModel.EditDevice = false;
         }
     }

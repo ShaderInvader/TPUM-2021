@@ -26,6 +26,7 @@ namespace ClientPresentationLayer.ViewModels
             NavigationViewModel.ConnectionLostEvent += CleanDevices;
 
             NewDeviceCommand = new NewDeviceCommand(this);
+            ToggleDeviceCommand = new ToggleDeviceCommand(this);
             SaveDeviceCommand = new AddDeviceCommand(this);
             EditDeviceCommand = new EditDeviceCommand(this);
             DeleteDeviceCommand = new MessageBoxCommand(new DeleteDeviceCommand(this), null, "Do you really want to delete this device?");
@@ -98,6 +99,7 @@ namespace ClientPresentationLayer.ViewModels
 
         #region ICommands
         public ICommand NewDeviceCommand { get; set; }
+        public ICommand ToggleDeviceCommand { get; set; }
         public ICommand SaveDeviceCommand { get; set; }
         public ICommand EditDeviceCommand { get; set; }
         public ICommand DeleteDeviceCommand { get; set; }

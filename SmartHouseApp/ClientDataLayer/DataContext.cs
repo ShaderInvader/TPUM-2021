@@ -21,14 +21,20 @@ namespace ClientDataLayer
 
         public async Task RequestDataUpdate()
         {
-            await WebSocketClient.CurrentConnection.SendAsync("UpdateDataRequest");
-
-            var requestTimeout = Stopwatch.StartNew();
             _isAwaitingResponse = true;
 
-            while (_isAwaitingResponse && requestTimeout.Elapsed.Seconds > Timeout) { ; }
+            await WebSocketClient.CurrentConnection.SendAsync("UpdateDataRequest");
 
-            _isAwaitingResponse = false;
+            while (_isAwaitingResponse) {}
+        }
+
+        public async Task RequestWithConfirmation(string request)
+        {
+            _isAwaitingConfirmation = true;
+
+            await WebSocketClient.CurrentConnection.SendAsync(request);
+
+            while (_isAwaitingConfirmation) { }
         }
 
         public void ReceiveData(string data)
@@ -36,12 +42,9 @@ namespace ClientDataLayer
             var split = data.Split('[');
             if (string.Compare(split[0], "Devices", StringComparison.Ordinal) == 0)
             {
-                lock (devicesLock) lock (roomsLock) lock (usersLock)
+                lock (devicesLock)
                 {
-                    Users.Clear();
-                    Rooms.Clear();
                     Devices.Clear();
-
 
                     var toDeserialize = split[1].Insert(0, "[");
                     var deserialized = JsonSerializer.Deserialize<List<ExampleDevice>>(toDeserialize);
@@ -50,10 +53,14 @@ namespace ClientDataLayer
 
                 _isAwaitingResponse = false;
             }
+            else if (string.Compare(split[0], "Confirm", StringComparison.Ordinal) == 0)
+            {
+                _isAwaitingConfirmation = false;
+            }
         }
 
+        private bool _isAwaitingConfirmation = false;
         private bool _isAwaitingResponse = false;
-        private const int Timeout = 60;
 
         public List<User> Users { get; set; } = new List<User>();
         public object usersLock = new object();
