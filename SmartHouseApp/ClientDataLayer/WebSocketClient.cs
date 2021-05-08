@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace ClientDataLayer
 {
+
     public static class WebSocketClient
     {
         public static async Task<WebSocketConnection> Connect(Uri peer, Action<string> log)
@@ -33,11 +34,11 @@ namespace ClientDataLayer
         {
             private ClientWebSocket _clientWebSocket = null;
             private Uri _peer = null;
-            private readonly Action<string> log;
+            private readonly Action<string> _log;
 
             public ClientWebSocketConnection(ClientWebSocket clientWebSocket, Uri peer, Action<string> log)
             {
-                this.log = log;
+                this._log = log;
                 _peer = peer;
                 _clientWebSocket = clientWebSocket;
                 Task.Factory.StartNew(() => ClientMessageLoop());
@@ -87,7 +88,7 @@ namespace ClientDataLayer
                 }
                 catch (Exception _ex)
                 {
-                    log($"Connection has been broken because of an exception {_ex}");
+                    _log($"Connection has been broken because of an exception {_ex}");
                     _clientWebSocket.CloseAsync(WebSocketCloseStatus.InternalServerError, "Connection has been broken because of an exception", CancellationToken.None).Wait();
                 }
             }

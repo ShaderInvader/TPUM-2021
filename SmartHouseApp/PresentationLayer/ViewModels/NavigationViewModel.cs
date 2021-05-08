@@ -16,7 +16,7 @@ namespace ClientPresentationLayer.ViewModels
         #endregion
 
         #region ViewModel
-        private string _connectionUri = "//localhost:8081/";
+        private string _connectionUri = "ws://localhost:8081/";
         public string ConnectionUri
         {
             get => _connectionUri;
@@ -35,6 +35,18 @@ namespace ClientPresentationLayer.ViewModels
             {
                 _currentPage = value;
                 OnPropertyChanged("CurrentPage");
+            }
+        }
+
+        private string _log = "Waiting for connection logs...";
+
+        public string Log
+        {
+            get => _log;
+            set
+            {
+                _log = value;
+                OnPropertyChanged("Log");
             }
         }
         #endregion
@@ -69,8 +81,13 @@ namespace ClientPresentationLayer.ViewModels
 
         public async Task<bool> EstablishConnection(Uri peerUri)
         {
-            await _connectionService.Connect(peerUri);
+            await _connectionService.Connect(peerUri, ShowLog);
             return _connectionService.Connected;
+        }
+
+        public void ShowLog(string log)
+        {
+            Log = log;
         }
     }
 }
