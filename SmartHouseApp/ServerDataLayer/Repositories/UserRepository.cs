@@ -85,7 +85,7 @@ namespace ServerDataLayer
                     found.Name = item.Name;
                     found.FirstName = item.FirstName;
                     found.LastName = item.LastName;
-                    found.Location = item.Location;
+                    found.Coordinates = item.Coordinates;
                     found.Email = item.Email;
                     found.Password = item.Password;
                 }
@@ -107,7 +107,7 @@ namespace ServerDataLayer
                     u.Name = item.Name;
                     u.FirstName = item.FirstName;
                     u.LastName = item.LastName;
-                    u.Location = item.Location;
+                    u.Coordinates = item.Coordinates;
                 }
             }
             return found.Count;

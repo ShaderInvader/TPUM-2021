@@ -146,7 +146,7 @@ namespace ServerDataLayer
             return returnValue;
         }
 
-        public int ToggleAll(string name)
+        public int ToggleAllByName(string name)
         {
             List<IDevice> devices = (List<IDevice>)GetAll(name);
             foreach (var device in devices)
@@ -157,7 +157,20 @@ namespace ServerDataLayer
                 }
             }
             return devices.Count;
-        } 
+        }
+
+        public bool TurnOffAll()
+        {
+            List<IDevice> devices = (List<IDevice>)Get();
+            foreach (var device in devices)
+            {
+                lock (_deviceLock)
+                {
+                    device.Enabled = false;
+                }
+            }
+            return true;
+        }
         #endregion
     }
 }

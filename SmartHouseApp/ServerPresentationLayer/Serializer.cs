@@ -2,16 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using ServerLogicLayer;
 
 namespace ServerPresentationLayer
 {
     public static class Serializer
     {
-        private static IDeviceService deviceService = new DeviceService();
 
-        public static string AllDataToJson()
+        public static string AllDataToJson(IDeviceService deviceService)
         {
             var devices = deviceService.GetDevices().Result;
 
@@ -19,6 +17,16 @@ namespace ServerPresentationLayer
             returnString += JsonSerializer.Serialize(devices);
 
             return returnString;
+        }
+
+        public static int IntFromJson(string json)
+        {
+            return JsonSerializer.Deserialize<int>(json);
+        }
+
+        public static ExampleDeviceDTO DeviceFormJson(string json)
+        {
+            return JsonSerializer.Deserialize<ExampleDeviceDTO>(json);
         }
     }
 }
