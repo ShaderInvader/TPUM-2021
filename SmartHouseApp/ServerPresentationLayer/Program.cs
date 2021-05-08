@@ -36,30 +36,26 @@ namespace ServerPresentationLayer
             webSocketConnection.onError = () => { Console.WriteLine("Connection error encountered"); };
         }
 
-        static void ParseMessage(string message)
+        static async void ParseMessage(string message)
         {
             Console.WriteLine(message);
             if(message.Contains("UpdateDataRequest"))
             {
-                Task.Run(() => CurrentConnection.SendAsync(Serializer.AllDataToJson(deviceService)));
+                await CurrentConnection.SendAsync(Serializer.AllDataToJson(deviceService));
             }
             else if(message.Contains("ToggleDevice"))
             {
                 var splited = message.Split(':');
                 int id = Serializer.IntFromJson(splited[1]);
-                if(deviceService.ToggleDevice(id).Result)
-                {
-                    Task.Run(() => CurrentConnection.SendAsync($"Confirm"));
-                }
+                await deviceService.ToggleDevice(id);
+                await CurrentConnection.SendAsync("Confirm");
             }
             else if(message.Contains("AddDevice"))
             {
                 var json = message.Substring("AddDevice".Length - 1);
                 ExampleDeviceDTO device = Serializer.DeviceFormJson(json);
-                if(deviceService.AddDevice(device).Result)
-                {
-                    Task.Run(() => CurrentConnection.SendAsync($"Confirm"));
-                }
+                await deviceService.AddDevice(device);
+                await CurrentConnection.SendAsync("Confirm");
             }
         }
     }
