@@ -16,10 +16,7 @@ namespace ServerPresentationLayer
             var devices = deviceService.GetDevices().Result;
 
             string returnString = "Devices";
-            foreach(var d in devices)
-            {
-                returnString += JsonSerializer.Serialize(d);
-            }
+            returnString += JsonSerializer.Serialize(devices);
 
             return returnString;
         }
