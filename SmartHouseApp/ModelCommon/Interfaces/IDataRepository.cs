@@ -8,8 +8,8 @@ namespace ModelCommon.Interfaces
     {
         public IEnumerable<T> Get();
         public T Get(int id);
-        public void Add(T item);
-        public int Remove(int id);
+        public bool Add(T item);
+        public bool Remove(int id);
         public bool Remove(T item);
         public bool Update(int id, T item);
     }
