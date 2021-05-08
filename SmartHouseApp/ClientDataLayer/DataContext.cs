@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
+using System.Threading.Tasks;
 using ModelCommon;
 using ModelCommon.Interfaces;
 
@@ -16,7 +18,19 @@ namespace ClientDataLayer
             private set => _instance = value;
         }
 
-        public void ParseData(string data)
+        public async Task RequestDataUpdate()
+        {
+            await WebSocketClient.CurrentConnection.SendAsync("UpdateDataRequest");
+
+            var requestTimeout = Stopwatch.StartNew();
+            _isAwaitingResponse = true;
+
+            while (_isAwaitingResponse && requestTimeout.Elapsed.Seconds > Timeout) { ; }
+
+            _isAwaitingResponse = false;
+        }
+
+        public void ReceiveData(string data)
         {
             lock (devicesLock) lock (roomsLock) lock (usersLock)
             {
@@ -26,7 +40,12 @@ namespace ClientDataLayer
 
 
             }
+
+            _isAwaitingResponse = false;
         }
+
+        private bool _isAwaitingResponse = false;
+        private const int Timeout = 60;
 
         public List<User> Users { get; set; } = new List<User>();
         public object usersLock = new object();

@@ -17,7 +17,7 @@ namespace ClientDataLayer
 
         public async Task<IEnumerable<IDevice>> Get()
         {
-            await WebSocketClient.CurrentConnection.SendAsync("HEhehe");
+            await DataContext.Instance.RequestDataUpdate();
             return DataContext.Instance.Devices;
         }
 
