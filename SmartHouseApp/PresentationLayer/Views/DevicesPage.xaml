@@ -27,8 +27,7 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" Width="30"/>
-                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="250"/>
-                    <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Type}" Width="100"/>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="350"/>
                     <GridViewColumn Header="Enabled" DisplayMemberBinding="{Binding Enabled}" Width="70"/>
                 </GridView>
             </ListView.View>
@@ -44,17 +43,14 @@
             <Label Content="Id:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0"/>
             <TextBlock Text="{Binding SelectedDevice.Id}" HorizontalAlignment="Left" Margin="70,15,10,0"  TextWrapping="Wrap" VerticalAlignment="Top" Visibility= "{Binding EditDeviceInv, Converter={StaticResource boolToVisible}}"/>
             <TextBox HorizontalAlignment="Left" Margin="70,14,0,0" Text="{Binding SelectedDevice.Id}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Visibility= "{Binding EditDevice, Converter={StaticResource boolToVisible}}"/>
-
-            <Label Content="Type:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,50,0,0"/>
             <TextBlock Text="{Binding SelectedDevice.Type}" HorizontalAlignment="Left" Margin="70,55,10,0"  TextWrapping="Wrap" VerticalAlignment="Top" Visibility= "{Binding EditDeviceInv, Converter={StaticResource boolToVisible}}"/>
-            <TextBox HorizontalAlignment="Left" Margin="70,54,0,0" Text="{Binding SelectedDevice.Type}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Visibility= "{Binding EditDevice, Converter={StaticResource boolToVisible}}"/>
 
-            <Label Content="Enabled" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,90,0,0"/>
-            <CheckBox HorizontalAlignment="Left" Margin="70,95,0,0" VerticalAlignment="Top" IsChecked="{Binding SelectedDevice.Enabled}" IsEnabled="{Binding EditDevice}"/>
+            <Label Content="Enabled" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,52,0,0"/>
+            <CheckBox HorizontalAlignment="Left" Margin="70,57,0,0" VerticalAlignment="Top" IsChecked="{Binding SelectedDevice.Enabled}" IsEnabled="{Binding EditDevice}"/>
 
-            <Label Content="Name:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,130,10,0"/>
+            <Label Content="Name:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,92,0,0"/>
             <TextBlock Text="{Binding SelectedDevice.Name}" HorizontalAlignment="Left" Margin="70,135,10,0"  TextWrapping="Wrap" VerticalAlignment="Top" Visibility= "{Binding EditDeviceInv, Converter={StaticResource boolToVisible}}"/>
-            <TextBox HorizontalAlignment="Left" Margin="70,134,0,0" Text="{Binding SelectedDevice.Name}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Visibility= "{Binding EditDevice, Converter={StaticResource boolToVisible}}"/>
+            <TextBox HorizontalAlignment="Left" Margin="70,96,0,0" Text="{Binding SelectedDevice.Name}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Visibility= "{Binding EditDevice, Converter={StaticResource boolToVisible}}"/>
 
             <Button Content="Save" Command="{Binding SaveDeviceCommand}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,10" Width="100" Visibility= "{Binding EditDevice, Converter={StaticResource boolToVisible}}"/>
             <StackPanel Grid.Row="1" >

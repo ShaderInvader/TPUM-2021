@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Text;
+using System.Linq;
 using System.Threading.Tasks;
 using ModelCommon;
 using ModelCommon.Interfaces;
+using System.Text.Json;
 
 namespace ClientDataLayer
 {
@@ -32,16 +33,23 @@ namespace ClientDataLayer
 
         public void ReceiveData(string data)
         {
-            lock (devicesLock) lock (roomsLock) lock (usersLock)
+            var split = data.Split('[');
+            if (string.Compare(split[0], "Devices", StringComparison.Ordinal) == 0)
             {
-                Users.Clear();
-                Rooms.Clear();
-                Devices.Clear();
+                lock (devicesLock) lock (roomsLock) lock (usersLock)
+                {
+                    Users.Clear();
+                    Rooms.Clear();
+                    Devices.Clear();
 
 
+                    var toDeserialize = split[1].Insert(0, "[");
+                    var deserialized = JsonSerializer.Deserialize<List<ExampleDevice>>(toDeserialize);
+                    Devices = new List<IDevice>(deserialized!);
+                }
+
+                _isAwaitingResponse = false;
             }
-
-            _isAwaitingResponse = false;
         }
 
         private bool _isAwaitingResponse = false;

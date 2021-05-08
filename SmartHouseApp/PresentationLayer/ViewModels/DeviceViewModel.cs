@@ -23,6 +23,7 @@ namespace ClientPresentationLayer.ViewModels
             _editDevice = false;
 
             NavigationViewModel.ConnectionEstablishedEvent += RequestDevices;
+            NavigationViewModel.ConnectionLostEvent += CleanDevices;
 
             NewDeviceCommand = new NewDeviceCommand(this);
             SaveDeviceCommand = new AddDeviceCommand(this);
@@ -30,9 +31,14 @@ namespace ClientPresentationLayer.ViewModels
             DeleteDeviceCommand = new MessageBoxCommand(new DeleteDeviceCommand(this), null, "Do you really want to delete this device?");
         }
 
+        private void CleanDevices()
+        {
+            Devices.Clear();
+        }
+
         private async void RequestDevices()
         {
-            _devices = new ObservableCollection<DeviceDTO>(await _deviceService.GetDevices());
+            Devices = new ObservableCollection<DeviceDTO>(await _deviceService.GetDevices());
         }
 
         ~DeviceViewModel()
