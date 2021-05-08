@@ -10,6 +10,7 @@ namespace ServerDataLayer.Interfaces
         public bool SetState(int id, bool enabled);
         public int SetStates(string name, bool enabled);
         public bool Toggle(int id);
-        public int ToggleAll(string name);
+        public int ToggleAllByName(string name);
+        public bool TurnOffAll();
     }
 }

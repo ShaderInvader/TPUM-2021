@@ -11,11 +11,12 @@ namespace ServerLogicLayer
         Task<ExampleDeviceDTO> GetDevice(string name);
         Task<IEnumerable<ExampleDeviceDTO>> GetDevices();
         Task<IEnumerable<ExampleDeviceDTO>> GetDevicesByName(string name);
-        Task<bool> SetDeviceState(int id, bool state);
+        Task<bool> ToggleDevice(int id);
         Task<bool> AddDevice(ExampleDeviceDTO newDevice);
         Task<bool> RemoveDevice(int id);
         Task<bool> RemoveDevicesByName(string name);
         Task<int[]> GetDevicesIds(string name);
         Task<bool> UpdateDevice(int id, ExampleDeviceDTO deviceNewValues);
+        Task<bool> TurnOffAllDevices();
     }
 }

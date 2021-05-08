@@ -18,6 +18,14 @@ namespace ServerLogicLayer
             };
         }
 
+        public static LocationDTO Map(ILocation location)
+        {
+            return new LocationDTO
+            {
+                Coordinates = new Tuple<double, double>(location.Coordinates.Item1, location.Coordinates.Item2 )
+            };
+        }
+
         public static UserDTO Map(User user)
         {
             return new UserDTO
@@ -27,7 +35,7 @@ namespace ServerLogicLayer
                 Email = user.Email,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
-                Location = new Tuple<double, double>(user.Location.Item1, user.Location.Item2),
+                Coordinates = Map(user.Coordinates),
                 Password = user.Password
             };
         }
@@ -51,8 +59,16 @@ namespace ServerLogicLayer
                 FirstName = userDto.FirstName,
                 LastName = userDto.LastName,
                 Email = userDto.Email,
-                Location = new Tuple<double, double>(userDto.Location.Item1, userDto.Location.Item2),
+                Coordinates = Map(userDto.Coordinates),
                 Password = userDto.Password
+            };
+        }
+
+        public static ILocation Map(LocationDTO location)
+        {
+            return new Location
+            {
+                Coordinates = new Tuple<double, double>(location.Coordinates.Item1, location.Coordinates.Item2)
             };
         }
 

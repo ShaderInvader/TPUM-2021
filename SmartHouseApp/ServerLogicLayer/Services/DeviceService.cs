@@ -82,15 +82,20 @@ namespace ServerLogicLayer
             return await Task.FromResult(_repoReference.Remove(name) > 0);
         }
 
-        public async Task<bool> SetDeviceState(int id, bool state)
+        public async Task<bool> ToggleDevice(int id)
         {
-            return await Task.FromResult(_repoReference.SetState(id, state));
+            return await Task.FromResult(_repoReference.Toggle(id));
         }
 
         public async Task<bool> UpdateDevice(int id, ExampleDeviceDTO deviceNewValues)
         {
             return await Task.FromResult(_repoReference.Update(id, Mapper.Map(deviceNewValues)));
-        } 
+        }
+
+        public async Task<bool> TurnOffAllDevices()
+        {
+            return await Task.FromResult(_repoReference.TurnOffAll());
+        }
         #endregion
     }
 }
