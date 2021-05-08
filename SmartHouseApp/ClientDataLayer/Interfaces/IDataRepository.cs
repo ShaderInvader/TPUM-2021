@@ -10,7 +10,7 @@ namespace ClientDataLayer.Interfaces
     {
         public Task<IEnumerable<T>> Get();
         public T Get(int id);
-        public bool Add(T item);
+        public Task<bool> Add(T item);
         public bool Remove(int id);
         public bool Remove(T item);
         public bool Update(int id, T item);

@@ -102,5 +102,10 @@ namespace ClientLogicLayer.Services
             DeviceChange?.Invoke();
             return retVal;
         }
+
+        public async Task ToggleDevice(int selectedDeviceId)
+        {
+            await _deviceRepo.Toggle(selectedDeviceId);
+        }
     }
 }

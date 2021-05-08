@@ -27,10 +27,10 @@ namespace ClientDataLayer
             return DataContext.Instance.Rooms.Find(room => room.Id == id);
         }
 
-        public bool Add(Room item)
+        public async Task<bool> Add(Room item)
         {
             DataContext.Instance.Rooms.Add(item);
-            return true;
+            return await Task.FromResult(true);
         }
 
         public bool Remove(int id)

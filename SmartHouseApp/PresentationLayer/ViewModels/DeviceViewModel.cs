@@ -23,16 +23,23 @@ namespace ClientPresentationLayer.ViewModels
             _editDevice = false;
 
             NavigationViewModel.ConnectionEstablishedEvent += RequestDevices;
+            NavigationViewModel.ConnectionLostEvent += CleanDevices;
 
             NewDeviceCommand = new NewDeviceCommand(this);
+            ToggleDeviceCommand = new ToggleDeviceCommand(this);
             SaveDeviceCommand = new AddDeviceCommand(this);
             EditDeviceCommand = new EditDeviceCommand(this);
             DeleteDeviceCommand = new MessageBoxCommand(new DeleteDeviceCommand(this), null, "Do you really want to delete this device?");
         }
 
+        private void CleanDevices()
+        {
+            Devices.Clear();
+        }
+
         private async void RequestDevices()
         {
-            _devices = new ObservableCollection<DeviceDTO>(await _deviceService.GetDevices());
+            Devices = new ObservableCollection<DeviceDTO>(await _deviceService.GetDevices());
         }
 
         ~DeviceViewModel()
@@ -92,6 +99,7 @@ namespace ClientPresentationLayer.ViewModels
 
         #region ICommands
         public ICommand NewDeviceCommand { get; set; }
+        public ICommand ToggleDeviceCommand { get; set; }
         public ICommand SaveDeviceCommand { get; set; }
         public ICommand EditDeviceCommand { get; set; }
         public ICommand DeleteDeviceCommand { get; set; }

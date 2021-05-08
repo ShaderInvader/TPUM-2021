@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using ClientDataLayer.Interfaces;
+using ModelCommon;
 using ModelCommon.Interfaces;
 
 namespace ClientDataLayer
@@ -27,10 +29,15 @@ namespace ClientDataLayer
             return DataContext.Instance.Devices.Find(device => device.Id == id);
         }
 
-        public bool Add(IDevice item)
+        public async Task<bool> Add(IDevice item)
         {
-            DataContext.Instance.Devices.Add(item);
-            return true; // Yeah I know this makes no sense
+            string addDeviceRequest = "AddDevice";
+            addDeviceRequest += JsonSerializer.Serialize((ExampleDevice)item);
+
+            await DataContext.Instance.RequestWithConfirmation(addDeviceRequest);
+            await DataContext.Instance.RequestDataUpdate();
+
+            return await Task.FromResult(true);
         }
 
         public bool Remove(int id)
@@ -118,16 +125,11 @@ namespace ClientDataLayer
             return devices.Count;
         }
 
-        public bool Toggle(int id)
+        public async Task<bool> Toggle(int id)
         {
-            IDevice device = Get(id);
-            if (device != null)
-            {
-                device.Enabled = !device.Enabled;
-                return true;
-            }
-
-            return false;
+            await DataContext.Instance.RequestWithConfirmation($"ToggleDevice:{id}");
+            await DataContext.Instance.RequestDataUpdate();
+            return await Task.FromResult(true);
         }
 
         public int ToggleAll(string name)

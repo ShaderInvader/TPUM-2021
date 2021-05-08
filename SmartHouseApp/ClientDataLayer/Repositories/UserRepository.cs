@@ -26,10 +26,10 @@ namespace ClientDataLayer
             return DataContext.Instance.Users.Find(user => user.Id == id);
         }
 
-        public bool Add(User item)
+        public async Task<bool> Add(User item)
         {
             DataContext.Instance.Users.Add(item);
-            return true;
+            return await Task.FromResult(true);
         }
 
         public bool Remove(int id)

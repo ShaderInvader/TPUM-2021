@@ -28,7 +28,7 @@ namespace ClientDataLayer
                     // ===== Creating socket connection object =====
                     WebSocketConnection socketConnection = new ClientWebSocketConnection(clientWebSocket, peer, log);
                     // ===== Attaching data parser to on message event =====
-                    socketConnection.OnMessage = (x) => Debug.WriteLine(x);
+                    socketConnection.OnMessage = DataContext.Instance.ReceiveData;
                     
                     // Setting the current connection for singleton connection implementation
                     CurrentConnection = socketConnection;
