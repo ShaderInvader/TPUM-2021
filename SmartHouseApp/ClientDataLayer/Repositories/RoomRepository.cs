@@ -1,48 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using ModelCommon;
 using ModelCommon.Interfaces;
 
 namespace ClientDataLayer
 {
-    public class HouseRepository : INamedRepository<Room>
+    public class RoomRepository : INamedRepository<Room>
     {
-        private readonly DataContext _dataContext;
-
-        public HouseRepository(DataContext dataContext)
+        private static RoomRepository _instance;
+        public static RoomRepository Instance
         {
-            _dataContext = dataContext;
+            get { return _instance ??= new RoomRepository(); }
+            private set => _instance = value;
         }
 
-        public IEnumerable<Room> Get()
+        public async Task<IEnumerable<Room>> Get()
         {
-            return _dataContext.Houses;
+            return await Task.FromResult(DataContext.Instance.Rooms);
         }
 
         public Room Get(int id)
         {
-            return _dataContext.Houses.Find(house => house.Id == id);
+            return DataContext.Instance.Rooms.Find(room => room.Id == id);
         }
 
         public void Add(Room item)
         {
-            _dataContext.Houses.Add(item);
+            DataContext.Instance.Rooms.Add(item);
         }
 
         public int Remove(int id)
         {
-            return _dataContext.Houses.RemoveAll(house => house.Id == id);
+            return DataContext.Instance.Rooms.RemoveAll(room => room.Id == id);
         }
 
         public bool Remove(Room item)
         {
-            return _dataContext.Houses.Remove(item);
+            return DataContext.Instance.Rooms.Remove(item);
         }
 
         public bool Update(int id, Room item)
         {
-            Room found = _dataContext.Houses.Find(house => house.Id == id);
+            Room found = DataContext.Instance.Rooms.Find(room => room.Id == id);
             if (found != null)
             {
                 found.Name = item.Name;
@@ -55,12 +56,12 @@ namespace ClientDataLayer
 
         public Room Get(string name)
         {
-            return _dataContext.Houses.Find(house => house.Name == name);
+            return DataContext.Instance.Rooms.Find(room => room.Name == name);
         }
 
         public IEnumerable<Room> GetAll(string name)
         {
-            return _dataContext.Houses.FindAll(house => house.Name == name);
+            return DataContext.Instance.Rooms.FindAll(room => room.Name == name);
         }
 
         public int GetFirstId(string name)
@@ -88,7 +89,7 @@ namespace ClientDataLayer
 
         public int Remove(string name)
         {
-            return _dataContext.Houses.RemoveAll(house => house.Name == name);
+            return DataContext.Instance.Rooms.RemoveAll(room => room.Name == name);
         }
 
         public bool UpdateFirst(string name, Room item)

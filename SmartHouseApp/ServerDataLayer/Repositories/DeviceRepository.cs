@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using ModelCommon.Interfaces;
 
 namespace ServerDataLayer
@@ -27,9 +28,9 @@ namespace ServerDataLayer
             return _dataContext.Devices.Find(device => device.Name == name);
         }
 
-        public IEnumerable<IDevice> Get()
+        public async Task<IEnumerable<IDevice>> Get()
         {
-            return _dataContext.Devices;
+            return await Task.FromResult(_dataContext.Devices);
         }
 
         public IDevice Get(int id)

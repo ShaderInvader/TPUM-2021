@@ -2,16 +2,18 @@
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using ClientLogicLayer;
+using ClientLogicLayer.Interfaces;
 using ClientLogicLayer.Services;
 using ClientPresentationLayer.ViewModels.Commands;
 
 namespace ClientPresentationLayer.ViewModels
 {
-    class NavigationViewModel : BaseViewModel
+    public class NavigationViewModel : BaseViewModel
     {
         #region Private
 
-        private readonly ConnectionService _connectionService;
+        private readonly IConnectionService _connectionService;
 
         #endregion
 
@@ -69,18 +71,23 @@ namespace ClientPresentationLayer.ViewModels
         public ICommand ConnectCommand { get; private set; }
         #endregion
 
+        public static event Action ConnectionEstablishedEvent;
+        public static event Action ConnectionLostEvent;
+
         public NavigationViewModel()
         {
             // Create connection service object
-            _connectionService = new ConnectionService();
+            _connectionService = ServiceFactory.CreateConnectionService;
+            // Add log messenger delegate
+            _connectionService.ConnectionLogger += s => Log = s;
 
             // Setup the page commands
             Devices = new LoadPageCommand(this, "DevicesPage.xaml");
-            Rooms = new LoadPageCommand(this, "RoomsPage.xaml");
+            Rooms = new LoadPageCommand(this, "RoomsPage.xaml", false);
             Alerts = new LoadPageCommand(this, "", false);
             ConnectCommand = new ConnectCommand(this);
 
-            // Load the default page on start
+            // Load the default page on connection
             Debug.WriteLine("Starting default page...");
             Devices.Execute(null);
         }
@@ -93,27 +100,20 @@ namespace ClientPresentationLayer.ViewModels
         public async Task<bool> EstablishConnection(Uri peerUri)
         {
             ConnectButtonText = "Connecting...";
-            bool result = await _connectionService.Connect(peerUri, ShowLog);
+            bool result = await _connectionService.Connect(peerUri);
             if (result)
             {
-                ConnectButtonText = "Disconnect";
+                ConnectionEstablishedEvent?.Invoke();
             }
-            else
-            {
-                ConnectButtonText = "Connect";
-            }
+            ConnectButtonText = result ? "Disconnect" : "Connect";
             return result;
         }
 
         public async Task Disconnect()
         {
             await _connectionService.Disconnect();
+            ConnectionLostEvent?.Invoke();
             ConnectButtonText = "Connect";
-        }
-
-        public void ShowLog(string log)
-        {
-            Log = log;
         }
     }
 }

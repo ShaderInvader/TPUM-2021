@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using DataLayer;
+using ClientLogicLayer;
+using ClientLogicLayer.InternalDTOs;
+using LogicLayer.Interfaces;
 using ModelCommon;
 using ModelCommon.Interfaces;
 
@@ -26,7 +27,7 @@ namespace LogicLayer
 
         public IEnumerable<UserDTO> GetUsers()
         {
-            IEnumerable<User> users = _userRepo.Get();
+            IEnumerable<User> users = _userRepo.Get().Result;
             List<UserDTO> userDTOs = new List<UserDTO>();
             foreach (var user in users)
             {

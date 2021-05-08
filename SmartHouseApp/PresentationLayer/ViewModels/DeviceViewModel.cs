@@ -1,8 +1,10 @@
-
-using LogicLayer;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using ClientLogicLayer;
+using ClientLogicLayer.InternalDTOs;
+using ClientLogicLayer.Services;
 using ClientPresentationLayer.ViewModels.Commands;
+using LogicLayer.Interfaces;
 
 namespace ClientPresentationLayer.ViewModels
 {
@@ -15,15 +17,22 @@ namespace ClientPresentationLayer.ViewModels
 
         public DeviceViewModel()
         {
-            _deviceService = new DeviceService(RepositoryPlaceholder.GetDeviceRepository());
+            _deviceService = ServiceFactory.CreateDeviceService;
             _deviceService.DeviceChange += UpdateDevices;
-            _devices = new ObservableCollection<DeviceDTO>(_deviceService.GetDevices());
-            _selectedDevice = _devices[0];
+            _devices = new ObservableCollection<DeviceDTO>();
             _editDevice = false;
+
+            NavigationViewModel.ConnectionEstablishedEvent += RequestDevices;
+
             NewDeviceCommand = new NewDeviceCommand(this);
             SaveDeviceCommand = new AddDeviceCommand(this);
             EditDeviceCommand = new EditDeviceCommand(this);
             DeleteDeviceCommand = new MessageBoxCommand(new DeleteDeviceCommand(this), null, "Do you really want to delete this device?");
+        }
+
+        private async void RequestDevices()
+        {
+            _devices = new ObservableCollection<DeviceDTO>(await _deviceService.GetDevices());
         }
 
         ~DeviceViewModel()
@@ -88,9 +97,9 @@ namespace ClientPresentationLayer.ViewModels
         public ICommand DeleteDeviceCommand { get; set; }
         #endregion
 
-        public void UpdateDevices()
+        public async void UpdateDevices()
         {
-            _devices = new ObservableCollection<DeviceDTO>(_deviceService.GetDevices());
+            _devices = new ObservableCollection<DeviceDTO>(await _deviceService.GetDevices());
             OnPropertyChanged("Devices");
         }
     }

@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ModelCommon.Interfaces
 {
     public interface IDataRepository<T> where T : IData
     {
-        public IEnumerable<T> Get();
+        public Task<IEnumerable<T>> Get();
         public T Get(int id);
         public void Add(T item);
         public int Remove(int id);

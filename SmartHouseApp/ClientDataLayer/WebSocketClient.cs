@@ -10,6 +10,8 @@ namespace ClientDataLayer
 
     public static class WebSocketClient
     {
+        public static WebSocketConnection CurrentConnection { get; private set; }
+
         public static async Task<WebSocketConnection> Connect(Uri peer, Action<string> log)
         {
             ClientWebSocket clientWebSocket = new ClientWebSocket();
@@ -19,8 +21,17 @@ namespace ClientDataLayer
             switch (clientWebSocket.State)
             {
                 case WebSocketState.Open:
+                    // Connection log invoke
                     log?.Invoke($"Opened connection to remote server: {peer}");
+
+                    // ===== Creating socket connection object =====
                     WebSocketConnection socketConnection = new ClientWebSocketConnection(clientWebSocket, peer, log);
+                    // ===== Attaching data parser to on message event =====
+                    socketConnection.OnMessage = DataContext.Instance.ParseData;
+                    
+                    // Setting the current connection for singleton connection implementation
+                    CurrentConnection = socketConnection;
+
                     return socketConnection;
                     
                 default:
@@ -30,19 +41,27 @@ namespace ClientDataLayer
             }
         }
 
+        public static async Task Disconnect()
+        {
+            await CurrentConnection.DisconnectAsync();
+            CurrentConnection = null;
+        }
+
         private class ClientWebSocketConnection : WebSocketConnection
         {
-            private ClientWebSocket _clientWebSocket = null;
+            private readonly ClientWebSocket _clientWebSocket = null;
             private Uri _peer = null;
             private readonly Action<string> _log;
 
             public ClientWebSocketConnection(ClientWebSocket clientWebSocket, Uri peer, Action<string> log)
             {
-                this._log = log;
+                _log = log;
                 _peer = peer;
                 _clientWebSocket = clientWebSocket;
                 Task.Factory.StartNew(ClientMessageLoop);
             }
+
+            public override bool IsConnected => _clientWebSocket.State == WebSocketState.Open;
 
             public override Task DisconnectAsync()
             {
@@ -65,7 +84,7 @@ namespace ClientDataLayer
                         WebSocketReceiveResult result = _clientWebSocket.ReceiveAsync(segment, CancellationToken.None).Result;
                         if (result.MessageType == WebSocketMessageType.Close)
                         {
-                            onClose?.Invoke();
+                            OnClose?.Invoke();
                             _clientWebSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "I am closing", CancellationToken.None).Wait();
                             return;
                         }
@@ -74,7 +93,7 @@ namespace ClientDataLayer
                         {
                             if (count >= buffer.Length)
                             {
-                                onClose?.Invoke();
+                                OnClose?.Invoke();
                                 _clientWebSocket.CloseAsync(WebSocketCloseStatus.InvalidPayloadData, "That's too long", CancellationToken.None).Wait();
                                 return;
                             }
@@ -83,7 +102,7 @@ namespace ClientDataLayer
                             count += result.Count;
                         }
                         string _message = Encoding.UTF8.GetString(buffer, 0, count);
-                        onMessage?.Invoke(_message);
+                        OnMessage?.Invoke(_message);
                     }
                 }
                 catch (Exception _ex)

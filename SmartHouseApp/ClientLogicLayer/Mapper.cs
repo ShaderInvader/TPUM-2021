@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using DataLayer;
+using ClientLogicLayer.InternalDTOs;
 using ModelCommon;
 using ModelCommon.Interfaces;
 
-namespace LogicLayer
+namespace ClientLogicLayer
 {
     public static class Mapper
     {
@@ -21,25 +21,22 @@ namespace LogicLayer
             };
         }
 
+        public static RoomDTO Map(Room room)
+        {
+            return new RoomDTO()
+            {
+                Id = room.Id,
+                Name = room.Name
+            };
+        }
+
         public static DeviceDTO Map(IDevice device)
         {
-            string type = device.GetType().ToString();
-            var names = type.Split('.');
             return new DeviceDTO()
             {
                 Id = device.Id,
                 Name = device.Name,
-                Enabled = device.Enabled,
-                Type = names[^1]
-            };
-        }
-
-        public static HouseDTO Map(Room house)
-        {
-            return new HouseDTO()
-            {
-                Id = house.Id,
-                Name = house.Name
+                Enabled = device.Enabled
             };
         }
 
@@ -50,6 +47,15 @@ namespace LogicLayer
                 Id = device.Id,
                 Name = device.Name,
                 Enabled = device.Enabled
+            };
+        }
+
+        public static Room Map(RoomDTO room)
+        {
+            return new Room()
+            {
+                Id = room.Id,
+                Name = room.Name
             };
         }
 
