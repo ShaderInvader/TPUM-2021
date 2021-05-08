@@ -61,9 +61,9 @@ namespace ServerDataLayer
             return _dataContext.Users.RemoveAll(user => user.Name == name);
         }
 
-        public int Remove(int id)
+        public bool Remove(int id)
         {
-            return _dataContext.Users.RemoveAll(user => user.Id == id);
+            return _dataContext.Users.RemoveAll(user => user.Id == id) > 0;
         }
 
         public bool Remove(User item)
