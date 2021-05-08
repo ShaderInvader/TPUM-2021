@@ -23,7 +23,7 @@ namespace ServerPresentationLayer
                 Console.WriteLine, 
                 (x) => Console.WriteLine(x.Message), 
                 (x) => Console.WriteLine($"New Coordinates: {x.Coordinates.Item1}, {x.Coordinates.Item2}"),
-                () => { Task.Run(() => deviceService.TurnOffAllDevices()); Console.WriteLine("Turning off all devices"); }
+                () => { Console.WriteLine("Turning off all devices"); Task.Run(() => deviceService.TurnOffAllDevices()); }
                 );
             await WebSocketServer.Server(8081, ConnectionHandler);
         }
@@ -56,6 +56,15 @@ namespace ServerPresentationLayer
                 ExampleDeviceDTO device = Serializer.DeviceFormJson(json);
                 await deviceService.AddDevice(device);
                 await CurrentConnection.SendAsync("Confirm");
+            }
+            else if(message.Contains("Location"))
+            {
+                var split = message.Split('(');
+                split = split[1].Split(',');
+                split[1] = split[1].Substring(1, split.Length - 1);
+                double x = Double.Parse(split[0]);
+                double y = Double.Parse(split[1]);
+                provider.TrackLocation(Mapper.Map(new LocationDTO { Coordinates = new Tuple<double, double>(x, y) }));
             }
         }
     }

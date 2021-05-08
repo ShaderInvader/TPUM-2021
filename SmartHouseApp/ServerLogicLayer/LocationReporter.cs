@@ -58,7 +58,7 @@ namespace ServerLogicLayer
             var c = value.Coordinates;
             var min = _minCoordinates.Coordinates;
             var max = _maxCoordinates.Coordinates;
-            if(c.Item1 < min.Item1 || c.Item2 < min.Item2 || c.Item1 < max.Item1 || c.Item2 < max.Item2)
+            if(!((c.Item1 > min.Item1 && c.Item2 > min.Item2) && (c.Item1 < max.Item1 && c.Item2 < max.Item2)))
             {
                 _onHouseLeft?.Invoke();
             }
