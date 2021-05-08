@@ -13,7 +13,7 @@ namespace ServerLogicLayer
         Task<IEnumerable<ExampleDeviceDTO>> GetDevicesByName(string name);
         Task<bool> SetDeviceState(int id, bool state);
         Task<bool> AddDevice(ExampleDeviceDTO newDevice);
-        Task<bool> RemoveDevice(ExampleDeviceDTO devicetoRemove);
+        Task<bool> RemoveDevice(int id);
         Task<bool> RemoveDevicesByName(string name);
         Task<int[]> GetDevicesIds(string name);
         Task<bool> UpdateDevice(int id, ExampleDeviceDTO deviceNewValues);

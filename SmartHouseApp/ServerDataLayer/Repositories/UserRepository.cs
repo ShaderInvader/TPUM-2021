@@ -19,9 +19,10 @@ namespace ServerDataLayer
 
         #region INamedRepository<User>
 
-        public void Add(User item)
+        public bool Add(User item)
         {
             _dataContext.Users.Add(item);
+            return true;
         }
 
         public User Get(string name)

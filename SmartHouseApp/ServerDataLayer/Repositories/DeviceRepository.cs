@@ -18,9 +18,10 @@ namespace ServerDataLayer
 
         #region IDeviceRepository
 
-        public void Add(IDevice item)
+        public bool Add(IDevice item)
         {
             _dataContext.Devices.Add(item);
+            return true;
         }
 
         public IDevice Get(string name)
@@ -60,9 +61,9 @@ namespace ServerDataLayer
             return _dataContext.Devices.RemoveAll(device => device.Name == name);
         }
 
-        public int Remove(int id)
+        public bool Remove(int id)
         {
-            return _dataContext.Devices.RemoveAll(device => device.Id == id);
+            return _dataContext.Devices.RemoveAll(device => device.Id == id) > 0;
         }
 
         public bool Remove(IDevice item)

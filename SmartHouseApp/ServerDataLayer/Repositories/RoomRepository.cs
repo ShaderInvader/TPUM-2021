@@ -7,7 +7,7 @@ using ModelCommon;
 
 namespace ServerDataLayer
 {
-    public class RoomRepository : INamedRepository<Room>
+    public class RoomRepository : IRoomRepository
     {
         private readonly DataContext _dataContext;
         private readonly object _houseLock = new object();
@@ -17,11 +17,12 @@ namespace ServerDataLayer
             _dataContext = DataContext.Instance;
         }
 
+        #region IRoomRepository
         public bool AddDeviceToRoom(int id, IDevice device)
         {
             bool returnValue = false;
             Room r = _dataContext.Rooms.Find(room => room.Id == id);
-            if(r != null)
+            if (r != null)
             {
                 r.Devices.Add(device);
                 returnValue = true;
@@ -33,10 +34,10 @@ namespace ServerDataLayer
         {
             bool returnValue = false;
             Room r = _dataContext.Rooms.Find(room => room.Id == roomId);
-            if(r != null)
+            if (r != null)
             {
                 IDevice d = _dataContext.Devices.Find(device => device.Id == deviceId);
-                if(d != null)
+                if (d != null)
                 {
 
                 }
@@ -48,7 +49,7 @@ namespace ServerDataLayer
         {
             bool returnValue = false;
             Room r = _dataContext.Rooms.Find(room => room.Id == roomId);
-            if(r != null)
+            if (r != null)
             {
                 returnValue = r.Devices.Remove(device);
             }
@@ -59,22 +60,24 @@ namespace ServerDataLayer
         {
             bool returnValue = false;
             Room r = _dataContext.Rooms.Find(room => room.Id == roomId);
-            if(r != null)
+            if (r != null)
             {
                 IDevice d = _dataContext.Devices.Find(device => device.Id == deviceId);
-                if(d != null)
+                if (d != null)
                 {
                     returnValue = r.Devices.Remove(d);
                 }
             }
             return returnValue;
-        }
+        } 
+        #endregion
 
-        #region INamedRepository<House>
+        #region INamedRepository<Room>
 
-        public void Add(Room item)
+        public bool Add(Room item)
         {
             _dataContext.Rooms.Add(item);
+            return true;
         }
 
         public Room Get(string name)
@@ -114,9 +117,9 @@ namespace ServerDataLayer
             return _dataContext.Rooms.RemoveAll(house => house.Name == name);
         }
 
-        public int Remove(int id)
+        public bool Remove(int id)
         {
-            return _dataContext.Rooms.RemoveAll(house => house.Id == id);
+            return _dataContext.Rooms.RemoveAll(house => house.Id == id) > 0;
         }
 
         public bool Remove(Room item)
