@@ -57,7 +57,7 @@ namespace LogicLayer
 
         public bool RemoveUser(UserDTO userToRemove)
         {
-            return _userRepo.Remove(userToRemove.Id) > 0;
+            return _userRepo.Remove(userToRemove.Id);
         }
 
         public bool LoginUser(string username, string password)

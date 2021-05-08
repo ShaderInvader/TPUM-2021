@@ -26,14 +26,15 @@ namespace ClientDataLayer
             return DataContext.Instance.Users.Find(user => user.Id == id);
         }
 
-        public void Add(User item)
+        public bool Add(User item)
         {
             DataContext.Instance.Users.Add(item);
+            return true;
         }
 
-        public int Remove(int id)
+        public bool Remove(int id)
         {
-            return DataContext.Instance.Users.RemoveAll(user => user.Id == id);
+            return DataContext.Instance.Users.RemoveAll(user => user.Id == id) > 0;
         }
 
         public bool Remove(User item)
@@ -68,19 +69,6 @@ namespace ClientDataLayer
             return DataContext.Instance.Users.FindAll(user => user.Name == name);
         }
 
-        public int GetFirstId(string name)
-        {
-            User found = DataContext.Instance.Users.Find(user => user.Name == name);
-            if (found != null)
-            {
-                return found.Id;
-            }
-            else
-            {
-                return -1;
-            }
-        }
-
         public int[] GetIds(string name)
         {
             List<User> found = DataContext.Instance.Users.FindAll(user => user.Name == name);
@@ -96,23 +84,6 @@ namespace ClientDataLayer
         public int Remove(string name)
         {
             return DataContext.Instance.Users.RemoveAll(user => user.Name == name);
-        }
-
-        public bool UpdateFirst(string name, User item)
-        {
-            User found = DataContext.Instance.Users.Find(user => user.Name == name);
-            if (found != null)
-            {
-                found.Email = item.Email;
-                found.Name = item.Name;
-                found.FirstName = item.FirstName;
-                found.LastName = item.LastName;
-                return true;
-            }
-            else
-            {
-                return false;
-            }
         }
 
         public int UpdateAll(string name, User item)

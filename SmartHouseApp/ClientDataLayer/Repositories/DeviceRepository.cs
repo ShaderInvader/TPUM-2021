@@ -26,14 +26,15 @@ namespace ClientDataLayer
             return DataContext.Instance.Devices.Find(device => device.Id == id);
         }
 
-        public void Add(IDevice item)
+        public bool Add(IDevice item)
         {
             DataContext.Instance.Devices.Add(item);
+            return true; // Yeah I know this makes no sense
         }
 
-        public int Remove(int id)
+        public bool Remove(int id)
         {
-            return DataContext.Instance.Devices.RemoveAll(device => device.Id == id);
+            return DataContext.Instance.Devices.RemoveAll(device => device.Id == id) > 0;
         }
 
         public bool Remove(IDevice item)
@@ -66,19 +67,6 @@ namespace ClientDataLayer
             return DataContext.Instance.Devices.FindAll(device => device.Name == name);
         }
 
-        public int GetFirstId(string name)
-        {
-            IDevice found = DataContext.Instance.Devices.Find(device => device.Name == name);
-            if (found != null)
-            {
-                return found.Id;
-            }
-            else
-            {
-                return -1;
-            }
-        }
-
         public int[] GetIds(string name)
         {
             List<IDevice> found = DataContext.Instance.Devices.FindAll(device => device.Name == name);
@@ -94,21 +82,6 @@ namespace ClientDataLayer
         public int Remove(string name)
         {
             return DataContext.Instance.Devices.RemoveAll(device => device.Name == name);
-        }
-
-        public bool UpdateFirst(string name, IDevice item)
-        {
-            IDevice found = DataContext.Instance.Devices.Find(device => device.Name == name);
-            if (found != null)
-            {
-                found.Enabled = item.Enabled;
-                found.Name = item.Name;
-                return true;
-            }
-            else
-            {
-                return false;
-            }
         }
 
         public int UpdateAll(string name, IDevice item)
@@ -134,18 +107,6 @@ namespace ClientDataLayer
             return false;
         }
 
-        public bool SetStateFirst(string name, bool enabled)
-        {
-            IDevice device = Get(name);
-            if (device != null)
-            {
-                device.Enabled = enabled;
-                return true;
-            }
-
-            return false;
-        }
-
         public int SetStates(string name, bool enabled)
         {
             List<IDevice> devices = (List<IDevice>)GetAll(name);
@@ -159,18 +120,6 @@ namespace ClientDataLayer
         public bool Toggle(int id)
         {
             IDevice device = Get(id);
-            if (device != null)
-            {
-                device.Enabled = !device.Enabled;
-                return true;
-            }
-
-            return false;
-        }
-
-        public bool ToggleFirst(string name)
-        {
-            IDevice device = Get(name);
             if (device != null)
             {
                 device.Enabled = !device.Enabled;

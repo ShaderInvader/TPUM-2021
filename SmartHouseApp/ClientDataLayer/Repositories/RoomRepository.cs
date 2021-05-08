@@ -26,14 +26,15 @@ namespace ClientDataLayer
             return DataContext.Instance.Rooms.Find(room => room.Id == id);
         }
 
-        public void Add(Room item)
+        public bool Add(Room item)
         {
             DataContext.Instance.Rooms.Add(item);
+            return true;
         }
 
-        public int Remove(int id)
+        public bool Remove(int id)
         {
-            return DataContext.Instance.Rooms.RemoveAll(room => room.Id == id);
+            return DataContext.Instance.Rooms.RemoveAll(room => room.Id == id) > 0;
         }
 
         public bool Remove(Room item)
@@ -64,17 +65,6 @@ namespace ClientDataLayer
             return DataContext.Instance.Rooms.FindAll(room => room.Name == name);
         }
 
-        public int GetFirstId(string name)
-        {
-            Room found = Get(name);
-            if (found != null)
-            {
-                return found.Id;
-            }
-
-            return -1;
-        }
-
         public int[] GetIds(string name)
         {
             List<Room> found = (List<Room>)GetAll(name);
@@ -90,19 +80,6 @@ namespace ClientDataLayer
         public int Remove(string name)
         {
             return DataContext.Instance.Rooms.RemoveAll(room => room.Name == name);
-        }
-
-        public bool UpdateFirst(string name, Room item)
-        {
-            Room found = Get(name);
-            if (found != null)
-            {
-                found.Name = item.Name;
-                found.Devices = new List<IDevice>(item.Devices);
-                return true;
-            }
-
-            return false;
         }
 
         public int UpdateAll(string name, Room item)

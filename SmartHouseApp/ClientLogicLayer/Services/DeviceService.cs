@@ -92,7 +92,7 @@ namespace ClientLogicLayer.Services
             bool retVal = false;
             try
             {
-                retVal = _deviceRepo.Remove(deviceToRemove.Id) > 0;
+                retVal = _deviceRepo.Remove(deviceToRemove.Id);
             }
             catch (InvalidDeviceDataException)
             {
