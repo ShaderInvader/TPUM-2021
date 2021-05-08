@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ClientDataLayer.Interfaces;
 using ClientLogicLayer;
 using ClientLogicLayer.InternalDTOs;
 using LogicLayer.Interfaces;

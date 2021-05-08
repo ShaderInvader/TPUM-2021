@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ModelCommon.Interfaces;
 
-namespace ModelCommon.Interfaces
+namespace ClientDataLayer.Interfaces
 {
     public interface IDeviceRepository : INamedRepository<IDevice>
     {
