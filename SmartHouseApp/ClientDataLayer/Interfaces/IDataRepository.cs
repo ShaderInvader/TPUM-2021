@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using ModelCommon.Interfaces;
 
-namespace ModelCommon.Interfaces
+namespace ClientDataLayer.Interfaces
 {
     public interface IDataRepository<T> where T : IData
     {

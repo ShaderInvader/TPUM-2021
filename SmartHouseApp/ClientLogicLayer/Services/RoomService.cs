@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using ClientDataLayer.Interfaces;
 using ClientLogicLayer.InternalDTOs;
 using LogicLayer.Interfaces;
 using ModelCommon;
