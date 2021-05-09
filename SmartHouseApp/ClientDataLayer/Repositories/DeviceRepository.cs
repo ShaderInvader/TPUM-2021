@@ -92,7 +92,7 @@ namespace ClientDataLayer
 
         public int Remove(string name)
         {
-            return _dataContext.Devices.RemoveAll(device => device.Name == name);
+            return _dataContext.Devices.RemoveAll(device => String.Compare(device.Name, name, StringComparison.Ordinal) == 0);
         }
 
         public bool SetState(int id, bool enabled)
