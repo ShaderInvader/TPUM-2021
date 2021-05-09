@@ -25,6 +25,11 @@ namespace ServerLogicLayer
             }
         }
 
+        public RoomService(IRoomRepository repository)
+        {
+            _repoReference = repository;
+        }
+
         #region IRoomService
         public async Task<bool> AddDeviceToRoom(RoomDTO referenceRoom, ExampleDeviceDTO newDevice)
         {

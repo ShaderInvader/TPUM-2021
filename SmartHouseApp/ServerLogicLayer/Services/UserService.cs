@@ -21,6 +21,11 @@ namespace ServerLogicLayer
             }
         }
 
+        public UserService(INamedRepository<User> repository)
+        {
+            _repoReference = repository;
+        }
+
         private async Task<IEnumerable<UserDTO>> GetUsersByName(string name)
         {
             var users = _repoReference.GetAll(name);
