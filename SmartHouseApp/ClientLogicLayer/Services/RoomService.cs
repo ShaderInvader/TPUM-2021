@@ -23,7 +23,7 @@ namespace ClientLogicLayer.Services
 
         public IEnumerable<RoomDTO> GetRooms()
         {
-            IEnumerable<Room> rooms = _roomRepo.Get().Result;
+            IEnumerable<Room> rooms = _roomRepo.Get();
             List<RoomDTO> roomsDTOs = new List<RoomDTO>();
             foreach (var room in rooms)
             {

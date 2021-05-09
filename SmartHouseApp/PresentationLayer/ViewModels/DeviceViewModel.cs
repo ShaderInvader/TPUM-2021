@@ -39,7 +39,7 @@ namespace ClientPresentationLayer.ViewModels
 
         private async void RequestDevices()
         {
-            Devices = new ObservableCollection<DeviceDTO>(await _deviceService.GetDevices());
+            await _deviceService.RefreshDevices();
         }
 
         ~DeviceViewModel()
@@ -105,9 +105,9 @@ namespace ClientPresentationLayer.ViewModels
         public ICommand DeleteDeviceCommand { get; set; }
         #endregion
 
-        public async void UpdateDevices()
+        public void UpdateDevices()
         {
-            _devices = new ObservableCollection<DeviceDTO>(await _deviceService.GetDevices());
+            _devices = new ObservableCollection<DeviceDTO>(_deviceService.GetDevices());
             OnPropertyChanged("Devices");
         }
     }

@@ -40,7 +40,7 @@ namespace LogicLayer
 
         public IEnumerable<UserDTO> GetUsers()
         {
-            IEnumerable<User> users = _userRepo.Get().Result;
+            IEnumerable<User> users = _userRepo.Get();
             List<UserDTO> userDTOs = new List<UserDTO>();
             foreach (var user in users)
             {

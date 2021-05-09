@@ -8,7 +8,9 @@ namespace ClientDataLayer.Interfaces
 {
     public interface IDataRepository<T> where T : IData
     {
-        public Task<IEnumerable<T>> Get();
+        public event Action DataChanged;
+        public IEnumerable<T> Get();
+        public Task Refresh();
         public T Get(int id);
         public Task<bool> Add(T item);
         public bool Remove(int id);

@@ -8,8 +8,9 @@ namespace LogicLayer.Interfaces
 {
     public interface IDeviceService
     {
+        Task RefreshDevices();
         DeviceDTO GetDevice(int id);
-        Task<IEnumerable<DeviceDTO>> GetDevices();
+        IEnumerable<DeviceDTO> GetDevices();
         bool SetDeviceState(int id, bool state);
         bool AddDevice(DeviceDTO newDevice);
         bool RemoveDevice(DeviceDTO deviceToRemove);

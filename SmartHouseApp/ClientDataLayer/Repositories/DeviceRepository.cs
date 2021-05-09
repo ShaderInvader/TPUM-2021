@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -18,15 +19,34 @@ namespace ClientDataLayer
             private set => _instance = value;
         }
 
-        public async Task<IEnumerable<IDevice>> Get()
+        private readonly DataContext _dataContext;
+
+        public DeviceRepository()
         {
-            await DataContext.Instance.RequestDataUpdate();
-            return DataContext.Instance.Devices;
+            _dataContext = DataContext.Instance;
+            _dataContext.DevicesChanged += DataChangedInvoke;
+        }
+
+        private void DataChangedInvoke()
+        {
+            DataChanged?.Invoke();
+        }
+
+        public event Action DataChanged;
+
+        public IEnumerable<IDevice> Get()
+        {
+            return _dataContext.Devices;
+        }
+
+        public async Task Refresh()
+        {
+            await _dataContext.RequestDataUpdate();
         }
 
         public IDevice Get(int id)
         {
-            return DataContext.Instance.Devices.Find(device => device.Id == id);
+            return _dataContext.Devices.Find(device => device.Id == id);
         }
 
         public async Task<bool> Add(IDevice item)
@@ -34,20 +54,20 @@ namespace ClientDataLayer
             string addDeviceRequest = "AddDevice";
             addDeviceRequest += JsonSerializer.Serialize((ExampleDevice)item);
 
-            await DataContext.Instance.RequestWithConfirmation(addDeviceRequest);
-            await DataContext.Instance.RequestDataUpdate();
+            await _dataContext.RequestWithConfirmation(addDeviceRequest);
+            await _dataContext.RequestDataUpdate();
 
             return await Task.FromResult(true);
         }
 
         public bool Remove(int id)
         {
-            return DataContext.Instance.Devices.RemoveAll(device => device.Id == id) > 0;
+            return _dataContext.Devices.RemoveAll(device => device.Id == id) > 0;
         }
 
         public bool Update(int id, IDevice item)
         {
-            IDevice found = DataContext.Instance.Devices.Find(device => device.Id == id);
+            IDevice found = _dataContext.Devices.Find(device => device.Id == id);
             if (found != null)
             {
                 found.Name = item.Name;
@@ -62,17 +82,17 @@ namespace ClientDataLayer
 
         public IDevice Get(string name)
         {
-            return DataContext.Instance.Devices.Find(device => device.Name == name);
+            return _dataContext.Devices.Find(device => device.Name == name);
         }
 
         public IEnumerable<IDevice> GetAll(string name)
         {
-            return DataContext.Instance.Devices.FindAll(device => device.Name == name);
+            return _dataContext.Devices.FindAll(device => device.Name == name);
         }
 
         public int Remove(string name)
         {
-            return DataContext.Instance.Devices.RemoveAll(device => device.Name == name);
+            return _dataContext.Devices.RemoveAll(device => device.Name == name);
         }
 
         public bool SetState(int id, bool enabled)
@@ -89,8 +109,8 @@ namespace ClientDataLayer
 
         public async Task<bool> Toggle(int id)
         {
-            await DataContext.Instance.RequestWithConfirmation($"ToggleDevice:{id}");
-            await DataContext.Instance.RequestDataUpdate();
+            await _dataContext.RequestWithConfirmation($"ToggleDevice:{id}");
+            await _dataContext.RequestDataUpdate();
             return await Task.FromResult(true);
         }
     }

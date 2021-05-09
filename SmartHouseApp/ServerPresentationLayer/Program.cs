@@ -55,7 +55,7 @@ namespace ServerPresentationLayer
             }
             else if (message.Contains("AddDevice"))
             {
-                var json = message.Substring("AddDevice".Length - 1);
+                var json = message.Substring("AddDevice".Length);
                 ExampleDeviceDTO device = Serializer.DeviceFormJson(json);
                 await deviceService.AddDevice(device);
                 await CurrentConnection.SendAsync("Confirm");

@@ -16,9 +16,16 @@ namespace ClientDataLayer
             private set => _instance = value;
         }
 
-        public async Task<IEnumerable<User>> Get()
+        public event Action DataChanged;
+
+        public IEnumerable<User> Get()
         {
             return DataContext.Instance.Users;
+        }
+
+        public Task Refresh()
+        {
+            throw new NotImplementedException();
         }
 
         public User Get(int id)

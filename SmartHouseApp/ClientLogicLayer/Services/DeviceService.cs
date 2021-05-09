@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using ClientDataLayer.Interfaces;
 using ClientLogicLayer.InternalDTOs;
@@ -17,6 +18,17 @@ namespace ClientLogicLayer.Services
         public DeviceService(IDeviceRepository deviceRepository)
         {
             _deviceRepo = deviceRepository;
+            _deviceRepo.DataChanged += DeviceChangedInvoke;
+        }
+
+        public void DeviceChangedInvoke()
+        {
+            DeviceChange?.Invoke();
+        }
+
+        public async Task RefreshDevices()
+        {
+            await _deviceRepo.Refresh();
         }
 
         public DeviceDTO GetDevice(int id)
@@ -27,9 +39,9 @@ namespace ClientLogicLayer.Services
             return Mapper.Map(_deviceRepo.Get(id));
         }
 
-        public async Task<IEnumerable<DeviceDTO>> GetDevices()
+        public IEnumerable<DeviceDTO> GetDevices()
         {
-            IEnumerable<IDevice> devices = await _deviceRepo.Get();
+            IEnumerable<IDevice> devices = _deviceRepo.Get();
 
             List<DeviceDTO> devicesDTOs = new List<DeviceDTO>();
             foreach (var device in devices)

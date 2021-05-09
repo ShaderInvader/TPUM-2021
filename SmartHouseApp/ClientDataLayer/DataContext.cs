@@ -49,6 +49,7 @@ namespace ClientDataLayer
                     var toDeserialize = split[1].Insert(0, "[");
                     var deserialized = JsonSerializer.Deserialize<List<ExampleDevice>>(toDeserialize);
                     Devices = new List<IDevice>(deserialized!);
+                    DevicesChanged?.Invoke();
                 }
 
                 _isAwaitingResponse = false;
@@ -61,6 +62,8 @@ namespace ClientDataLayer
 
         private bool _isAwaitingConfirmation = false;
         private bool _isAwaitingResponse = false;
+
+        public event Action DevicesChanged;
 
         public List<User> Users { get; set; } = new List<User>();
         public object usersLock = new object();
