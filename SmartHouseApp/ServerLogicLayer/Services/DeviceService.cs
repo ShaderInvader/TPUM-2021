@@ -28,6 +28,11 @@ namespace ServerLogicLayer
             }
         }
 
+        public DeviceService(IDeviceRepository repository)
+        {
+            _repoReference = repository;
+        }
+
         #region IDeviceService
 
         public async Task<bool> AddDevice(ExampleDeviceDTO newDevice)
