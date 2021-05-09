@@ -5,10 +5,6 @@ VisualStudioVersion = 16.0.31112.23
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientPresentationLayer", "PresentationLayer\ClientPresentationLayer.csproj", "{5A1435B7-277E-488B-B6C1-9A04549C9EBF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataLayerTests", "DataLayerTests\DataLayerTests.csproj", "{3E1E0546-E643-4456-B63A-A697C619C3CC}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogicLayerTests", "LogicLayerTests\LogicLayerTests.csproj", "{38D5CFBE-FA4C-4423-A3A3-0F992762C140}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerDataLayer", "ServerDataLayer\ServerDataLayer.csproj", "{EC63EDEC-139D-4E8C-AB6A-AAB17134476E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerLogicLayer", "ServerLogicLayer\ServerLogicLayer.csproj", "{ABE779CE-5CAD-41FE-98EC-174918E1EC83}"
@@ -36,14 +32,6 @@ Global
 		{5A1435B7-277E-488B-B6C1-9A04549C9EBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A1435B7-277E-488B-B6C1-9A04549C9EBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A1435B7-277E-488B-B6C1-9A04549C9EBF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3E1E0546-E643-4456-B63A-A697C619C3CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3E1E0546-E643-4456-B63A-A697C619C3CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3E1E0546-E643-4456-B63A-A697C619C3CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3E1E0546-E643-4456-B63A-A697C619C3CC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{38D5CFBE-FA4C-4423-A3A3-0F992762C140}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{38D5CFBE-FA4C-4423-A3A3-0F992762C140}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{38D5CFBE-FA4C-4423-A3A3-0F992762C140}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{38D5CFBE-FA4C-4423-A3A3-0F992762C140}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EC63EDEC-139D-4E8C-AB6A-AAB17134476E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EC63EDEC-139D-4E8C-AB6A-AAB17134476E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC63EDEC-139D-4E8C-AB6A-AAB17134476E}.Release|Any CPU.ActiveCfg = Release|Any CPU
