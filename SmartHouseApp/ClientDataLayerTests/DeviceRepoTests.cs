@@ -1,8 +1,6 @@
 using System.Linq;
 using ClientDataLayer;
-using ClientDataLayer.Interfaces;
 using ModelCommon;
-using Moq;
 using NUnit.Framework;
 
 namespace DataLayerTests

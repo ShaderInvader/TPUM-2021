@@ -6,7 +6,6 @@ using ClientLogicLayer;
 using ClientLogicLayer.InternalDTOs;
 using LogicLayer.Interfaces;
 using ModelCommon;
-using ModelCommon.Interfaces;
 
 namespace LogicLayer
 {

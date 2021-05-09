@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using ClientDataLayer.Interfaces;
+using ClientLogicLayer.InternalDTOs;
 using ClientLogicLayer.Services;
 using ModelCommon;
 using ModelCommon.Interfaces;
@@ -46,7 +48,10 @@ namespace LogicLayerTests
                 new ExampleDevice() {Id = 102, Name = "device", Enabled = false}
             });
 
-            //_deviceRepoMock.SetupRemove()
+            _deviceRepoMock.Setup(x => x.SetState(0, true)).Returns(true);
+            _deviceRepoMock.Setup(x => x.SetState(1, false)).Returns(false);
+
+            _deviceRepoMock.Setup(x => x.Add(new ExampleDevice())).Returns(Task.FromResult(true));
 
             dService = new DeviceService(_deviceRepoMock.Object);
         }
@@ -72,25 +77,16 @@ namespace LogicLayerTests
         [Test]
         public void SetDeviceStateTest()
         {
-            
+            Assert.AreEqual(dService.SetDeviceState(0, true), true);
+            Assert.AreNotEqual(dService.SetDeviceState(0, true), false);
+            Assert.AreEqual(dService.SetDeviceState(1, false), false);
+            Assert.AreNotEqual(dService.SetDeviceState(1, false), true);
         }
 
         [Test]
         public void AddDeviceTest()
         {
-
-        }
-
-        [Test]
-        public void RemoveDeviceTest()
-        {
-            
-        }
-
-        [Test]
-        public void ToggleDeviceTest()
-        {
-
+            Assert.AreEqual(true, dService.AddDevice(new DeviceDTO() { Enabled = true, Id = 0, Name = "A" }));
         }
     }
 }

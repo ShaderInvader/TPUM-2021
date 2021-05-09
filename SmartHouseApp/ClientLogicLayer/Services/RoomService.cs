@@ -3,7 +3,6 @@ using ClientDataLayer.Interfaces;
 using ClientLogicLayer.InternalDTOs;
 using LogicLayer.Interfaces;
 using ModelCommon;
-using ModelCommon.Interfaces;
 
 namespace ClientLogicLayer.Services
 {

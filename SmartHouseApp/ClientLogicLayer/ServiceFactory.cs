@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ClientDataLayer;
+﻿using ClientDataLayer;
 using ClientLogicLayer.Interfaces;
 using ClientLogicLayer.Services;
 using LogicLayer;

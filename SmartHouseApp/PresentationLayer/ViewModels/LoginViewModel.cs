@@ -1,7 +1,6 @@
 ﻿using System.Windows.Input;
 using ClientLogicLayer;
 using ClientPresentationLayer.ViewModels.Commands;
-using LogicLayer;
 using LogicLayer.Interfaces;
 
 namespace ClientPresentationLayer.ViewModels
