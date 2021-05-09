@@ -72,6 +72,13 @@ namespace ServerLogicTests
         }
 
         [Test]
+        public void RemoveTest()
+        {
+            Assert.AreEqual(true, _service.RemoveDevice(1).Result);
+            Assert.AreEqual(false, _service.RemoveDevice(3).Result);
+        }
+
+        [Test]
         public void ToggleDeviceTest()
         {
             Assert.AreEqual(true, _service.ToggleDevice(0).Result);
