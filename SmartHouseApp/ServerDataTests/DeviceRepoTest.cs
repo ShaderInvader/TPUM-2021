@@ -1,5 +1,4 @@
 using NUnit.Framework;
-using Moq;
 using ServerDataLayer;
 using ModelCommon;
 using ModelCommon.Interfaces;
@@ -27,6 +26,8 @@ namespace ServerDataTests
             Assert.AreEqual("Motion Detector", _deviceRepo.Get(3).Name);
             Assert.AreEqual(1, _deviceRepo.Get("Wall Socket").Id);
             Assert.AreEqual(false, _deviceRepo.Get(1).Enabled);
+            var allDevices = (List<IDevice>)_deviceRepo.Get();
+            Assert.AreEqual(4, allDevices.Count);
         }
 
         [Test]
@@ -56,6 +57,7 @@ namespace ServerDataTests
             Assert.AreEqual(3, allDevices.Count);
             Assert.AreEqual(1, allDevices[0].Id);
         }
+
         [Test]
         public void RemoveByNameTest()
         {
@@ -63,6 +65,50 @@ namespace ServerDataTests
             var allDevices = (List<IDevice>)_deviceRepo.Get();
             Assert.AreEqual(2, allDevices.Count);
             Assert.AreEqual(1, allDevices[0].Id);
+        }
+
+        [Test]
+        public void UpdateTest()
+        {
+            Assert.AreEqual(true, _deviceRepo.Update(0, new ExampleDevice() { Id = 0, Name = "Wall Socket", Enabled = false }));
+            Assert.AreEqual("Wall Socket", _deviceRepo.Get(0).Name);
+            Assert.AreEqual(false, _deviceRepo.Get(0).Enabled);
+        }
+
+        [Test]
+        public void TurnOffAllTest()
+        {
+            _deviceRepo.TurnOffAll();
+            var allDevices = (List<IDevice>)_deviceRepo.Get();
+            foreach(var d in allDevices)
+            {
+                Assert.AreEqual(false, d.Enabled);
+            }
+        }
+
+        [Test]
+        public void ApplyLastStateOnAllTest()
+        {
+            _deviceRepo.TurnOffAll();
+            var allDevices = (List<IDevice>)_deviceRepo.Get();
+            foreach (var d in allDevices)
+            {
+                Assert.AreEqual(false, d.Enabled);
+            }
+            _deviceRepo.ApplyLastStateOnAll();
+            Assert.AreEqual(true, _deviceRepo.Get(0).Enabled);
+            Assert.AreEqual(false, _deviceRepo.Get(1).Enabled);
+            Assert.AreEqual(false, _deviceRepo.Get(2).Enabled);
+            Assert.AreEqual(true, _deviceRepo.Get(3).Enabled);
+
+        }
+
+        [Test]
+        public void ToggleTest()
+        {
+            Assert.AreEqual(false, _deviceRepo.Toggle(7));
+            Assert.AreEqual(true, _deviceRepo.Toggle(0));
+            Assert.AreEqual(false, _deviceRepo.Get(0).Enabled);
         }
     }
 }
