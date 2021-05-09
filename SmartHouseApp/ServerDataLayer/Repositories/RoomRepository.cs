@@ -40,7 +40,8 @@ namespace ServerDataLayer
                 IDevice d = _dataContext.Devices.Find(device => device.Id == deviceId);
                 if (d != null)
                 {
-
+                    r.Devices.Add(d);
+                    returnValue = true; 
                 }
             }
             return returnValue;
@@ -63,7 +64,7 @@ namespace ServerDataLayer
             Room r = _dataContext.Rooms.Find(room => room.Id == roomId);
             if (r != null)
             {
-                IDevice d = _dataContext.Devices.Find(device => device.Id == deviceId);
+                IDevice d = r.Devices.Find(device => device.Id == deviceId);
                 if (d != null)
                 {
                     returnValue = r.Devices.Remove(d);
