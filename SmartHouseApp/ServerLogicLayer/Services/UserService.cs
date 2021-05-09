@@ -21,6 +21,17 @@ namespace ServerLogicLayer
             }
         }
 
+        private async Task<IEnumerable<UserDTO>> GetUsersByName(string name)
+        {
+            var users = _repoReference.GetAll(name);
+            List<UserDTO> usersDTO = new List<UserDTO>();
+            foreach (var u in users)
+            {
+                usersDTO.Add(Mapper.Map(u));
+            }
+            return await Task.FromResult(usersDTO);
+        }
+
         #region IUserService
         public async Task<bool> AddUser(UserDTO userToAdd)
         {
@@ -35,17 +46,6 @@ namespace ServerLogicLayer
         public async Task<IEnumerable<UserDTO>> GetUsers()
         {
             var users = _repoReference.Get();
-            List<UserDTO> usersDTO = new List<UserDTO>();
-            foreach (var u in users)
-            {
-                usersDTO.Add(Mapper.Map(u));
-            }
-            return await Task.FromResult(usersDTO);
-        }
-
-        public async Task<IEnumerable<UserDTO>> GetUsersByName(string name)
-        {
-            var users = _repoReference.GetAll(name);
             List<UserDTO> usersDTO = new List<UserDTO>();
             foreach (var u in users)
             {

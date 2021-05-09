@@ -40,18 +40,6 @@ namespace ClientLogicLayer.Services
             return devicesDTOs;
         }
 
-        public IEnumerable<DeviceDTO> GetDevicesByName(string name)
-        {
-            IEnumerable<IDevice> devices = _deviceRepo.GetAll(name);
-            List<DeviceDTO> devicesDTOs = new List<DeviceDTO>();
-            foreach (var device in devices)
-            {
-                devicesDTOs.Add(Mapper.Map(device));
-            }
-
-            return devicesDTOs;
-        }
-
         public bool SetDeviceState(int id, bool state)
         {
             if (id < 0)

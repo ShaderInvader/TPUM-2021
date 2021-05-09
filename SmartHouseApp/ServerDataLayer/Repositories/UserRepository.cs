@@ -46,18 +46,6 @@ namespace ServerDataLayer
             return _dataContext.Users.FindAll(user => user.Name == name);
         }
 
-        public int[] GetIds(string name)
-        {
-            List<User> found = _dataContext.Users.FindAll(user => user.Name == name);
-            int[] ids = new int[found.Count];
-            for (int i = 0; i < found.Count; i++)
-            {
-                ids[i] = found[i].Id;
-            }
-
-            return ids;
-        }
-
         public int Remove(string name)
         {
             return _dataContext.Users.RemoveAll(user => user.Name == name);
@@ -66,11 +54,6 @@ namespace ServerDataLayer
         public bool Remove(int id)
         {
             return _dataContext.Users.RemoveAll(user => user.Id == id) > 0;
-        }
-
-        public bool Remove(User item)
-        {
-            return _dataContext.Users.Remove(item);
         }
 
         public bool Update(int id, User item)
@@ -93,24 +76,6 @@ namespace ServerDataLayer
                 returnValue = true;
             }
             return returnValue;
-        }
-
-        public int UpdateAll(string name, User item)
-        {
-            List<User> found = _dataContext.Users.FindAll(user => user.Name == name);
-            foreach (var u in found)
-            {
-                lock (_userLock)
-                {
-                    u.Email = item.Email;
-                    u.Password = item.Password;
-                    u.Name = item.Name;
-                    u.FirstName = item.FirstName;
-                    u.LastName = item.LastName;
-                    u.Coordinates = item.Coordinates;
-                }
-            }
-            return found.Count;
         }
         
         #endregion

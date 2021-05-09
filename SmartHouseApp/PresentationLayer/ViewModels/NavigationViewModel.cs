@@ -6,6 +6,7 @@ using ClientLogicLayer;
 using ClientLogicLayer.Interfaces;
 using ClientLogicLayer.Services;
 using ClientPresentationLayer.ViewModels.Commands;
+using System.Globalization;
 
 namespace ClientPresentationLayer.ViewModels
 {
@@ -77,6 +78,7 @@ namespace ClientPresentationLayer.ViewModels
 
         public NavigationViewModel()
         {
+            CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
             // Create connection service object
             _connectionService = ServiceFactory.CreateConnectionService;
             _locationService = ServiceFactory.CreateLocationService;

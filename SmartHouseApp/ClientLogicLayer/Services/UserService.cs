@@ -19,6 +19,18 @@ namespace LogicLayer
             _userRepo = userRepository;
         }
 
+        private IEnumerable<UserDTO> GetUsersByName(string name)
+        {
+            IEnumerable<User> users = _userRepo.GetAll(name);
+            List<UserDTO> userDTOs = new List<UserDTO>();
+            foreach (var user in users)
+            {
+                userDTOs.Add(Mapper.Map(user));
+            }
+
+            return userDTOs;
+        }
+
         public UserDTO GetUser(int id)
         {
             if (id < 0)
@@ -29,18 +41,6 @@ namespace LogicLayer
         public IEnumerable<UserDTO> GetUsers()
         {
             IEnumerable<User> users = _userRepo.Get().Result;
-            List<UserDTO> userDTOs = new List<UserDTO>();
-            foreach (var user in users)
-            {
-                userDTOs.Add(Mapper.Map(user));
-            }
-
-            return userDTOs;
-        }
-
-        public IEnumerable<UserDTO> GetUsersByName(string name)
-        {
-            IEnumerable<User> users = _userRepo.GetAll(name);
             List<UserDTO> userDTOs = new List<UserDTO>();
             foreach (var user in users)
             {

@@ -9,6 +9,5 @@ namespace LogicLayer.Interfaces
     {
         RoomDTO GetRoom(int id);
         IEnumerable<RoomDTO> GetRooms();
-        IEnumerable<RoomDTO> GetRoomsByName(string name);
     }
 }

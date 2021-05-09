@@ -40,11 +40,6 @@ namespace ServerLogicLayer
             return await Task.FromResult(Mapper.Map(_repoReference.Get(id)));
         }
 
-        public async Task<ExampleDeviceDTO> GetDevice(string name)
-        {
-            return await Task.FromResult(Mapper.Map(_repoReference.Get(name)));
-        }
-
         public async Task<IEnumerable<ExampleDeviceDTO>> GetDevices()
         {
             var devices = _repoReference.Get();
@@ -56,30 +51,9 @@ namespace ServerLogicLayer
             return await Task.FromResult(exampleDevices);
         }
 
-        public async Task<IEnumerable<ExampleDeviceDTO>> GetDevicesByName(string name)
-        {
-            var devices = _repoReference.GetAll(name);
-            List<ExampleDeviceDTO> exampleDevices = new List<ExampleDeviceDTO>();
-            foreach (var d in devices)
-            {
-                exampleDevices.Add(Mapper.Map(d));
-            }
-            return await Task.FromResult(exampleDevices);
-        }
-
-        public async Task<int[]> GetDevicesIds(string name)
-        {
-            return await Task.FromResult(_repoReference.GetIds(name));
-        }
-
         public async Task<bool> RemoveDevice(int id)
         {
             return await Task.FromResult(_repoReference.Remove(id));
-        }
-
-        public async Task<bool> RemoveDevicesByName(string name)
-        {
-            return await Task.FromResult(_repoReference.Remove(name) > 0);
         }
 
         public async Task<bool> ToggleDevice(int id)
@@ -95,6 +69,11 @@ namespace ServerLogicLayer
         public async Task<bool> TurnOffAllDevices()
         {
             return await Task.FromResult(_repoReference.TurnOffAll());
+        }
+
+        public async Task<bool> TurnOnLastDevices()
+        {
+            return await Task.FromResult(_repoReference.ApplyLastStateOnAll());
         }
         #endregion
     }

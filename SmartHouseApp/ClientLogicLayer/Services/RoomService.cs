@@ -32,17 +32,5 @@ namespace ClientLogicLayer.Services
 
             return roomsDTOs;
         }
-
-        public IEnumerable<RoomDTO> GetRoomsByName(string name)
-        {
-            IEnumerable<Room> rooms = _roomRepo.GetAll(name);
-            List<RoomDTO> roomsDTOs = new List<RoomDTO>();
-            foreach (var room in rooms)
-            {
-                roomsDTOs.Add(Mapper.Map(room));
-            }
-
-            return roomsDTOs;
-        }
     }
 }

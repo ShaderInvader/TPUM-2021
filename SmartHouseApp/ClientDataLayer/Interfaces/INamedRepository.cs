@@ -9,8 +9,6 @@ namespace ClientDataLayer.Interfaces
     {
         public T Get(string name);
         public IEnumerable<T> GetAll(string name);
-        public int[] GetIds(string name);
         public int Remove(string name);
-        public int UpdateAll(string name, T item);
     }
 }

@@ -52,17 +52,6 @@ namespace ServerLogicLayer
             return await Task.FromResult(rooms);
         }
 
-        public async Task<IEnumerable<RoomDTO>> GetRoomsByName(string name)
-        {
-            List<RoomDTO> rooms = new List<RoomDTO>();
-            var ro = _repoReference.GetAll(name);
-            foreach (var r in ro)
-            {
-                rooms.Add(Mapper.Map(r));
-            }
-            return await Task.FromResult(rooms);
-        }
-
         public async Task<bool> RemoveDeviceFromRoom(RoomDTO referenceRoom, ExampleDeviceDTO newDevice)
         {
             return await Task.FromResult(_repoReference.RemoveDeviceFromRoom(referenceRoom.Id, Mapper.Map(newDevice)));
@@ -70,7 +59,7 @@ namespace ServerLogicLayer
 
         public async Task<bool> RemoveRoom(RoomDTO roomToRemove)
         {
-            return await Task.FromResult(_repoReference.Remove(Mapper.Map(roomToRemove)));
+            return await Task.FromResult(_repoReference.Remove(roomToRemove.Id));
         }
 
         public async Task<bool> UpdateRoom(int id, RoomDTO newRoomValues)

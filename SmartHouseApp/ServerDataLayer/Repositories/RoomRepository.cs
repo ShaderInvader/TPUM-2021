@@ -101,18 +101,6 @@ namespace ServerDataLayer
             return _dataContext.Rooms.FindAll(house => house.Name == name);
         }
 
-        public int[] GetIds(string name)
-        {
-            List<Room> found = (List<Room>)GetAll(name);
-            int[] ids = new int[found.Count];
-            for (int i = 0; i < found.Count; i++)
-            {
-                ids[i] = found[i].Id;
-            }
-
-            return ids;
-        }
-
         public int Remove(string name)
         {
             return _dataContext.Rooms.RemoveAll(house => house.Name == name);
@@ -121,11 +109,6 @@ namespace ServerDataLayer
         public bool Remove(int id)
         {
             return _dataContext.Rooms.RemoveAll(house => house.Id == id) > 0;
-        }
-
-        public bool Remove(Room item)
-        {
-            return _dataContext.Rooms.Remove(item);
         }
 
         public bool Update(int id, Room item)
@@ -143,20 +126,6 @@ namespace ServerDataLayer
             }
 
             return returnValue;
-        }
-
-        public int UpdateAll(string name, Room item)
-        {
-            List<Room> found = (List<Room>)GetAll(name);
-            foreach (var h in found)
-            {
-                lock (_houseLock)
-                {
-                    h.Name = item.Name;
-                    h.Devices = new List<IDevice>(item.Devices);
-                }
-            }
-            return found.Count;
         }
         #endregion
     }

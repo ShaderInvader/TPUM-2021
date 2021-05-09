@@ -12,7 +12,6 @@ namespace ClientDataLayer.Interfaces
         public T Get(int id);
         public Task<bool> Add(T item);
         public bool Remove(int id);
-        public bool Remove(T item);
         public bool Update(int id, T item);
     }
 }

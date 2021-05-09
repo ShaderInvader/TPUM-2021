@@ -20,10 +20,19 @@ namespace ClientDataLayer
         public async Task TrackPosition()
         {
             isTracking = true;
+            double valToAdd = 1;
             while (isTracking)
             {
                 await WebSocketClient.CurrentConnection.SendAsync($"Location:{CurrentLocation}");
-                CurrentLocation = new Tuple<double, double>(CurrentLocation.Item1 + 5.0, CurrentLocation.Item2);
+                if(CurrentLocation.Item1 > 20)
+                {
+                    valToAdd = -1;
+                }
+                else if(CurrentLocation.Item1 < -20)
+                {
+                    valToAdd = 1;
+                }
+                CurrentLocation = new Tuple<double, double>(CurrentLocation.Item1 + valToAdd, CurrentLocation.Item2);
                 System.Threading.Thread.Sleep(1000);
             }
         }

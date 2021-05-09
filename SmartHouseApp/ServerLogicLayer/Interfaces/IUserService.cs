@@ -9,7 +9,6 @@ namespace ServerLogicLayer
     {
         Task<UserDTO> GetUser(int id);
         Task<IEnumerable<UserDTO>> GetUsers();
-        Task<IEnumerable<UserDTO>> GetUsersByName(string name);
         Task<bool> AddUser(UserDTO userToAdd);
         Task<bool> RemoveUser(int userID);
         Task<bool> LoginUser(string username, string password);

@@ -1,5 +1,6 @@
 ﻿using ServerLogicLayer;
 using System;
+using System.Globalization;
 using System.Threading.Tasks;
 
 namespace ServerPresentationLayer
@@ -14,6 +15,7 @@ namespace ServerPresentationLayer
 
         static async Task Main(string[] args)
         {
+            CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
             provider = new LocationTracker();
             var min = new Tuple<double, double>(-10, -10);
             var max = new Tuple<double, double>(10, 10);
@@ -21,9 +23,10 @@ namespace ServerPresentationLayer
 
             reporter.Subscribe(provider,
                 Console.WriteLine, 
-                (x) => Console.WriteLine(x.Message), 
-                (x) => Console.WriteLine($"New Coordinates: {x.Coordinates.Item1}, {x.Coordinates.Item2}"),
-                () => { Console.WriteLine("Turning off all devices"); Task.Run(() => deviceService.TurnOffAllDevices()); }
+                (x) => Console.WriteLine(x.Message),
+                (x) => { },
+                TurnOffAll,
+                TurnOnAll
                 );
             await WebSocketServer.Server(8081, ConnectionHandler);
         }
@@ -32,32 +35,32 @@ namespace ServerPresentationLayer
         {
             CurrentConnection = webSocketConnection;
             webSocketConnection.onMessage = ParseMessage;
-            webSocketConnection.onClose = () => { Console.WriteLine("Connection closed"); };
-            webSocketConnection.onError = () => { Console.WriteLine("Connection error encountered"); };
+            webSocketConnection.onClose = () => { Console.WriteLine("[Server]: Connection closed"); };
+            webSocketConnection.onError = () => { Console.WriteLine("[Server]: Connection error encountered"); };
         }
 
         static async void ParseMessage(string message)
         {
-            Console.WriteLine(message);
-            if(message.Contains("UpdateDataRequest"))
+            Console.WriteLine($"[Client]: {message}");
+            if (message.Contains("UpdateDataRequest"))
             {
-                await CurrentConnection.SendAsync(Serializer.AllDataToJson(deviceService));
+                await SendDevices();
             }
-            else if(message.Contains("ToggleDevice"))
+            else if (message.Contains("ToggleDevice"))
             {
                 var splited = message.Split(':');
                 int id = Serializer.IntFromJson(splited[1]);
                 await deviceService.ToggleDevice(id);
                 await CurrentConnection.SendAsync("Confirm");
             }
-            else if(message.Contains("AddDevice"))
+            else if (message.Contains("AddDevice"))
             {
                 var json = message.Substring("AddDevice".Length - 1);
                 ExampleDeviceDTO device = Serializer.DeviceFormJson(json);
                 await deviceService.AddDevice(device);
                 await CurrentConnection.SendAsync("Confirm");
             }
-            else if(message.Contains("Location"))
+            else if (message.Contains("Location"))
             {
                 var split = message.Split('(');
                 split = split[1].Split(',');
@@ -66,6 +69,25 @@ namespace ServerPresentationLayer
                 double y = Double.Parse(split[1]);
                 provider.TrackLocation(Mapper.Map(new LocationDTO { Coordinates = new Tuple<double, double>(x, y) }));
             }
+        }
+
+        static async void TurnOffAll()
+        {
+            Console.WriteLine("[Server]: Turning off all devices"); 
+            await deviceService.TurnOffAllDevices();
+            await SendDevices();
+        }
+
+        static async void TurnOnAll()
+        {
+            Console.WriteLine("[Server]: Client returns home - turn on last devices"); 
+            await deviceService.TurnOnLastDevices();
+            await SendDevices();
+        }
+
+        static async Task SendDevices()
+        {
+            await CurrentConnection.SendAsync(Serializer.AllDataToJson(deviceService));
         }
     }
 }

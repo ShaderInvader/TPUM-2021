@@ -45,11 +45,6 @@ namespace ClientDataLayer
             return DataContext.Instance.Devices.RemoveAll(device => device.Id == id) > 0;
         }
 
-        public bool Remove(IDevice item)
-        {
-            return DataContext.Instance.Devices.Remove(item);
-        }
-
         public bool Update(int id, IDevice item)
         {
             IDevice found = DataContext.Instance.Devices.Find(device => device.Id == id);
@@ -75,32 +70,9 @@ namespace ClientDataLayer
             return DataContext.Instance.Devices.FindAll(device => device.Name == name);
         }
 
-        public int[] GetIds(string name)
-        {
-            List<IDevice> found = DataContext.Instance.Devices.FindAll(device => device.Name == name);
-            int[] ids = new int[found.Count];
-            for (int i = 0; i < found.Count; i++)
-            {
-                ids[i] = found[i].Id;
-            }
-
-            return ids;
-        }
-
         public int Remove(string name)
         {
             return DataContext.Instance.Devices.RemoveAll(device => device.Name == name);
-        }
-
-        public int UpdateAll(string name, IDevice item)
-        {
-            List<IDevice> found = DataContext.Instance.Devices.FindAll(device => device.Name == name);
-            foreach (var t in found)
-            {
-                t.Enabled = item.Enabled;
-                t.Name = item.Name;
-            }
-            return found.Count;
         }
 
         public bool SetState(int id, bool enabled)
@@ -115,31 +87,11 @@ namespace ClientDataLayer
             return false;
         }
 
-        public int SetStates(string name, bool enabled)
-        {
-            List<IDevice> devices = (List<IDevice>)GetAll(name);
-            foreach (var device in devices)
-            {
-                device.Enabled = enabled;
-            }
-            return devices.Count;
-        }
-
         public async Task<bool> Toggle(int id)
         {
             await DataContext.Instance.RequestWithConfirmation($"ToggleDevice:{id}");
             await DataContext.Instance.RequestDataUpdate();
             return await Task.FromResult(true);
-        }
-
-        public int ToggleAll(string name)
-        {
-            List<IDevice> devices = (List<IDevice>)GetAll(name);
-            foreach (var device in devices)
-            {
-                device.Enabled = !device.Enabled;
-            }
-            return devices.Count;
         }
     }
 }

@@ -45,18 +45,6 @@ namespace ServerDataLayer
             return _dataContext.Devices.FindAll(device => device.Name == name);
         }
 
-        public int[] GetIds(string name)
-        {
-            List<IDevice> found = _dataContext.Devices.FindAll(device => device.Name == name);
-            int[] ids = new int[found.Count];
-            for (int i = 0; i < found.Count; i++)
-            {
-                ids[i] = found[i].Id;
-            }
-
-            return ids;
-        }
-
         public int Remove(string name)
         {
             return _dataContext.Devices.RemoveAll(device => device.Name == name);
@@ -65,11 +53,6 @@ namespace ServerDataLayer
         public bool Remove(int id)
         {
             return _dataContext.Devices.RemoveAll(device => device.Id == id) > 0;
-        }
-
-        public bool Remove(IDevice item)
-        {
-            return _dataContext.Devices.Remove(item);
         }
 
         public bool Update(int id, IDevice item)
@@ -88,19 +71,6 @@ namespace ServerDataLayer
             return returnValue;
         }
 
-        public int UpdateAll(string name, IDevice item)
-        {
-            List<IDevice> found = _dataContext.Devices.FindAll(device => device.Name == name);
-            foreach (var d in found)
-            {
-                lock(_deviceLock)
-                {
-                    d.Enabled = item.Enabled;
-                }
-            }
-            return found.Count;
-        }
-
         public bool SetState(int id, bool enabled)
         {
             IDevice device = Get(id);
@@ -115,19 +85,6 @@ namespace ServerDataLayer
             }
 
             return returnValue;
-        }
-
-        public int SetStates(string name, bool enabled)
-        {
-            List<IDevice> devices = (List<IDevice>)GetAll(name);
-            foreach (var device in devices)
-            {
-                lock (_deviceLock)
-                {
-                    device.Enabled = enabled;
-                }
-            }
-            return devices.Count;
         }
 
         public bool Toggle(int id)
@@ -146,19 +103,6 @@ namespace ServerDataLayer
             return returnValue;
         }
 
-        public int ToggleAllByName(string name)
-        {
-            List<IDevice> devices = (List<IDevice>)GetAll(name);
-            foreach (var device in devices)
-            {
-                lock (_deviceLock)
-                {
-                    device.Enabled = !device.Enabled;
-                }
-            }
-            return devices.Count;
-        }
-
         public bool TurnOffAll()
         {
             List<IDevice> devices = (List<IDevice>)Get();
@@ -166,7 +110,21 @@ namespace ServerDataLayer
             {
                 lock (_deviceLock)
                 {
+                    device.LastState = device.Enabled;
                     device.Enabled = false;
+                }
+            }
+            return true;
+        }
+
+        public bool ApplyLastStateOnAll()
+        {
+            List<IDevice> devices = (List<IDevice>)Get();
+            foreach (var device in devices)
+            {
+                lock (_deviceLock)
+                {
+                    device.Enabled = device.LastState;
                 }
             }
             return true;

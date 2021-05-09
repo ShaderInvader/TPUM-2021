@@ -9,7 +9,6 @@ namespace ServerLogicLayer
     {
         Task<RoomDTO> GetRoom(int id);
         Task<IEnumerable<RoomDTO>> GetRooms();
-        Task<IEnumerable<RoomDTO>> GetRoomsByName(string name);
         Task<bool> AddRoom(RoomDTO roomToAdd);
         Task<bool> RemoveRoom(RoomDTO roomToRemove);
         Task<bool> UpdateRoom(int id, RoomDTO newRoomValues);
