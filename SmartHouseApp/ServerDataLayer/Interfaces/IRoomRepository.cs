@@ -4,7 +4,7 @@ using System.Text;
 using ModelCommon;
 using ModelCommon.Interfaces;
 
-namespace ServerDataLayer.Interfaces
+namespace ServerDataLayer
 {
     public interface IRoomRepository : INamedRepository<Room>
     {

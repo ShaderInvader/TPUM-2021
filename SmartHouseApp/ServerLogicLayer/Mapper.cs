@@ -86,8 +86,8 @@ namespace ServerLogicLayer
         {
             IDevice device = new ExampleDevice
             {
-                Name = deviceDTO.Name,
                 Id = deviceDTO.Id,
+                Name = deviceDTO.Name,
                 Enabled = deviceDTO.Enabled
             };
             return device;

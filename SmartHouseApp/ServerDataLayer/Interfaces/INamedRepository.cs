@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using ModelCommon.Interfaces;
-using ServerDataLayer.Interfaces;
 
-namespace ServerDataLayer.Interfaces
+namespace ServerDataLayer
 {
     public interface INamedRepository<T> : IDataRepository<T> where T : INamed
     {

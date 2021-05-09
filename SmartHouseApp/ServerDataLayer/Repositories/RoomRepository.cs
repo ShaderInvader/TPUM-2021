@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using ModelCommon.Interfaces;
 using ModelCommon;
-using ServerDataLayer.Interfaces;
 
 namespace ServerDataLayer
 {

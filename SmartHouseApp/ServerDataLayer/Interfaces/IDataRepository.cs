@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using ModelCommon.Interfaces;
 
-namespace ServerDataLayer.Interfaces
+namespace ServerDataLayer
 {
     public interface IDataRepository<T> where T : IData
     {

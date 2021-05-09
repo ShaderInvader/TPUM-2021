@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ModelCommon.Interfaces;
+﻿using ModelCommon.Interfaces;
 
-namespace ServerDataLayer.Interfaces
+namespace ServerDataLayer
 {
     public interface IDeviceRepository : INamedRepository<IDevice>
     {

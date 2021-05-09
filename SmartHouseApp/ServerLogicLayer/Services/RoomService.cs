@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using ModelCommon.Interfaces;
 using ModelCommon;
 using ServerDataLayer;
-using ServerDataLayer.Interfaces;
 
 namespace ServerLogicLayer
 {
