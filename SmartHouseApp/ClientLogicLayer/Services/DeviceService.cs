@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using ClientDataLayer.Interfaces;
 using ClientLogicLayer.InternalDTOs;

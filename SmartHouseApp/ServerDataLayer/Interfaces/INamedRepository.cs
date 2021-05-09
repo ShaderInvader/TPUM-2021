@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using ModelCommon.Interfaces;
-using ServerDataLayer.Interfaces;
 
 namespace ServerDataLayer.Interfaces
 {

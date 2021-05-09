@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using ClientLogicLayer;
 using ClientLogicLayer.Interfaces;
-using ClientLogicLayer.Services;
 using ClientPresentationLayer.ViewModels.Commands;
 using System.Globalization;
 
