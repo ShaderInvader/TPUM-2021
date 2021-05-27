@@ -1,0 +1,5 @@
+User,1,ObjectType
+User_Id,2,Variable
+User_Name,3,Variable
+User_Coordinates,4,Object
+Location,5,ObjectType

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="OPCUAModelDesign.xslt"?>
+<ModelDesign xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" TargetNamespace="http://screensaver.com/TPUM/SmartHouseApp/" xmlns="http://opcfoundation.org/UA/ModelDesign.xsd">
+  <Namespaces>
+    <Namespace Name="SmartApp_Model" Prefix="SmartApp.Model" XmlPrefix="SmartApp_Model">http://screensaver.com/TPUM/SmartHouseApp/</Namespace>
+    <Namespace Name="OpcUa" Prefix="Opc.Ua" XmlNamespace="http://opcfoundation.org/UA/2008/02/Types.xsd">http://opcfoundation.org/UA/</Namespace>
+  </Namespaces>
+  <ObjectType xmlns:q1="http://screensaver.com/TPUM/SmartHouseApp/" SymbolicName="q1:User">
+    <Children>
+      <Variable SymbolicName="q1:Id" xmlns:q2="http://opcfoundation.org/UA/" DataType="q2:Integer" />
+      <Variable SymbolicName="q1:Name" xmlns:q3="http://opcfoundation.org/UA/" DataType="q3:String" />
+      <Object SymbolicName="q1:Coordinates" TypeDefinition="q1:Location" />
+    </Children>
+    <ClassName>User</ClassName>
+  </ObjectType>
+  <ObjectType xmlns:q4="http://screensaver.com/TPUM/SmartHouseApp/" SymbolicName="q4:Location">
+    <ClassName>Location</ClassName>
+  </ObjectType>
+</ModelDesign>
