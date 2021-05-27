@@ -24,10 +24,12 @@ namespace ClientDataLayer
                     log?.Invoke($"Opened connection to remote server: {peer}");
 
                     // ===== Creating socket connection object =====
-                    WebSocketConnection socketConnection = new ClientWebSocketConnection(clientWebSocket, peer, log);
-                    // ===== Attaching data parser to on message event =====
-                    socketConnection.OnMessage = DataContext.Instance.ReceiveData;
-                    
+                    WebSocketConnection socketConnection = new ClientWebSocketConnection(clientWebSocket, peer, log)
+                    {
+                        // ===== Attaching data parser to on message event =====
+                        OnMessage = DataContext.Instance.ReceiveData
+                    };
+
                     // Setting the current connection for singleton connection implementation
                     CurrentConnection = socketConnection;
 

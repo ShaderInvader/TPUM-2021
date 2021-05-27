@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ClientDataLayer;
 using ClientDataLayer.Interfaces;
 using ClientLogicLayer;
-using LogicLayer;
-using ModelCommon;
 using Moq;
 using NUnit.Framework;
 

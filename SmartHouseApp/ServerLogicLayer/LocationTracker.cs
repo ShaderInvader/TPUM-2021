@@ -1,12 +1,12 @@
-﻿using ModelCommon.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using ServerDataLayer.Interfaces;
 
 namespace ServerLogicLayer
 {
     public class LocationTracker : IObservable<ILocation>
     {
-        private List<IObserver<ILocation>> _observers;
+        private readonly List<IObserver<ILocation>> _observers;
         public LocationTracker()
         {
             _observers = new List<IObserver<ILocation>>();
@@ -47,8 +47,8 @@ namespace ServerLogicLayer
 
         private class Unsubscriber : IDisposable
         {
-            private List<IObserver<ILocation>> _observers;
-            private IObserver<ILocation> _observer;
+            private readonly List<IObserver<ILocation>> _observers;
+            private readonly IObserver<ILocation> _observer;
 
             public Unsubscriber(List<IObserver<ILocation>> observers, IObserver<ILocation> observer)
             {

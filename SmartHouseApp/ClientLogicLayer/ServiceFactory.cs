@@ -1,8 +1,6 @@
 ﻿using ClientDataLayer;
 using ClientLogicLayer.Interfaces;
 using ClientLogicLayer.Services;
-using LogicLayer;
-using LogicLayer.Interfaces;
 
 namespace ClientLogicLayer
 {

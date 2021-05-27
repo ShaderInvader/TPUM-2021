@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using ClientLogicLayer.InternalDTOs;
 
-namespace LogicLayer.Interfaces
+namespace ClientLogicLayer.Interfaces
 {
     public interface IUserService
     {

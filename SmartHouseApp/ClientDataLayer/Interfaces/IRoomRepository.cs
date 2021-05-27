@@ -1,7 +1,4 @@
-﻿using ModelCommon;
-using ModelCommon.Interfaces;
-
-namespace ClientDataLayer.Interfaces
+﻿namespace ClientDataLayer.Interfaces
 {
     public interface IRoomRepository : INamedRepository<Room>
     {

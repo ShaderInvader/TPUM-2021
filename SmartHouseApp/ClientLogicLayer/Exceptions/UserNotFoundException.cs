@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LogicLayer
+namespace ClientLogicLayer
 {
     public class UserNotFoundException : Exception
     {

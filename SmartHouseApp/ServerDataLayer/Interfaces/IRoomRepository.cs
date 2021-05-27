@@ -1,5 +1,4 @@
-﻿using ModelCommon;
-using ModelCommon.Interfaces;
+﻿using ServerDataLayer.Interfaces;
 
 namespace ServerDataLayer
 {

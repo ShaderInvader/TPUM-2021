@@ -1,6 +1,6 @@
-﻿using ClientLogicLayer.InternalDTOs;
-using ModelCommon;
-using ModelCommon.Interfaces;
+﻿using ClientDataLayer;
+using ClientDataLayer.Interfaces;
+using ClientLogicLayer.InternalDTOs;
 
 namespace ClientLogicLayer
 {

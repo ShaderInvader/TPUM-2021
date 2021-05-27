@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using ModelCommon.Interfaces;
+using ServerDataLayer.Interfaces;
 
 namespace ServerDataLayer
 {

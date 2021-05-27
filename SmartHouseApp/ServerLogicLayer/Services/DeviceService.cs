@@ -1,5 +1,4 @@
-﻿using ModelCommon;
-using ServerDataLayer;
+﻿using ServerDataLayer;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -7,7 +6,7 @@ namespace ServerLogicLayer
 {
     public class DeviceService : IDeviceService
     {
-        private IDeviceRepository _repoReference = null;
+        private readonly IDeviceRepository _repoReference = null;
 
         public DeviceService()
         {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ClientLogicLayer.InternalDTOs;
 
-namespace LogicLayer.Interfaces
+namespace ClientLogicLayer.Interfaces
 {
     public interface IDeviceService
     {

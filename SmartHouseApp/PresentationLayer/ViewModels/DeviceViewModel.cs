@@ -1,10 +1,10 @@
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using ClientLogicLayer;
+using ClientLogicLayer.Interfaces;
 using ClientLogicLayer.InternalDTOs;
 using ClientLogicLayer.Services;
 using ClientPresentationLayer.ViewModels.Commands;
-using LogicLayer.Interfaces;
 
 namespace ClientPresentationLayer.ViewModels
 {

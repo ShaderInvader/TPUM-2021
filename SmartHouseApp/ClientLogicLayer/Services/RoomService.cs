@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
+using ClientDataLayer;
 using ClientDataLayer.Interfaces;
+using ClientLogicLayer.Interfaces;
 using ClientLogicLayer.InternalDTOs;
-using LogicLayer.Interfaces;
-using ModelCommon;
 
 namespace ClientLogicLayer.Services
 {

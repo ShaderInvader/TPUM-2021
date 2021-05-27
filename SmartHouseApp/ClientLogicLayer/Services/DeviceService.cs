@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ClientDataLayer.Interfaces;
+using ClientLogicLayer.Interfaces;
 using ClientLogicLayer.InternalDTOs;
-using LogicLayer.Interfaces;
-using ModelCommon.Interfaces;
 
 namespace ClientLogicLayer.Services
 {
@@ -89,7 +88,7 @@ namespace ClientLogicLayer.Services
 
         public bool RemoveDevice(DeviceDTO deviceToRemove)
         {
-            bool retVal = false;
+            bool retVal;
             try
             {
                 retVal = _deviceRepo.Remove(deviceToRemove.Id);

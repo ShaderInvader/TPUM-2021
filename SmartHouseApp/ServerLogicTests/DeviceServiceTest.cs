@@ -1,10 +1,9 @@
 using NUnit.Framework;
 using Moq;
 using ServerDataLayer;
-using ModelCommon;
 using System;
-using ModelCommon.Interfaces;
 using System.Collections.Generic;
+using ServerDataLayer.Interfaces;
 using ServerLogicLayer;
 
 namespace ServerLogicTests

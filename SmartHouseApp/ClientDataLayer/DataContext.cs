@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using ModelCommon;
-using ModelCommon.Interfaces;
 using System.Text.Json;
+using ClientDataLayer.Interfaces;
 
 namespace ClientDataLayer
 {

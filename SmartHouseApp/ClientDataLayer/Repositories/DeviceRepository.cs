@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using ClientDataLayer.Interfaces;
-using ModelCommon;
-using ModelCommon.Interfaces;
 
 namespace ClientDataLayer
 {

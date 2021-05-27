@@ -13,7 +13,7 @@ namespace ServerPresentationLayer
         private static LocationReporter reporter;
 
 
-        static async Task Main(string[] args)
+        static async Task Main()
         {
             CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
             provider = new LocationTracker();

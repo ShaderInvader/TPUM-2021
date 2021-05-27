@@ -1,6 +1,5 @@
 using System.Linq;
 using ClientDataLayer;
-using ModelCommon;
 using NUnit.Framework;
 
 namespace DataLayerTests

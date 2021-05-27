@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using ServerDataLayer;
-using ModelCommon;
 
 namespace ServerLogicLayer
 {
     public class UserService : IUserService
     {
-        private INamedRepository<User> _repoReference;
+        private readonly INamedRepository<User> _repoReference;
 
         public UserService()
         {

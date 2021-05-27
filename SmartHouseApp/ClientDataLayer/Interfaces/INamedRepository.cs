@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using ModelCommon.Interfaces;
 
 namespace ClientDataLayer.Interfaces
 {

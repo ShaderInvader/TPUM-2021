@@ -1,8 +1,7 @@
 using NUnit.Framework;
 using ServerDataLayer;
-using ModelCommon;
-using ModelCommon.Interfaces;
 using System.Collections.Generic;
+using ServerDataLayer.Interfaces;
 
 namespace ServerDataTests
 {

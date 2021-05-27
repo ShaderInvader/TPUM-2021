@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ClientDataLayer;
 using ClientDataLayer.Interfaces;
 using ClientLogicLayer.InternalDTOs;
 using ClientLogicLayer.Services;
-using ModelCommon;
-using ModelCommon.Interfaces;
 using Moq;
 using NUnit.Framework;
 

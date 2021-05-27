@@ -1,5 +1,5 @@
-﻿using ModelCommon.Interfaces;
-using System;
+﻿using System;
+using ServerDataLayer.Interfaces;
 
 namespace ServerLogicLayer
 {

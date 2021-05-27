@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using ModelCommon.Interfaces;
-using ModelCommon;
+using ServerDataLayer;
+using ServerDataLayer.Interfaces;
 
 namespace ServerLogicLayer
 {

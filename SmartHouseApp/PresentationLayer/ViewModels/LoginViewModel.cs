@@ -1,7 +1,7 @@
 ﻿using System.Windows.Input;
 using ClientLogicLayer;
+using ClientLogicLayer.Interfaces;
 using ClientPresentationLayer.ViewModels.Commands;
-using LogicLayer.Interfaces;
 
 namespace ClientPresentationLayer.ViewModels
 {
@@ -28,6 +28,5 @@ namespace ClientPresentationLayer.ViewModels
         }
 
         public ICommand LoginCommand { get; set; }
-
     }
 }

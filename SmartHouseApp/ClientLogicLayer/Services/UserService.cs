@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ClientDataLayer;
 using ClientDataLayer.Interfaces;
-using ClientLogicLayer;
+using ClientLogicLayer.Interfaces;
 using ClientLogicLayer.InternalDTOs;
-using LogicLayer.Interfaces;
-using ModelCommon;
 
-namespace LogicLayer
+namespace ClientLogicLayer
 {
     public class UserService : IUserService
     {
