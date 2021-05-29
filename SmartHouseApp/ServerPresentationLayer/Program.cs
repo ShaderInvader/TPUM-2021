@@ -41,53 +41,53 @@ namespace ServerPresentationLayer
 
         static async void ParseMessage(string message)
         {
-            Console.WriteLine($"[Client]: {message}");
-            if (message.Contains("UpdateDataRequest"))
+            Message msg = MessageParser.DeserializeMessage(message);
+            Console.WriteLine($"[Client] Command: {msg.Command}");
+            switch(msg.Command)
             {
-                await SendDevices();
+                case "Subscribe":
+                    break;
+                case "UpdateAll":
+                    var devices = deviceService.GetDevices().Result;
+                    _ = CurrentConnection.SendAsync(MessageParser.CreateMessage("UpdateAll", devices, devices.GetType().Name));
+                    break;
+                case "Add":
+                    var deviceToAdd = msg.Data as ExampleDeviceDTO;
+                    await deviceService.AddDevice(deviceToAdd);
+                    _ = SendConfirm();
+                    break;
+                case "Toggle":
+                    var deviceId = msg.Data as int?;
+                    if(deviceId != null)
+                    {
+                        await deviceService.ToggleDevice(deviceId.Value);
+                        _ = SendConfirm();
+                    }
+                    break;
+                case "OnNext":
+                    var location = msg.Data as Tuple<double, double>;
+                    provider.TrackLocation(Mapper.Map(new LocationDTO() { Coordinates = location }));
+                    break;
             }
-            else if (message.Contains("ToggleDevice"))
-            {
-                var splited = message.Split(':');
-                int id = Serializer.IntFromJson(splited[1]);
-                await deviceService.ToggleDevice(id);
-                await CurrentConnection.SendAsync("Confirm");
-            }
-            else if (message.Contains("AddDevice"))
-            {
-                var json = message.Substring("AddDevice".Length);
-                ExampleDeviceDTO device = Serializer.DeviceFormJson(json);
-                await deviceService.AddDevice(device);
-                await CurrentConnection.SendAsync("Confirm");
-            }
-            else if (message.Contains("Location"))
-            {
-                var split = message.Split('(');
-                split = split[1].Split(',');
-                split[1] = split[1].Substring(1, split.Length - 1);
-                double x = Double.Parse(split[0]);
-                double y = Double.Parse(split[1]);
-                provider.TrackLocation(Mapper.Map(new LocationDTO { Coordinates = new Tuple<double, double>(x, y) }));
-            }
+            
+        }
+
+        static async Task SendConfirm()
+        {
+            await CurrentConnection.SendAsync(MessageParser.CreateMessage("Confirm", "", "void"));
         }
 
         static async void TurnOffAll()
         {
             Console.WriteLine("[Server]: Turning off all devices"); 
             await deviceService.TurnOffAllDevices();
-            await SendDevices();
         }
 
         static async void TurnOnAll()
         {
             Console.WriteLine("[Server]: Client returns home - turn on last devices"); 
             await deviceService.TurnOnLastDevices();
-            await SendDevices();
         }
 
-        static async Task SendDevices()
-        {
-            await CurrentConnection.SendAsync(Serializer.AllDataToJson(deviceService));
-        }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Text.Json;
 using ClientDataLayer.Interfaces;
 
 namespace ClientDataLayer
@@ -20,40 +19,40 @@ namespace ClientDataLayer
         {
             _isAwaitingResponse = true;
 
-            await WebSocketClient.CurrentConnection.SendAsync("UpdateDataRequest");
+            await WebSocketClient.CurrentConnection.SendAsync(MessageParser.CreateMessage("UpdateAll", "", "void"));
 
             while (_isAwaitingResponse) {}
         }
 
-        public async Task RequestWithConfirmation(string request)
+        public async Task RequestWithConfirmation(string msg)
         {
             _isAwaitingConfirmation = true;
 
-            await WebSocketClient.CurrentConnection.SendAsync(request);
+            await WebSocketClient.CurrentConnection.SendAsync(msg);
 
             while (_isAwaitingConfirmation) { }
         }
 
         public void ReceiveData(string data)
         {
-            var split = data.Split('[');
-            if (string.Compare(split[0], "Devices", StringComparison.Ordinal) == 0)
+            var msg = MessageParser.DeserializeMessage(data);
+            switch (msg.Command)
             {
-                lock (devicesLock)
-                {
-                    Devices.Clear();
+                case "UpdateAll":
+                    lock (devicesLock)
+                    {
+                        Devices.Clear();
+                        Devices = new List<IDevice>((List<ExampleDevice>)msg.Data);
+                        DevicesChanged?.Invoke();
+                    }
+                    _isAwaitingResponse = false;
+                    break;
+                case "OnNext":
 
-                    var toDeserialize = split[1].Insert(0, "[");
-                    var deserialized = JsonSerializer.Deserialize<List<ExampleDevice>>(toDeserialize);
-                    Devices = new List<IDevice>(deserialized!);
-                    DevicesChanged?.Invoke();
-                }
-
-                _isAwaitingResponse = false;
-            }
-            else if (string.Compare(split[0], "Confirm", StringComparison.Ordinal) == 0)
-            {
-                _isAwaitingConfirmation = false;
+                    break;
+                case "Confirm":
+                    _isAwaitingConfirmation = false;
+                    break;
             }
         }
 

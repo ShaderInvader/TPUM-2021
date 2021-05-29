@@ -21,7 +21,7 @@ namespace ClientDataLayer
             double valToAdd = 1;
             while (isTracking)
             {
-                await WebSocketClient.CurrentConnection.SendAsync($"Location:{CurrentLocation}");
+                await WebSocketClient.CurrentConnection.SendAsync(MessageParser.CreateMessage("OnNext", CurrentLocation, CurrentLocation.GetType().Name));
                 if(CurrentLocation.Item1 > 20)
                 {
                     valToAdd = -1;

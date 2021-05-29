@@ -47,10 +47,7 @@ namespace ClientDataLayer
 
         public async Task<bool> Add(IDevice item)
         {
-            string addDeviceRequest = "AddDevice";
-            addDeviceRequest += JsonSerializer.Serialize((ExampleDevice)item);
-
-            await _dataContext.RequestWithConfirmation(addDeviceRequest);
+            await _dataContext.RequestWithConfirmation(MessageParser.CreateMessage("Add", item, item.GetType().Name));
             await _dataContext.RequestDataUpdate();
 
             return await Task.FromResult(true);
@@ -105,7 +102,7 @@ namespace ClientDataLayer
 
         public async Task<bool> Toggle(int id)
         {
-            await _dataContext.RequestWithConfirmation($"ToggleDevice:{id}");
+            await _dataContext.RequestWithConfirmation(MessageParser.CreateMessage("Toggle", id, id.GetType().Name));
             await _dataContext.RequestDataUpdate();
             return await Task.FromResult(true);
         }
