@@ -10,10 +10,35 @@
       <Variable SymbolicName="q1:Id" xmlns:q2="http://opcfoundation.org/UA/" DataType="q2:Integer" />
       <Variable SymbolicName="q1:Name" xmlns:q3="http://opcfoundation.org/UA/" DataType="q3:String" />
       <Object SymbolicName="q1:Coordinates" TypeDefinition="q1:Location" />
+      <Variable SymbolicName="q1:FirstName" xmlns:q4="http://opcfoundation.org/UA/" DataType="q4:String" />
+      <Variable SymbolicName="q1:LastName" xmlns:q5="http://opcfoundation.org/UA/" DataType="q5:String" />
+      <Variable SymbolicName="q1:Email" xmlns:q6="http://opcfoundation.org/UA/" DataType="q6:String" />
+      <Variable SymbolicName="q1:Password" xmlns:q7="http://opcfoundation.org/UA/" DataType="q7:String" />
     </Children>
     <ClassName>User</ClassName>
   </ObjectType>
-  <ObjectType xmlns:q4="http://screensaver.com/TPUM/SmartHouseApp/" SymbolicName="q4:Location">
+  <ObjectType xmlns:q8="http://screensaver.com/TPUM/SmartHouseApp/" SymbolicName="q8:Location">
+    <Children>
+      <Variable SymbolicName="q8:CoordinatesX" xmlns:q9="http://opcfoundation.org/UA/" DataType="q9:Double" />
+      <Variable SymbolicName="q8:CoordinatesY" xmlns:q10="http://opcfoundation.org/UA/" DataType="q10:Double" />
+    </Children>
     <ClassName>Location</ClassName>
+  </ObjectType>
+  <ObjectType xmlns:q11="http://screensaver.com/TPUM/SmartHouseApp/" SymbolicName="q11:Room">
+    <Children>
+      <Variable SymbolicName="q11:Id" xmlns:q12="http://opcfoundation.org/UA/" DataType="q12:Integer" />
+      <Variable SymbolicName="q11:Name" xmlns:q13="http://opcfoundation.org/UA/" DataType="q13:String" />
+      <Object SymbolicName="q11:Devices" TypeDefinition="q11:Device" />
+    </Children>
+    <ClassName>Room</ClassName>
+  </ObjectType>
+  <ObjectType xmlns:q14="http://screensaver.com/TPUM/SmartHouseApp/" SymbolicName="q14:Device">
+    <Children>
+      <Variable SymbolicName="q14:Id" xmlns:q15="http://opcfoundation.org/UA/" DataType="q15:Integer" />
+      <Variable SymbolicName="q14:Name" xmlns:q16="http://opcfoundation.org/UA/" DataType="q16:String" />
+      <Variable SymbolicName="q14:Enabled" xmlns:q17="http://opcfoundation.org/UA/" DataType="q17:Boolean" />
+      <Variable SymbolicName="q14:LastState" xmlns:q18="http://opcfoundation.org/UA/" DataType="q18:Boolean" />
+    </Children>
+    <ClassName>Device</ClassName>
   </ObjectType>
 </ModelDesign>
