@@ -56,10 +56,11 @@ namespace ServerLogicLayer
         {
             LocationDTO loc = Mapper.Map(value);
             _onNext?.Invoke(loc);
-            var c = value.Coordinates;
-            var min = _minCoordinates.Coordinates;
-            var max = _maxCoordinates.Coordinates;
-            if(((c.Item1 > min.Item1 && c.Item2 > min.Item2) && (c.Item1 < max.Item1 && c.Item2 < max.Item2)))
+            var c = value;
+            var min = _minCoordinates;
+            var max = _maxCoordinates;
+            if(c.Longitude > min.Longitude && c.Latitude > min.Latitude 
+                && c.Longitude < max.Longitude && c.Latitude < max.Latitude)
             {
                 if(!_inHouse)
                 {

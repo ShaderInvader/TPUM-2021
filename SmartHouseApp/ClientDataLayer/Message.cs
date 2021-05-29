@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Collections.Generic;
+using System.Text.Json;
 
 namespace ClientDataLayer
 {
@@ -24,6 +25,11 @@ namespace ClientDataLayer
         public static Message DeserializeMessage(string message)
         {
             return JsonSerializer.Deserialize<Message>(message);
+        }
+
+        public static T DeserializeType<T>(string json)
+        {
+            return JsonSerializer.Deserialize<T>(json);
         }
     }
 }

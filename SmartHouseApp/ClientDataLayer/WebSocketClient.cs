@@ -85,6 +85,7 @@ namespace ClientDataLayer
                         WebSocketReceiveResult result = _clientWebSocket.ReceiveAsync(segment, CancellationToken.None).Result;
                         if (result.MessageType == WebSocketMessageType.Close)
                         {
+                            Console.WriteLine("[ClientMessageLoop]: Closing");
                             OnClose?.Invoke();
                             _clientWebSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "I am closing", CancellationToken.None).Wait();
                             return;
@@ -94,6 +95,7 @@ namespace ClientDataLayer
                         {
                             if (count >= buffer.Length)
                             {
+                                Console.WriteLine("[ClientMessageLoop]: Buffer to small");
                                 OnClose?.Invoke();
                                 _clientWebSocket.CloseAsync(WebSocketCloseStatus.InvalidPayloadData, "That's too long", CancellationToken.None).Wait();
                                 return;

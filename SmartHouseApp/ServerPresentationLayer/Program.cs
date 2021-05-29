@@ -17,9 +17,9 @@ namespace ServerPresentationLayer
         {
             CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
             provider = new LocationTracker();
-            var min = new Tuple<double, double>(-10, -10);
-            var max = new Tuple<double, double>(10, 10);
-            reporter = new LocationReporter(Mapper.Map(new LocationDTO { Coordinates = min }), Mapper.Map(new LocationDTO { Coordinates = max}));
+            var min = new LocationDTO{Longitude = -10, Latitude = -10};
+            var max = new LocationDTO { Longitude = 10, Latitude = 10 };
+            reporter = new LocationReporter(Mapper.Map(min), Mapper.Map(max));
 
             reporter.Subscribe(provider,
                 Console.WriteLine, 
@@ -48,25 +48,21 @@ namespace ServerPresentationLayer
                 case "Subscribe":
                     break;
                 case "UpdateAll":
-                    var devices = deviceService.GetDevices().Result;
-                    _ = CurrentConnection.SendAsync(MessageParser.CreateMessage("UpdateAll", devices, devices.GetType().Name));
+                    _ = SendUpdateAll();
                     break;
                 case "Add":
-                    var deviceToAdd = msg.Data as ExampleDeviceDTO;
+                    var deviceToAdd = MessageParser.DeserializeType<ExampleDeviceDTO>(msg.Data.ToString());
                     await deviceService.AddDevice(deviceToAdd);
                     _ = SendConfirm();
                     break;
                 case "Toggle":
-                    var deviceId = msg.Data as int?;
-                    if(deviceId != null)
-                    {
-                        await deviceService.ToggleDevice(deviceId.Value);
-                        _ = SendConfirm();
-                    }
+                    var deviceId = MessageParser.DeserializeType<int>(msg.Data.ToString());
+                    await deviceService.ToggleDevice(deviceId);
+                    _ = SendConfirm();
                     break;
                 case "OnNext":
-                    var location = msg.Data as Tuple<double, double>;
-                    provider.TrackLocation(Mapper.Map(new LocationDTO() { Coordinates = location }));
+                    var location = MessageParser.DeserializeType<LocationDTO>(msg.Data.ToString());
+                    provider.TrackLocation(Mapper.Map(location));
                     break;
             }
             
@@ -77,16 +73,24 @@ namespace ServerPresentationLayer
             await CurrentConnection.SendAsync(MessageParser.CreateMessage("Confirm", "", "void"));
         }
 
+        static async Task SendUpdateAll()
+        {
+            var devices = deviceService.GetDevices().Result;
+            await CurrentConnection.SendAsync(MessageParser.CreateMessage("UpdateAll", devices, devices.GetType().Name));
+        }
+
         static async void TurnOffAll()
         {
             Console.WriteLine("[Server]: Turning off all devices"); 
             await deviceService.TurnOffAllDevices();
+            _ = SendUpdateAll();
         }
 
         static async void TurnOnAll()
         {
             Console.WriteLine("[Server]: Client returns home - turn on last devices"); 
             await deviceService.TurnOnLastDevices();
+            _ = SendUpdateAll();
         }
 
     }

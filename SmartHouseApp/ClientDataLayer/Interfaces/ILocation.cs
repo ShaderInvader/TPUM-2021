@@ -4,6 +4,7 @@ namespace ClientDataLayer.Interfaces
 {
     public interface ILocation
     {
-        public Tuple<double, double> Coordinates { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
     }
 }

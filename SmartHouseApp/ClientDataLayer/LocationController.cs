@@ -13,7 +13,7 @@ namespace ClientDataLayer
             private set => _instance = value;
         }
 
-        public Tuple<double, double> CurrentLocation { get; set; } = new Tuple<double, double>(0.0, 0.0);
+        public ILocation CurrentLocation { get; set; } = new Location() {Latitude = 0.0, Longitude = 0.0 };
         private bool isTracking;
         public async Task TrackPosition()
         {
@@ -22,15 +22,15 @@ namespace ClientDataLayer
             while (isTracking)
             {
                 await WebSocketClient.CurrentConnection.SendAsync(MessageParser.CreateMessage("OnNext", CurrentLocation, CurrentLocation.GetType().Name));
-                if(CurrentLocation.Item1 > 20)
+                if(CurrentLocation.Latitude > 20)
                 {
                     valToAdd = -1;
                 }
-                else if(CurrentLocation.Item1 < -20)
+                else if(CurrentLocation.Latitude < -20)
                 {
                     valToAdd = 1;
                 }
-                CurrentLocation = new Tuple<double, double>(CurrentLocation.Item1 + valToAdd, CurrentLocation.Item2);
+                CurrentLocation.Latitude += valToAdd;
                 System.Threading.Thread.Sleep(1000);
             }
         }

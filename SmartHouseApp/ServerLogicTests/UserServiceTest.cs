@@ -12,24 +12,24 @@ namespace ServerLogicTests
         private Mock<INamedRepository<User>> _mockRepo;
         private UserService _service;
 
-        private static Tuple<double, double> coords = new Tuple<double, double>(1, 1);
-        private User aUser0 = new User() { Name = "amazurek", FirstName = "Adam", LastName = "Mazurek", Email = "amazurek@outlook.com", Id = 2, Coordinates = new Location() { Coordinates = coords } };
-        private User aUser1 = new User() { Name = "amazurek", FirstName = "Adrianna", LastName = "Mazurek", Email = "amazurek@gmail.com", Id = 3, Coordinates = new Location() { Coordinates = coords } };
+        private static Location coords = new Location() { Longitude = 0, Latitude = 0 };
+        private User aUser0 = new User() { Name = "amazurek", FirstName = "Adam", LastName = "Mazurek", Email = "amazurek@outlook.com", Id = 2, Coordinates = coords };
+        private User aUser1 = new User() { Name = "amazurek", FirstName = "Adrianna", LastName = "Mazurek", Email = "amazurek@gmail.com", Id = 3, Coordinates = coords };
         [SetUp]
         public void Setup()
         {
             _mockRepo = new Mock<INamedRepository<User>>();
 
             // ===== Get by id setup =====
-            _mockRepo.Setup(x => x.Get(0)).Returns(new User() { Email = "jan.kowalski@gmail.com", FirstName = "Jan", Id = 0, LastName = "Kowalski", Name = "jkowalski", Coordinates = new Location() { Coordinates = coords } });
-            _mockRepo.Setup(x => x.Get(1)).Returns(new User() { Email = "karol.nowak@gmail.com", FirstName = "Karol", Id = 1, LastName = "Nowak", Name = "knowak", Coordinates = new Location() {Coordinates = coords } });
+            _mockRepo.Setup(x => x.Get(0)).Returns(new User() { Email = "jan.kowalski@gmail.com", FirstName = "Jan", Id = 0, LastName = "Kowalski", Name = "jkowalski", Coordinates = coords }) ;
+            _mockRepo.Setup(x => x.Get(1)).Returns(new User() { Email = "karol.nowak@gmail.com", FirstName = "Karol", Id = 1, LastName = "Nowak", Name = "knowak", Coordinates = coords });
             _mockRepo.Setup(x => x.Get(It.Is<int>(i => i < 0))).Throws<ArgumentOutOfRangeException>();
 
             // ===== Get everything setup =====
             _mockRepo.Setup(x => x.Get()).Returns(new List<User>()
             {
-                new User() { Name = "sjanusz", FirstName = "Sylwia", LastName = "Janusz", Email = "sjanusz@outlook.com", Id = 0, Coordinates = new Location() { Coordinates = coords }},
-                new User() { Name = "ggóra", FirstName = "Gabiriela", LastName = "Góra", Email = "ggora@gmail.com", Id = 1, Coordinates = new Location() { Coordinates = coords } }
+                new User() { Name = "sjanusz", FirstName = "Sylwia", LastName = "Janusz", Email = "sjanusz@outlook.com", Id = 0, Coordinates = coords},
+                new User() { Name = "ggóra", FirstName = "Gabiriela", LastName = "Góra", Email = "ggora@gmail.com", Id = 1, Coordinates = coords }
             });
 
             //Add mock

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using ClientDataLayer.Interfaces;
 
@@ -42,7 +43,8 @@ namespace ClientDataLayer
                     lock (devicesLock)
                     {
                         Devices.Clear();
-                        Devices = new List<IDevice>((List<ExampleDevice>)msg.Data);
+                        var objectList = MessageParser.DeserializeType<List<ExampleDevice>>(msg.Data.ToString());
+                        Devices = new List<IDevice>(objectList);
                         DevicesChanged?.Invoke();
                     }
                     _isAwaitingResponse = false;

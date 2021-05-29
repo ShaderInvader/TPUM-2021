@@ -21,5 +21,9 @@ namespace ServerPresentationLayer
         {
             return JsonSerializer.Deserialize<Message>(message);
         }
+        public static T DeserializeType<T>(string json)
+        {
+            return JsonSerializer.Deserialize<T>(json);
+        }
     }
 }

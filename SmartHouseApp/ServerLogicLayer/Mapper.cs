@@ -21,7 +21,8 @@ namespace ServerLogicLayer
         {
             return new LocationDTO
             {
-                Coordinates = new Tuple<double, double>(location.Coordinates.Item1, location.Coordinates.Item2 )
+                Longitude = location.Longitude,
+                Latitude = location.Latitude
             };
         }
 
@@ -67,7 +68,8 @@ namespace ServerLogicLayer
         {
             return new Location
             {
-                Coordinates = new Tuple<double, double>(location.Coordinates.Item1, location.Coordinates.Item2)
+                Longitude = location.Longitude,
+                Latitude = location.Latitude
             };
         }
 
