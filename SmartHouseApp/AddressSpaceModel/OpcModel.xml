@@ -4,7 +4,6 @@
   <Namespaces>
     <Namespace Name="DataLayer" Prefix="DataLayer" XmlPrefix="DataLayer">http://screensaver.com/TPUM/SmartHouseApp/</Namespace>
     <Namespace Name="OpcUa" Prefix="Opc.Ua" XmlNamespace="http://opcfoundation.org/UA/2008/02/Types.xsd">http://opcfoundation.org/UA/</Namespace>
-    <Namespace Name="DataLayerInterfaces" Prefix="DataLayer.Interfaces">http://screensaver.com/TPUM/SmartHouseApp/Interfaces</Namespace>
   </Namespaces>
   <ObjectType xmlns:q1="http://screensaver.com/TPUM/SmartHouseApp/" SymbolicName="q1:User">
     <Children>

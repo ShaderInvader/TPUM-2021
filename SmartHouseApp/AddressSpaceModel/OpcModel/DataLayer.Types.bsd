@@ -1,5 +1,4 @@
 <opc:TypeDictionary
-  xmlns:s2="http://screensaver.com/TPUM/SmartHouseApp/Interfaces"
   xmlns:opc="http://opcfoundation.org/BinarySchema/"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns:ua="http://opcfoundation.org/UA/"
@@ -9,6 +8,5 @@
 >
   <!-- This File was generated on 2021-05-30 and supports the specifications supported by version 1.11.335.10 of the OPC UA deliverables. -->
   <opc:Import Namespace="http://opcfoundation.org/UA/" Location="Opc.Ua.BinarySchema.bsd"/>
-  <opc:Import Namespace="http://screensaver.com/TPUM/SmartHouseApp/Interfaces" Location="DataLayer.Interfaces.BinarySchema.bsd"/>
 
 </opc:TypeDictionary>
