@@ -40,13 +40,13 @@ namespace ClientDataLayer
             switch (msg.Command)
             {
                 case "UpdateAll":
+                    var objectList = MessageParser.DeserializeType<List<ExampleDevice>>(msg.Data.ToString());
                     lock (devicesLock)
                     {
                         Devices.Clear();
-                        var objectList = MessageParser.DeserializeType<List<ExampleDevice>>(msg.Data.ToString());
                         Devices = new List<IDevice>(objectList);
-                        DevicesChanged?.Invoke();
                     }
+                    DevicesChanged?.Invoke();
                     _isAwaitingResponse = false;
                     break;
                 case "OnNext":
