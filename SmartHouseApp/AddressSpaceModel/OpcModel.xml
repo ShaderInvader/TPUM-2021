@@ -2,8 +2,9 @@
 <?xml-stylesheet type="text/xsl" href="OPCUAModelDesign.xslt"?>
 <ModelDesign xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" TargetNamespace="http://screensaver.com/TPUM/SmartHouseApp/" xmlns="http://opcfoundation.org/UA/ModelDesign.xsd">
   <Namespaces>
-    <Namespace Name="SmartApp_Model" Prefix="SmartApp.Model" XmlPrefix="SmartApp_Model">http://screensaver.com/TPUM/SmartHouseApp/</Namespace>
+    <Namespace Name="DataLayer" Prefix="DataLayer" XmlPrefix="DataLayer">http://screensaver.com/TPUM/SmartHouseApp/</Namespace>
     <Namespace Name="OpcUa" Prefix="Opc.Ua" XmlNamespace="http://opcfoundation.org/UA/2008/02/Types.xsd">http://opcfoundation.org/UA/</Namespace>
+    <Namespace Name="DataLayerInterfaces" Prefix="DataLayer.Interfaces">http://screensaver.com/TPUM/SmartHouseApp/Interfaces</Namespace>
   </Namespaces>
   <ObjectType xmlns:q1="http://screensaver.com/TPUM/SmartHouseApp/" SymbolicName="q1:User">
     <Children>
@@ -40,5 +41,31 @@
       <Variable SymbolicName="q14:LastState" xmlns:q18="http://opcfoundation.org/UA/" DataType="q18:Boolean" />
     </Children>
     <ClassName>Device</ClassName>
+  </ObjectType>
+  <ObjectType xmlns:q19="http://screensaver.com/TPUM/SmartHouseApp/" SymbolicName="q19:IData">
+    <Children>
+      <Variable SymbolicName="q19:Id" xmlns:q20="http://opcfoundation.org/UA/" DataType="q20:Integer" />
+    </Children>
+    <ClassName>IData</ClassName>
+  </ObjectType>
+  <ObjectType xmlns:q21="http://screensaver.com/TPUM/SmartHouseApp/" SymbolicName="q21:INamed" BaseType="q21:IData">
+    <Children>
+      <Variable SymbolicName="q21:Name" xmlns:q22="http://opcfoundation.org/UA/" DataType="q22:String" />
+    </Children>
+    <ClassName>INamed</ClassName>
+  </ObjectType>
+  <ObjectType xmlns:q23="http://screensaver.com/TPUM/SmartHouseApp/" SymbolicName="q23:IDevice" BaseType="q23:INamed">
+    <Children>
+      <Variable SymbolicName="q23:Enabled" xmlns:q24="http://opcfoundation.org/UA/" DataType="q24:Boolean" />
+      <Variable SymbolicName="q23:LastState" xmlns:q25="http://opcfoundation.org/UA/" DataType="q25:Boolean" />
+    </Children>
+    <ClassName>IDevice</ClassName>
+  </ObjectType>
+  <ObjectType xmlns:q26="http://screensaver.com/TPUM/SmartHouseApp/" SymbolicName="q26:ILocation">
+    <Children>
+      <Variable SymbolicName="q26:Latitude" xmlns:q27="http://opcfoundation.org/UA/" DataType="q27:Double" />
+      <Variable SymbolicName="q26:Longitude" xmlns:q28="http://opcfoundation.org/UA/" DataType="q28:Double" />
+    </Children>
+    <ClassName>ILocation</ClassName>
   </ObjectType>
 </ModelDesign>

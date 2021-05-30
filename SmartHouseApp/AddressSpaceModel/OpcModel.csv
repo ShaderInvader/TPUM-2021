@@ -24,3 +24,16 @@ Device_Id,23,Variable
 Device_Name,24,Variable
 Device_Enabled,25,Variable
 Device_LastState,26,Variable
+IData,27,ObjectType
+IData_Id,28,Variable
+INamed,29,ObjectType
+INamed_Id,30,Variable
+INamed_Name,31,Variable
+IDevice,32,ObjectType
+IDevice_Id,33,Variable
+IDevice_Name,34,Variable
+IDevice_Enabled,35,Variable
+IDevice_LastState,36,Variable
+ILocation,37,ObjectType
+ILocation_Latitude,38,Variable
+ILocation_Longitude,39,Variable
