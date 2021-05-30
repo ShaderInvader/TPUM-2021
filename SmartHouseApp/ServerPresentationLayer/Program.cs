@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ServerPresentationLayer
 {
-    class Program
+    public class Program
     {
         private static WebSocketConnection CurrentConnection;
         private static readonly IDeviceService deviceService = new DeviceService();
@@ -30,7 +30,6 @@ namespace ServerPresentationLayer
                 TurnOffAll,
                 TurnOnAll
                 );
-
             deviceProvider = new DeviceTracker();
             deviceReporter = new DeviceReporter();
             deviceReporter.Subscribe(deviceProvider,
@@ -38,6 +37,11 @@ namespace ServerPresentationLayer
                 (x) => Console.WriteLine(x.Message),
                 (x) => { _ = CurrentConnection.SendAsync(MessageParser.CreateMessage("OnNext", x, x.GetType().Name)); }
                 );
+            await CreateServer();
+        }
+
+        public static async Task CreateServer()
+        {
             await WebSocketServer.Server(8081, ConnectionHandler);
         }
 

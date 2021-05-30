@@ -66,6 +66,13 @@ namespace ClientDataLayer
             }
         }
 
+        public void ClearContext()
+        {
+            Users.Clear();
+            Rooms.Clear();
+            Devices.Clear();
+        }
+
         private bool _isAwaitingConfirmation = false;
         private bool _isAwaitingResponse = false;
 

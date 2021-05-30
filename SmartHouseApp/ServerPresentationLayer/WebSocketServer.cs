@@ -116,5 +116,6 @@ namespace ServerPresentationLayer
             byte[] buffer = Encoding.UTF8.GetBytes(message);
             return new ArraySegment<byte>(buffer);
         }
+
     }
 }

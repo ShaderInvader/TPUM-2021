@@ -2,7 +2,6 @@
 <uax:ListOfNodeState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd">
   <uax:NamespaceUris>
     <uax:NamespaceUri>http://screensaver.com/TPUM/SmartHouseApp/</uax:NamespaceUri>
-    <uax:NamespaceUri>http://screensaver.com/TPUM/SmartHouseApp/Interfaces</uax:NamespaceUri>
   </uax:NamespaceUris>
   <User xmlns="http://screensaver.com/TPUM/SmartHouseApp/">
     <uax:NodeClass>ObjectType_8</uax:NodeClass>

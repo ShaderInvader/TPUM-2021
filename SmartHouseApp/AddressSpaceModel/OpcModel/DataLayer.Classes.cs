@@ -33,7 +33,6 @@ using System.Text;
 using System.Xml;
 using System.Runtime.Serialization;
 using Opc.Ua;
-using DataLayer.Interfaces;
 
 namespace DataLayer
 {
@@ -595,11 +594,6 @@ namespace DataLayer
         /// The URI for the OpcUaXsd namespace (.NET code namespace is 'Opc.Ua').
         /// </summary>
         public const string OpcUaXsd = "http://opcfoundation.org/UA/2008/02/Types.xsd";
-
-        /// <summary>
-        /// The URI for the DataLayerInterfaces namespace (.NET code namespace is 'DataLayer.Interfaces').
-        /// </summary>
-        public const string DataLayerInterfaces = "http://screensaver.com/TPUM/SmartHouseApp/Interfaces";
     }
     #endregion
 
@@ -654,16 +648,15 @@ namespace DataLayer
 
         #region Initialization String
         private const string InitializationString =
-           "AgAAACoAAABodHRwOi8vc2NyZWVuc2F2ZXIuY29tL1RQVU0vU21hcnRIb3VzZUFwcC80AAAAaHR0cDov" +
-           "L3NjcmVlbnNhdmVyLmNvbS9UUFVNL1NtYXJ0SG91c2VBcHAvSW50ZXJmYWNlc/////8EYIAAAQAAAAEA" +
-           "DAAAAFVzZXJJbnN0YW5jZQEBAQABAQEA/////wcAAAAVYIkKAgAAAAEAAgAAAElkAQECAAAvAD8CAAAA" +
-           "ABv/////AQH/////AAAAABVgiQoCAAAAAQAEAAAATmFtZQEBAwAALwA/AwAAAAAM/////wEB/////wAA" +
-           "AAAEYIAKAQAAAAEACwAAAENvb3JkaW5hdGVzAQEEAAAvAQEFAAQAAAD/////AgAAABVgiQoCAAAAAQAM" +
-           "AAAAQ29vcmRpbmF0ZXNYAQEGAAAvAD8GAAAAAAv/////AQH/////AAAAABVgiQoCAAAAAQAMAAAAQ29v" +
-           "cmRpbmF0ZXNZAQEHAAAvAD8HAAAAAAv/////AQH/////AAAAABVgiQoCAAAAAQAJAAAARmlyc3ROYW1l" +
-           "AQEIAAAvAD8IAAAAAAz/////AQH/////AAAAABVgiQoCAAAAAQAIAAAATGFzdE5hbWUBAQkAAC8APwkA" +
-           "AAAADP////8BAf////8AAAAAFWCJCgIAAAABAAUAAABFbWFpbAEBCgAALwA/CgAAAAAM/////wEB////" +
-           "/wAAAAAVYIkKAgAAAAEACAAAAFBhc3N3b3JkAQELAAAvAD8LAAAAAAz/////AQH/////AAAAAA==";
+           "AQAAACoAAABodHRwOi8vc2NyZWVuc2F2ZXIuY29tL1RQVU0vU21hcnRIb3VzZUFwcC//////BGCAAAEA" +
+           "AAABAAwAAABVc2VySW5zdGFuY2UBAQEAAQEBAP////8HAAAAFWCJCgIAAAABAAIAAABJZAEBAgAALwA/" +
+           "AgAAAAAb/////wEB/////wAAAAAVYIkKAgAAAAEABAAAAE5hbWUBAQMAAC8APwMAAAAADP////8BAf//" +
+           "//8AAAAABGCACgEAAAABAAsAAABDb29yZGluYXRlcwEBBAAALwEBBQAEAAAA/////wIAAAAVYIkKAgAA" +
+           "AAEADAAAAENvb3JkaW5hdGVzWAEBBgAALwA/BgAAAAAL/////wEB/////wAAAAAVYIkKAgAAAAEADAAA" +
+           "AENvb3JkaW5hdGVzWQEBBwAALwA/BwAAAAAL/////wEB/////wAAAAAVYIkKAgAAAAEACQAAAEZpcnN0" +
+           "TmFtZQEBCAAALwA/CAAAAAAM/////wEB/////wAAAAAVYIkKAgAAAAEACAAAAExhc3ROYW1lAQEJAAAv" +
+           "AD8JAAAAAAz/////AQH/////AAAAABVgiQoCAAAAAQAFAAAARW1haWwBAQoAAC8APwoAAAAADP////8B" +
+           "Af////8AAAAAFWCJCgIAAAABAAgAAABQYXNzd29yZAEBCwAALwA/CwAAAAAM/////wEB/////wAAAAA=";
         #endregion
         #endif
         #endregion
@@ -1104,11 +1097,10 @@ namespace DataLayer
 
         #region Initialization String
         private const string InitializationString =
-           "AgAAACoAAABodHRwOi8vc2NyZWVuc2F2ZXIuY29tL1RQVU0vU21hcnRIb3VzZUFwcC80AAAAaHR0cDov" +
-           "L3NjcmVlbnNhdmVyLmNvbS9UUFVNL1NtYXJ0SG91c2VBcHAvSW50ZXJmYWNlc/////8EYIAAAQAAAAEA" +
-           "EAAAAExvY2F0aW9uSW5zdGFuY2UBAQUAAQEFAP////8CAAAAFWCJCgIAAAABAAwAAABDb29yZGluYXRl" +
-           "c1gBAQwAAC8APwwAAAAAC/////8BAf////8AAAAAFWCJCgIAAAABAAwAAABDb29yZGluYXRlc1kBAQ0A" +
-           "AC8APw0AAAAAC/////8BAf////8AAAAA";
+           "AQAAACoAAABodHRwOi8vc2NyZWVuc2F2ZXIuY29tL1RQVU0vU21hcnRIb3VzZUFwcC//////BGCAAAEA" +
+           "AAABABAAAABMb2NhdGlvbkluc3RhbmNlAQEFAAEBBQD/////AgAAABVgiQoCAAAAAQAMAAAAQ29vcmRp" +
+           "bmF0ZXNYAQEMAAAvAD8MAAAAAAv/////AQH/////AAAAABVgiQoCAAAAAQAMAAAAQ29vcmRpbmF0ZXNZ" +
+           "AQENAAAvAD8NAAAAAAv/////AQH/////AAAAAA==";
         #endregion
         #endif
         #endregion
@@ -1309,14 +1301,13 @@ namespace DataLayer
 
         #region Initialization String
         private const string InitializationString =
-           "AgAAACoAAABodHRwOi8vc2NyZWVuc2F2ZXIuY29tL1RQVU0vU21hcnRIb3VzZUFwcC80AAAAaHR0cDov" +
-           "L3NjcmVlbnNhdmVyLmNvbS9UUFVNL1NtYXJ0SG91c2VBcHAvSW50ZXJmYWNlc/////8EYIAAAQAAAAEA" +
-           "DAAAAFJvb21JbnN0YW5jZQEBDgABAQ4A/////wMAAAAVYIkKAgAAAAEAAgAAAElkAQEPAAAvAD8PAAAA" +
-           "ABv/////AQH/////AAAAABVgiQoCAAAAAQAEAAAATmFtZQEBEAAALwA/EAAAAAAM/////wEB/////wAA" +
-           "AAAEYIAKAQAAAAEABwAAAERldmljZXMBAREAAC8BARYAEQAAAP////8EAAAAFWCJCgIAAAABAAIAAABJ" +
-           "ZAEBEgAALwA/EgAAAAAb/////wEB/////wAAAAAVYIkKAgAAAAEABAAAAE5hbWUBARMAAC8APxMAAAAA" +
-           "DP////8BAf////8AAAAAFWCJCgIAAAABAAcAAABFbmFibGVkAQEUAAAvAD8UAAAAAAH/////AQH/////" +
-           "AAAAABVgiQoCAAAAAQAJAAAATGFzdFN0YXRlAQEVAAAvAD8VAAAAAAH/////AQH/////AAAAAA==";
+           "AQAAACoAAABodHRwOi8vc2NyZWVuc2F2ZXIuY29tL1RQVU0vU21hcnRIb3VzZUFwcC//////BGCAAAEA" +
+           "AAABAAwAAABSb29tSW5zdGFuY2UBAQ4AAQEOAP////8DAAAAFWCJCgIAAAABAAIAAABJZAEBDwAALwA/" +
+           "DwAAAAAb/////wEB/////wAAAAAVYIkKAgAAAAEABAAAAE5hbWUBARAAAC8APxAAAAAADP////8BAf//" +
+           "//8AAAAABGCACgEAAAABAAcAAABEZXZpY2VzAQERAAAvAQEWABEAAAD/////BAAAABVgiQoCAAAAAQAC" +
+           "AAAASWQBARIAAC8APxIAAAAAG/////8BAf////8AAAAAFWCJCgIAAAABAAQAAABOYW1lAQETAAAvAD8T" +
+           "AAAAAAz/////AQH/////AAAAABVgiQoCAAAAAQAHAAAARW5hYmxlZAEBFAAALwA/FAAAAAAB/////wEB" +
+           "/////wAAAAAVYIkKAgAAAAEACQAAAExhc3RTdGF0ZQEBFQAALwA/FQAAAAAB/////wEB/////wAAAAA=";
         #endregion
         #endif
         #endregion
@@ -1565,12 +1556,11 @@ namespace DataLayer
 
         #region Initialization String
         private const string InitializationString =
-           "AgAAACoAAABodHRwOi8vc2NyZWVuc2F2ZXIuY29tL1RQVU0vU21hcnRIb3VzZUFwcC80AAAAaHR0cDov" +
-           "L3NjcmVlbnNhdmVyLmNvbS9UUFVNL1NtYXJ0SG91c2VBcHAvSW50ZXJmYWNlc/////8EYIAAAQAAAAEA" +
-           "DgAAAERldmljZUluc3RhbmNlAQEWAAEBFgD/////BAAAABVgiQoCAAAAAQACAAAASWQBARcAAC8APxcA" +
-           "AAAAG/////8BAf////8AAAAAFWCJCgIAAAABAAQAAABOYW1lAQEYAAAvAD8YAAAAAAz/////AQH/////" +
-           "AAAAABVgiQoCAAAAAQAHAAAARW5hYmxlZAEBGQAALwA/GQAAAAAB/////wEB/////wAAAAAVYIkKAgAA" +
-           "AAEACQAAAExhc3RTdGF0ZQEBGgAALwA/GgAAAAAB/////wEB/////wAAAAA=";
+           "AQAAACoAAABodHRwOi8vc2NyZWVuc2F2ZXIuY29tL1RQVU0vU21hcnRIb3VzZUFwcC//////BGCAAAEA" +
+           "AAABAA4AAABEZXZpY2VJbnN0YW5jZQEBFgABARYA/////wQAAAAVYIkKAgAAAAEAAgAAAElkAQEXAAAv" +
+           "AD8XAAAAABv/////AQH/////AAAAABVgiQoCAAAAAQAEAAAATmFtZQEBGAAALwA/GAAAAAAM/////wEB" +
+           "/////wAAAAAVYIkKAgAAAAEABwAAAEVuYWJsZWQBARkAAC8APxkAAAAAAf////8BAf////8AAAAAFWCJ" +
+           "CgIAAAABAAkAAABMYXN0U3RhdGUBARoAAC8APxoAAAAAAf////8BAf////8AAAAA";
         #endregion
         #endif
         #endregion
@@ -1867,10 +1857,9 @@ namespace DataLayer
 
         #region Initialization String
         private const string InitializationString =
-           "AgAAACoAAABodHRwOi8vc2NyZWVuc2F2ZXIuY29tL1RQVU0vU21hcnRIb3VzZUFwcC80AAAAaHR0cDov" +
-           "L3NjcmVlbnNhdmVyLmNvbS9UUFVNL1NtYXJ0SG91c2VBcHAvSW50ZXJmYWNlc/////8EYIAAAQAAAAEA" +
-           "DQAAAElEYXRhSW5zdGFuY2UBARsAAQEbAP////8BAAAAFWCJCgIAAAABAAIAAABJZAEBHAAALwA/HAAA" +
-           "AAAb/////wEB/////wAAAAA=";
+           "AQAAACoAAABodHRwOi8vc2NyZWVuc2F2ZXIuY29tL1RQVU0vU21hcnRIb3VzZUFwcC//////BGCAAAEA" +
+           "AAABAA0AAABJRGF0YUluc3RhbmNlAQEbAAEBGwD/////AQAAABVgiQoCAAAAAQACAAAASWQBARwAAC8A" +
+           "PxwAAAAAG/////8BAf////8AAAAA";
         #endregion
         #endif
         #endregion
@@ -2023,11 +2012,10 @@ namespace DataLayer
 
         #region Initialization String
         private const string InitializationString =
-           "AgAAACoAAABodHRwOi8vc2NyZWVuc2F2ZXIuY29tL1RQVU0vU21hcnRIb3VzZUFwcC80AAAAaHR0cDov" +
-           "L3NjcmVlbnNhdmVyLmNvbS9UUFVNL1NtYXJ0SG91c2VBcHAvSW50ZXJmYWNlc/////8EYIAAAQAAAAEA" +
-           "DgAAAElOYW1lZEluc3RhbmNlAQEdAAEBHQD/////AgAAABVgiQoCAAAAAQACAAAASWQBAR4AAC8APx4A" +
-           "AAAAG/////8BAf////8AAAAAFWCJCgIAAAABAAQAAABOYW1lAQEfAAAvAD8fAAAAAAz/////AQH/////" +
-           "AAAAAA==";
+           "AQAAACoAAABodHRwOi8vc2NyZWVuc2F2ZXIuY29tL1RQVU0vU21hcnRIb3VzZUFwcC//////BGCAAAEA" +
+           "AAABAA4AAABJTmFtZWRJbnN0YW5jZQEBHQABAR0A/////wIAAAAVYIkKAgAAAAEAAgAAAElkAQEeAAAv" +
+           "AD8eAAAAABv/////AQH/////AAAAABVgiQoCAAAAAQAEAAAATmFtZQEBHwAALwA/HwAAAAAM/////wEB" +
+           "/////wAAAAA=";
         #endregion
         #endif
         #endregion
@@ -2180,12 +2168,11 @@ namespace DataLayer
 
         #region Initialization String
         private const string InitializationString =
-           "AgAAACoAAABodHRwOi8vc2NyZWVuc2F2ZXIuY29tL1RQVU0vU21hcnRIb3VzZUFwcC80AAAAaHR0cDov" +
-           "L3NjcmVlbnNhdmVyLmNvbS9UUFVNL1NtYXJ0SG91c2VBcHAvSW50ZXJmYWNlc/////8EYIAAAQAAAAEA" +
-           "DwAAAElEZXZpY2VJbnN0YW5jZQEBIAABASAA/////wQAAAAVYIkKAgAAAAEAAgAAAElkAQEhAAAvAD8h" +
-           "AAAAABv/////AQH/////AAAAABVgiQoCAAAAAQAEAAAATmFtZQEBIgAALwA/IgAAAAAM/////wEB////" +
-           "/wAAAAAVYIkKAgAAAAEABwAAAEVuYWJsZWQBASMAAC8APyMAAAAAAf////8BAf////8AAAAAFWCJCgIA" +
-           "AAABAAkAAABMYXN0U3RhdGUBASQAAC8APyQAAAAAAf////8BAf////8AAAAA";
+           "AQAAACoAAABodHRwOi8vc2NyZWVuc2F2ZXIuY29tL1RQVU0vU21hcnRIb3VzZUFwcC//////BGCAAAEA" +
+           "AAABAA8AAABJRGV2aWNlSW5zdGFuY2UBASAAAQEgAP////8EAAAAFWCJCgIAAAABAAIAAABJZAEBIQAA" +
+           "LwA/IQAAAAAb/////wEB/////wAAAAAVYIkKAgAAAAEABAAAAE5hbWUBASIAAC8APyIAAAAADP////8B" +
+           "Af////8AAAAAFWCJCgIAAAABAAcAAABFbmFibGVkAQEjAAAvAD8jAAAAAAH/////AQH/////AAAAABVg" +
+           "iQoCAAAAAQAJAAAATGFzdFN0YXRlAQEkAAAvAD8kAAAAAAH/////AQH/////AAAAAA==";
         #endregion
         #endif
         #endregion
@@ -2386,11 +2373,10 @@ namespace DataLayer
 
         #region Initialization String
         private const string InitializationString =
-           "AgAAACoAAABodHRwOi8vc2NyZWVuc2F2ZXIuY29tL1RQVU0vU21hcnRIb3VzZUFwcC80AAAAaHR0cDov" +
-           "L3NjcmVlbnNhdmVyLmNvbS9UUFVNL1NtYXJ0SG91c2VBcHAvSW50ZXJmYWNlc/////8EYIAAAQAAAAEA" +
-           "EQAAAElMb2NhdGlvbkluc3RhbmNlAQElAAEBJQD/////AgAAABVgiQoCAAAAAQAIAAAATGF0aXR1ZGUB" +
-           "ASYAAC8APyYAAAAAC/////8BAf////8AAAAAFWCJCgIAAAABAAkAAABMb25naXR1ZGUBAScAAC8APycA" +
-           "AAAAC/////8BAf////8AAAAA";
+           "AQAAACoAAABodHRwOi8vc2NyZWVuc2F2ZXIuY29tL1RQVU0vU21hcnRIb3VzZUFwcC//////BGCAAAEA" +
+           "AAABABEAAABJTG9jYXRpb25JbnN0YW5jZQEBJQABASUA/////wIAAAAVYIkKAgAAAAEACAAAAExhdGl0" +
+           "dWRlAQEmAAAvAD8mAAAAAAv/////AQH/////AAAAABVgiQoCAAAAAQAJAAAATG9uZ2l0dWRlAQEnAAAv" +
+           "AD8nAAAAAAv/////AQH/////AAAAAA==";
         #endregion
         #endif
         #endregion

@@ -8,6 +8,13 @@ namespace ServerDataLayer
         private readonly DataContext _dataContext;
         private readonly object _deviceLock = new object();
 
+        private static DeviceRepository _instance;
+        public static DeviceRepository Instance
+        {
+            get { return _instance ??= new DeviceRepository(); }
+            private set => _instance = value;
+        }
+
         public DeviceRepository()
         {
             _dataContext = DataContext.Instance;
