@@ -11,22 +11,39 @@ namespace ClientLogicLayer.Services
     {
         private readonly IDeviceRepository _deviceRepo;
 
-        public event Action DeviceChange;
+        public event Action DevicesChange;
+        public event Action<DeviceDTO> OnDeviceChanged;
 
         public DeviceService(IDeviceRepository deviceRepository)
         {
             _deviceRepo = deviceRepository;
-            _deviceRepo.DataChanged += DeviceChangedInvoke;
+            _deviceRepo.DataChanged += DevicesChangedInvoke;
+            _deviceRepo.OnDeviceChanged += OnDeviceChangedInvoke;
         }
 
-        public void DeviceChangedInvoke()
+        public void DevicesChangedInvoke()
         {
-            DeviceChange?.Invoke();
+            DevicesChange?.Invoke();
+        }
+
+        public void OnDeviceChangedInvoke(IDevice device)
+        {
+            OnDeviceChanged.Invoke(Mapper.Map(device));
         }
 
         public async Task RefreshDevices()
         {
             await _deviceRepo.Refresh();
+        }
+
+        public async Task SubscribeDevice(DeviceDTO device)
+        {
+            await _deviceRepo.SubscribeDevice(Mapper.Map(device));
+        }
+
+        public async Task DisposeDevice(DeviceDTO device)
+        {
+            await _deviceRepo.DisposeDevice(Mapper.Map(device));
         }
 
         public DeviceDTO GetDevice(int id)
@@ -57,7 +74,7 @@ namespace ClientLogicLayer.Services
             bool methodRetVal = _deviceRepo.SetState(id, state);
             if (methodRetVal)
             {
-                DeviceChange?.Invoke();
+                DevicesChange?.Invoke();
             }
             return methodRetVal;
         }
@@ -82,7 +99,7 @@ namespace ClientLogicLayer.Services
             }
 
             _deviceRepo.Add(Mapper.Map(newDevice));
-            DeviceChange?.Invoke();
+            DevicesChange?.Invoke();
             return true;
         }
 
@@ -97,7 +114,7 @@ namespace ClientLogicLayer.Services
             {
                 return false;
             }
-            DeviceChange?.Invoke();
+            DevicesChange?.Invoke();
             return retVal;
         }
 

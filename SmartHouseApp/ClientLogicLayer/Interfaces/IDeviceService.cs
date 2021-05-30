@@ -14,7 +14,9 @@ namespace ClientLogicLayer.Interfaces
         bool AddDevice(DeviceDTO newDevice);
         bool RemoveDevice(DeviceDTO deviceToRemove);
         public Task ToggleDevice(int selectedDeviceId);
-
-        event Action DeviceChange;
+        Task SubscribeDevice(DeviceDTO device);
+        Task DisposeDevice(DeviceDTO device);
+        event Action DevicesChange;
+        event Action<DeviceDTO> OnDeviceChanged;
     }
 }

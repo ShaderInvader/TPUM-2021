@@ -37,6 +37,7 @@ namespace ClientDataLayer
         public void ReceiveData(string data)
         {
             var msg = MessageParser.DeserializeMessage(data);
+            Debug.WriteLine($"[Server] {msg.Command}");
             switch (msg.Command)
             {
                 case "UpdateAll":
@@ -50,7 +51,14 @@ namespace ClientDataLayer
                     _isAwaitingResponse = false;
                     break;
                 case "OnNext":
-
+                    var sendDevice = MessageParser.DeserializeType<ExampleDevice>(msg.Data.ToString());
+                    var changedDevice = Devices.Find((x) => x.Id == sendDevice.Id);
+                    lock (devicesLock)
+                    {
+                        changedDevice.LastState = sendDevice.LastState;
+                        changedDevice.Enabled = sendDevice.Enabled;
+                    }
+                    OnDeviceChange?.Invoke(changedDevice);
                     break;
                 case "Confirm":
                     _isAwaitingConfirmation = false;
@@ -62,6 +70,7 @@ namespace ClientDataLayer
         private bool _isAwaitingResponse = false;
 
         public event Action DevicesChanged;
+        public event Action<IDevice> OnDeviceChange;
 
         public List<User> Users { get; set; } = new List<User>();
         public object usersLock = new object();

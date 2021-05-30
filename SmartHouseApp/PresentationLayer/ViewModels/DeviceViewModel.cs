@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Input;
 using ClientLogicLayer;
 using ClientLogicLayer.Interfaces;
@@ -18,7 +19,8 @@ namespace ClientPresentationLayer.ViewModels
         public DeviceViewModel()
         {
             _deviceService = ServiceFactory.CreateDeviceService;
-            _deviceService.DeviceChange += UpdateDevices;
+            _deviceService.DevicesChange += UpdateDevices;
+            _deviceService.OnDeviceChanged += UpdateDevice;
             _devices = new ObservableCollection<DeviceDTO>();
             _editDevice = false;
 
@@ -44,7 +46,8 @@ namespace ClientPresentationLayer.ViewModels
 
         ~DeviceViewModel()
         {
-            _deviceService.DeviceChange -= UpdateDevices;
+            _deviceService.DevicesChange -= UpdateDevices;
+            _deviceService.OnDeviceChanged -= UpdateDevice;
         }
 
         #region Properties
@@ -64,7 +67,15 @@ namespace ClientPresentationLayer.ViewModels
             get => _selectedDevice;
             set
             {
+                if(_selectedDevice != null)
+                {
+                    _deviceService.DisposeDevice(_selectedDevice);
+                }
                 _selectedDevice = value;
+                if (_selectedDevice != null)
+                {
+                    _deviceService.SubscribeDevice(_selectedDevice);
+                }
                 OnPropertyChanged("SelectedDevice");
             }
         }
@@ -108,6 +119,20 @@ namespace ClientPresentationLayer.ViewModels
         public void UpdateDevices()
         {
             _devices = new ObservableCollection<DeviceDTO>(_deviceService.GetDevices());
+            OnPropertyChanged("Devices");
+        }
+
+        public void UpdateDevice(DeviceDTO device)
+        {
+            for(int i = 0; i < _devices.Count; ++i)
+            {
+                if(_devices[i].Id == device.Id)
+                {
+                    _devices[i].Enabled = device.Enabled;
+                    break;
+                }
+            }
+            OnPropertyChanged("SelectedDevice");
             OnPropertyChanged("Devices");
         }
     }

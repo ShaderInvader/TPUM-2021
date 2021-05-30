@@ -91,6 +91,7 @@ namespace ServerDataLayer
             {
                 lock (_deviceLock)
                 {
+                    device.LastState = device.Enabled;
                     device.Enabled = !device.Enabled;
                 }
                 returnValue = true;

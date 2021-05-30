@@ -16,11 +16,14 @@ namespace ClientDataLayer
         }
 
         private readonly DataContext _dataContext;
+        public event Action DataChanged;
+        public event Action<IDevice> OnDeviceChanged;
 
         public DeviceRepository()
         {
             _dataContext = DataContext.Instance;
             _dataContext.DevicesChanged += DataChangedInvoke;
+            _dataContext.OnDeviceChange += DeviceChangedInvoke;
         }
 
         private void DataChangedInvoke()
@@ -28,7 +31,10 @@ namespace ClientDataLayer
             DataChanged?.Invoke();
         }
 
-        public event Action DataChanged;
+        private void DeviceChangedInvoke(IDevice device)
+        {
+            OnDeviceChanged?.Invoke(device);
+        }
 
         public IEnumerable<IDevice> Get()
         {
@@ -51,6 +57,16 @@ namespace ClientDataLayer
             await _dataContext.RequestDataUpdate();
 
             return await Task.FromResult(true);
+        }
+
+        public async Task SubscribeDevice(IDevice device)
+        {
+            await _dataContext.RequestWithConfirmation(MessageParser.CreateMessage("Subscribe", device, device.GetType().Name));
+        }
+
+        public async Task DisposeDevice(IDevice device)
+        {
+            await _dataContext.RequestWithConfirmation(MessageParser.CreateMessage("Dispose", device, device.GetType().Name));
         }
 
         public bool Remove(int id)
